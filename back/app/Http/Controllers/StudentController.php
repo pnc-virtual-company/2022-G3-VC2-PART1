@@ -21,7 +21,8 @@ class StudentController extends Controller
         $std->address = $request->address;
         $std->email = $request->email;
         $std->img = $request->file('img')->store('public/images');
-        $std->birth_day = $request->birth_day;
+        $std->birth_day = $request-> birth_day;
+        $std->gender = $request->gender;
         $std->password = $request->password;
         $std->save();
         return response()->json(['message' => 'added']);
@@ -43,6 +44,7 @@ class StudentController extends Controller
         $std->class = $request->class;
         $std->address = $request->address;
         $std->email = $request->email;
+        $std->gender = $request->gender;
         $std->img = $request->file('img')->store('public/images');
         $std->birth_day = $request->birth_day;
         $std->password = $request->password;
@@ -74,5 +76,14 @@ class StudentController extends Controller
     public function approved($allow)
     {
         return Student::with(['approve'])->get();
+    }
+
+
+    public function img(Request $request,$id)
+    {
+        $std = Student::findOrFail($id);
+        $std->img = $request->img;
+        $std->update();
+        return response()->json(['message' =>'items updated']);
     }
 }

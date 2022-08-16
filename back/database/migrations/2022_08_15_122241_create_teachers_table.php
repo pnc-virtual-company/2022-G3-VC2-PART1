@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->date('birth_day');
+            $table->string('gender');
             $table->string('email');
             $table->string('address');
             $table->string('password');

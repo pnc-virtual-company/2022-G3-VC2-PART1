@@ -53,3 +53,7 @@ Route::get("/stdReq/{id}", [StudentController::class , 'getReqStudent']);
 Route::get("/countDayoff/{id}", [StudentController::class , 'countStudentReq']);
 // find aprove or not
 Route::get("/approved/{id}", [StudentController::class , 'approved']);
+
+//update img
+Route::put("/img/{id}",[StudentController::class,'img']);
+

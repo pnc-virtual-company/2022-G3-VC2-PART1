@@ -19,6 +19,7 @@ class TeacherController extends Controller
         $cher->last_name = $request->last_name;
         $cher->address = $request->address;
         $cher->email = $request->email;
+        $cher->gender = $request->gender;
         $cher->img = $request->file('img')->store('public/images');
         $cher->birth_day = $request->birth_day;
         $cher->password = $request->password;
@@ -42,6 +43,7 @@ class TeacherController extends Controller
         $cher->last_name = $request->last_name;
         $cher->address = $request->address;
         $cher->email = $request->email;
+        $cher->gender = $request->gender;
         $cher->img = $request->file('img')->store('public/images');
         $cher->birth_day = $request->birth_day;
         $cher->password = $request->password;

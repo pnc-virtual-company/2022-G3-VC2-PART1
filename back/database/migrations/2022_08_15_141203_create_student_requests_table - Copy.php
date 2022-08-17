@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('student_requests', function (Blueprint $table) {
@@ -19,15 +15,12 @@ return new class extends Migration
             $table->dateTime("start_date");
             $table->dateTime("end_date");
             $table->string("reason");
+            $table->string("leave_type");
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('student_requests');

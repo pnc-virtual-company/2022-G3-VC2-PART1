@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Accepted;
+// use App\Models\StudentRequest;
 use Illuminate\Http\Request;
+
 
 class StudentController extends Controller
 {
@@ -20,11 +23,24 @@ class StudentController extends Controller
         $std->class = $request->class;
         $std->address = $request->address;
         $std->email = $request->email;
-        $std->img = $request->file('img')->store('public/images');
+        $std->role = $request->role;
+
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
+        // $post->save();
+
+        // return response()->json(['massage' => "Upload successfully"]);
         $std->birth_day = $request-> birth_day;
         $std->gender = $request->gender;
-        $std->password = $request->password;
+        $std->password = bcrypt($request->password);
         $std->save();
+        $token = $std->createToken('mytoken')->plainTextToken;
+            $response = [
+                'user' => $std,
+                'token' => $token
+            ];
         return response()->json(['message' => 'added']);
     }
     public function show( $id)
@@ -42,6 +58,7 @@ class StudentController extends Controller
         $std->first_name = $request->first_name;
         $std->last_name = $request->last_name;
         $std->class = $request->class;
+        $std->role = $request->role;
         $std->address = $request->address;
         $std->email = $request->email;
         $std->gender = $request->gender;
@@ -73,9 +90,9 @@ class StudentController extends Controller
         return Student::withCount(['dayOff'])->where('id','=',$id)->get();
     }
 
-    public function approved($allow)
+    public function approved($allow,$student_id)
     {
-        return Student::with(['approve'])->get();
+        return Accepted::where('allow', '=', strtoupper($allow))->where('student_id','=',$student_id)->get();
     }
 
 
@@ -86,4 +103,38 @@ class StudentController extends Controller
         $std->update();
         return response()->json(['message' =>'items updated']);
     }
+
+    // public function updateRequest(Request $request,$id)
+    // {
+    //     $req =  StudentRequest::findOrFail($id);
+    //     $req->student_id = $request->student_id;
+    //     $req->start_date = $request->start_date;
+    //     $req->end_date = $request->end_date;
+    //     $req->reason = $request->reason;
+    //     $req->update();
+    //     return response()->json(['message' => 'items updated']);
+    // }
+
+    // public function makeRequest(Request $request)
+    // {
+    //     $req = new StudentRequest();
+    //     $req->student_id = $request->student_id;
+    //     $req->start_date = $request->start_date;
+    //     $req->end_date = $request->end_date;
+    //     $req->reason = $request->reason;
+    //     $req->save();
+    //     return response()->json(['message' => "Item saved successfully"]);
+    // }
+
+    // public function deleteRequest($id)
+    // {
+    //     $result = ['message' => "Item remove successfully"];
+    //     if (!StudentRequest::destroy($id)) {
+    //         $result = ['message' => "Item not found"];
+
+    //     }
+    //     return $result;
+    // }
+
+
 }

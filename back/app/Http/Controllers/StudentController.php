@@ -62,7 +62,10 @@ class StudentController extends Controller
         $std->address = $request->address;
         $std->email = $request->email;
         $std->gender = $request->gender;
-        $std->img = $request->file('img')->store('public/images');
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
         $std->birth_day = $request->birth_day;
         $std->password = $request->password;
         $std->update();
@@ -99,7 +102,10 @@ class StudentController extends Controller
     public function img(Request $request,$id)
     {
         $std = Student::findOrFail($id);
-        $std->img = $request->img;
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
         $std->update();
         return response()->json(['message' =>'items updated']);
     }

@@ -110,37 +110,6 @@ class StudentController extends Controller
         return response()->json(['message' =>'items updated']);
     }
 
-    // public function updateRequest(Request $request,$id)
-    // {
-    //     $req =  StudentRequest::findOrFail($id);
-    //     $req->student_id = $request->student_id;
-    //     $req->start_date = $request->start_date;
-    //     $req->end_date = $request->end_date;
-    //     $req->reason = $request->reason;
-    //     $req->update();
-    //     return response()->json(['message' => 'items updated']);
-    // }
-
-    // public function makeRequest(Request $request)
-    // {
-    //     $req = new StudentRequest();
-    //     $req->student_id = $request->student_id;
-    //     $req->start_date = $request->start_date;
-    //     $req->end_date = $request->end_date;
-    //     $req->reason = $request->reason;
-    //     $req->save();
-    //     return response()->json(['message' => "Item saved successfully"]);
-    // }
-
-    // public function deleteRequest($id)
-    // {
-    //     $result = ['message' => "Item remove successfully"];
-    //     if (!StudentRequest::destroy($id)) {
-    //         $result = ['message' => "Item not found"];
-
-    //     }
-    //     return $result;
-    // }
-
+    
 
 }

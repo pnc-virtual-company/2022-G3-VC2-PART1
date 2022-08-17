@@ -13,51 +13,47 @@ use App\Http\Controllers\LoginController;
 Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
 Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
 
-// Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::get('/student', [App\Http\Controllers\StudentController::class , 'index']);
-    Route::delete('/student/{id}', [App\Http\Controllers\StudentController::class , 'destroy']);
-    Route::put('/student/{id}', [App\Http\Controllers\StudentController::class , 'update']);
-    Route::post('/logout', [App\Http\Controllers\LoginController::class , 'logout']);
-
-// });
 
 // Route::group(['namespace' => 'Admin'], function () {
-// // Controllers Within The "App\Http\Controllers\Admin" Namespace
+// Controllers Within The "App\Http\Controllers\Admin" Namespace
 // });
 
-// //student routes
-// Route::get("/student", [StudentController::class , 'index']);
-// Route::get("/student/{id}", [StudentController::class , 'show']);
-// Route::delete("/student/{id}", [StudentController::class , 'destroy']);
-// Route::put("/student/{id}", [StudentController::class , 'update']);
-// Route::post("/student", [StudentController::class , 'store']);
-// // Route::post("/student", [StudentController::class , 'updateRequest']);
-// // Route::delete("/student/{id}", [StudentController::class , 'deleteRequest']);
-// // Route::delete("/studentReq/{id}", [StudentController::class , 'makeRequest']);
+Route::controller(StudentController::class)->group(function () {
+    Route::get("/student", 'index');
+    Route::get("/logout", 'logout');
+    Route::post("/student", 'updateRequest');
+    Route::delete("/student/{id}", 'deleteRequest');
+    Route::delete("/studentReq/{id}", 'makeRequest');
+});
 
-
-// //teacher routes
-Route::get("/teacher", [TeacherController::class , 'index']);
-Route::delete("/teacher/{id}", [TeacherController::class , 'destroy']);
-Route::put("/teacher/{id}", [TeacherController::class , 'update']);
-Route::post("/teacher", [TeacherController::class , 'store']);
-Route::get("/teacher/{id}", [TeacherController::class , 'show']);
-
+// Route::get("/student", [StudentController:
+Route::controller(TeacherController::class)->group(function () {
+    Route::get("/teacher",  'index');
+    Route::delete("/teacher/{id}", 'destroy');
+    Route::put("/teacher/{id}", 'update');
+    Route::post("/teacher", 'store');
+    Route::get("/teacher/{id}", 'show');
+});
 
 // //request routes
-Route::get("/request", [StudentRequestController::class , 'index']);
-Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
-Route::put("/request/{id}", [StudentRequestController::class , 'update']);
-Route::post("/request", [StudentRequestController::class , 'store']);
-Route::get("/request/{id}", [StudentRequestController::class , 'show']);
+Route::controller(StudentRequestController::class)->group(function () {
+    Route::get("/request", 'index');
+    Route::delete("/request/{id}", 'destroy');
+    Route::put("/request/{id}", 'update');
+    Route::post("/request", 'store');
+    Route::get("/request/{id}", 'show');
+});
 
-// //request routes
-Route::get("/accept", [AcceptedController::class , 'index']);
-Route::delete("/accept/{id}", [AcceptedController::class , 'destroy']);
-Route::put("/accept/{id}", [AcceptedController::class , 'update']);
-Route::post("/accept/{id}", [AcceptedController::class , 'store']);
-Route::get("/accept/{id}", [AcceptedController::class , 'show']);
+//accept routes
+Route::controller(StudentRequestController::class)->group(function () {
+    Route::get("/accept", 'index');
+    Route::delete("/accept/{id}", 'destroy');
+    Route::put("/accept/{id}", 'update');
+    Route::post("/accept", 'store');
+    Route::get("/accept/{id}", 'show');
+});
+
 
 // // find student request
 Route::get("/stdReq/{id}", [StudentController::class , 'getReqStudent']);
@@ -69,7 +65,7 @@ Route::get("/countRequest/{id}", [StudentController::class , 'countStudentReq'])
 Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
 
 //update img
-// Route::put("/img/{id}", [StudentController::class , 'img']);
+Route::put("/img/{id}", [StudentController::class , 'img']);
 
 // //admine route
 // Route::get("/admin", [AdminController::class , 'index']);

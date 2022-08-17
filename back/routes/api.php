@@ -27,14 +27,14 @@ Route::post('/register', [App\Http\Controllers\StudentController::class , 'store
 // });
 
 // //student routes
-// Route::get("/student", [StudentController::class , 'index']);
-// Route::get("/student/{id}", [StudentController::class , 'show']);
-// Route::delete("/student/{id}", [StudentController::class , 'destroy']);
-// Route::put("/student/{id}", [StudentController::class , 'update']);
-// Route::post("/student", [StudentController::class , 'store']);
-// // Route::post("/student", [StudentController::class , 'updateRequest']);
-// // Route::delete("/student/{id}", [StudentController::class , 'deleteRequest']);
-// // Route::delete("/studentReq/{id}", [StudentController::class , 'makeRequest']);
+Route::get("/student", [StudentController::class , 'index']);
+Route::get("/student/{id}", [StudentController::class , 'show']);
+Route::delete("/student/{id}", [StudentController::class , 'destroy']);
+Route::put("/student/{id}", [StudentController::class , 'update']);
+Route::post("/student", [StudentController::class , 'store']);
+// Route::post("/student", [StudentController::class , 'updateRequest']);
+// Route::delete("/student/{id}", [StudentController::class , 'deleteRequest']);
+// Route::delete("/studentReq/{id}", [StudentController::class , 'makeRequest']);
 
 
 // //teacher routes

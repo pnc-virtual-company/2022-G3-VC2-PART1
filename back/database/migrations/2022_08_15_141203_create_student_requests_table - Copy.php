@@ -19,6 +19,9 @@ return new class extends Migration
             $table->dateTime("start_date");
             $table->dateTime("end_date");
             $table->string("reason");
+            $table->string("leave_type");
+            $table->boolean("status");
+            $table->date("request_date");
             $table->timestamps();
         });
     }

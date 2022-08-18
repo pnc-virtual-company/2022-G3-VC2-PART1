@@ -19,6 +19,9 @@ class StudentRequestController extends Controller
         $req->start_date = $request->start_date;
         $req->end_date = $request->end_date;
         $req->reason = $request->reason;
+        $req->leave_type = $request->leave_type;
+        $req->status = $request->status;
+        $req->request_date = $request->request_date;
         $req->save();
         return response()->json(['message' => "Item saved successfully"]);
     }
@@ -39,6 +42,9 @@ class StudentRequestController extends Controller
         $req->start_date = $request->start_date;
         $req->end_date = $request->end_date;
         $req->reason = $request->reason;
+        $req->leave_type = $request->leave_type;
+        $req->status = $request->status;
+        $req->request_date = $request->request_date;
         $req->update();
         return response()->json(['message' => 'items updated']);
     }

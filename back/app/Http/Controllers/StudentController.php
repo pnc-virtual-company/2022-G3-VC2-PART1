@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
 class StudentController extends Controller
 {
     public function index()
@@ -14,13 +14,21 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
+        $request -> validate([
+            'email' => 'string|required|email|unique:users',
+        ]); 
         $std = new Student();
         $std->first_name = $request->first_name;
         $std->last_name = $request->last_name;
         $std->class = $request->class;
         $std->address = $request->address;
         $std->email = $request->email;
-        $std->img = $request->file('img')->store('public/images');
+
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images',$newName);
+        $std['img']=URL('storage/images/'.$newName);
+
         $std->birth_day = $request-> birth_day;
         $std->gender = $request->gender;
         $std->password = $request->password;
@@ -29,6 +37,7 @@ class StudentController extends Controller
     }
     public function show( $id)
     {
+        
         $result = ['message' => "Item not found"];
         if (Student::find($id)) {
             $result = Student::find($id);
@@ -38,14 +47,30 @@ class StudentController extends Controller
 
     public function update(Request $request,  $id)
     {
+        $request -> validate([
+            'email' => 'string|required|email|unique:users',
+        ]); 
         $std = Student::findOrFail($id);
+
+        // delete old image
+        $link_img = substr($std['img'],22);
+        if( File::exists(public_path($link_img)) ) {
+            File::delete(public_path($link_img));
+        }
+
         $std->first_name = $request->first_name;
         $std->last_name = $request->last_name;
         $std->class = $request->class;
         $std->address = $request->address;
         $std->email = $request->email;
         $std->gender = $request->gender;
-        $std->img = $request->file('img')->store('public/images');
+
+        // add new image
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images',$newName);
+        $std['img']=URL('storage/images/'.$newName);
+
         $std->birth_day = $request->birth_day;
         $std->password = $request->password;
         $std->update();

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\Accepted;
-// use App\Models\StudentRequest;
 use Illuminate\Http\Request;
 
 
@@ -29,9 +28,7 @@ class StudentController extends Controller
         $newName = time() . $name;
         $std->img = $request->file('img')->storeAs('public/images', $newName);
         $std['img'] = URL('storage/images/' . $newName);
-        // $post->save();
 
-        // return response()->json(['massage' => "Upload successfully"]);
         $std->birth_day = $request-> birth_day;
         $std->gender = $request->gender;
         $std->password = bcrypt($request->password);
@@ -41,7 +38,7 @@ class StudentController extends Controller
                 'user' => $std,
                 'token' => $token
             ];
-        return response()->json(['message' => 'added']);
+        return response($response,201);
     }
     public function show( $id)
     {
@@ -82,7 +79,7 @@ class StudentController extends Controller
         return $result;
     }
 
-    public function getReqStudent($id)
+      public function getReqStudent($id)
     {
         return Student::with(['dayOff','approve'])->where('id','=',$id)->get();
 
@@ -110,6 +107,6 @@ class StudentController extends Controller
         return response()->json(['message' =>'items updated']);
     }
 
-    
+
 
 }

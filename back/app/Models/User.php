@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-class Teacher extends Model
+
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -14,13 +16,6 @@ class Teacher extends Model
         'remember_token',
     ];
 
-    public function accepted()
-    {
-        return $this->hasMany(Accepted::class);
-    }
 
-    public function request()
-    {
-        return $this->hasMany(StudentRequest::class);
-    }
+
 }

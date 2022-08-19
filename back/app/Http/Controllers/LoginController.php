@@ -3,23 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Login;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
-    
+
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['mas' => "Invalid"]);
+        $user = Student::where('email', $request->email)->first();
+        //check password
+        if(!$user || !!Hash::check($user->password,$user->password)){
+            return response()->json(['sms'=>"Invaliid password"]);
         }
-        $user = Auth::user();
-        $token = $user->createToken('mytoken')->plainTextToken;
-        $cookie = cookie('jwt', $token, 60 * 24);
-        return response()->json(['mas' => 'success', 'token' => $token], 200)->withCookie($cookie);
-    }
+        $token = $user->createToken('myToken')->plainTextToken;
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+        return response()->json($response);
+    } 
     public function logout()
     {
         $cookie = Cookie::forget('jwt');

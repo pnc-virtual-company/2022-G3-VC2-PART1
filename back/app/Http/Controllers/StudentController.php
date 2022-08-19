@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\Accepted;
-// use App\Models\StudentRequest;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\File;
@@ -49,7 +48,7 @@ class StudentController extends Controller
                 'user' => $std,
                 'token' => $token
             ];
-        return response()->json(['message' => 'added']);
+        return response($response,201);
     }
     public function show( $id)
     {
@@ -107,7 +106,7 @@ class StudentController extends Controller
         return $result;
     }
 
-    public function getReqStudent($id)
+      public function getReqStudent($id)
     {
         return Student::with(['dayOff','approve'])->where('id','=',$id)->get();
 
@@ -134,6 +133,6 @@ class StudentController extends Controller
         return response()->json(['message' =>'items updated']);
     }
 
-    
+
 
 }

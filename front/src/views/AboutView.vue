@@ -1,18 +1,13 @@
-<<<<<<< HEAD
 <template>
-  <div class="m-auto">
-    <StudentLeave/>
-=======
-<template >
   <div class="about">
-    <h1>This is an about page</h1>
-
->>>>>>> 34919ba5fb030caf254530fe0669c7b9f3aac3e0
+    <StudentLeave/>
   </div>
-</template>
+
+<template >
 
 <script>
-import StudentLeave from '@/components/StudentLeave.vue';
+// import StudentLeave from '@/components/StudentLeave.vue';
+import StudentLeave from '@/components/student/StudentLeave.vue';
 export default {
   components: {
     StudentLeave,
@@ -20,6 +15,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>

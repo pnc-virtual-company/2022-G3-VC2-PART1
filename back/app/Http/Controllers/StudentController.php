@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Accepted;
+// use App\Models\StudentRequest;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\File;
+
+
 class StudentController extends Controller
 {
     public function index()
@@ -29,10 +34,21 @@ class StudentController extends Controller
         $std->img = $request->file('img')->storeAs('public/images',$newName);
         $std['img']=URL('storage/images/'.$newName);
 
+
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
+
         $std->birth_day = $request-> birth_day;
         $std->gender = $request->gender;
-        $std->password = $request->password;
+        $std->password = bcrypt($request->password);
         $std->save();
+        $token = $std->createToken('mytoken')->plainTextToken;
+            $response = [
+                'user' => $std,
+                'token' => $token
+            ];
         return response()->json(['message' => 'added']);
     }
     public function show( $id)
@@ -71,6 +87,10 @@ class StudentController extends Controller
         $std->img = $request->file('img')->storeAs('public/images',$newName);
         $std['img']=URL('storage/images/'.$newName);
 
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
         $std->birth_day = $request->birth_day;
         $std->password = $request->password;
         $std->update();
@@ -98,17 +118,22 @@ class StudentController extends Controller
         return Student::withCount(['dayOff'])->where('id','=',$id)->get();
     }
 
-    public function approved($allow)
+    public function approved($allow,$student_id)
     {
-        return Student::with(['approve'])->get();
+        return Accepted::where('allow', '=', strtoupper($allow))->where('student_id','=',$student_id)->get();
     }
-
 
     public function img(Request $request,$id)
     {
         $std = Student::findOrFail($id);
-        $std->img = $request->img;
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
         $std->update();
         return response()->json(['message' =>'items updated']);
     }
+
+    
+
 }

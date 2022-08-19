@@ -22,4 +22,9 @@ class StudentRequest extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function approve()
+    {
+        return $this->belongsTo(Accepted::class);
+    }
 }

@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
-    public function teacher($user)
+    public function teacher()
     {
         return $this->hasMany(Teacher::class);
     }
 
-    public function student($user)
+    public function student()
     {
-        return $this->hasMany(Teacher::class);
+        return $this->hasMany(Student::class);
     }
 
-    
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
+use App\Models\Accepted;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -19,6 +20,7 @@ class TeacherController extends Controller
         $cher->last_name = $request->last_name;
         $cher->address = $request->address;
         $cher->email = $request->email;
+        $cher->role = $request->role;
         $cher->gender = $request->gender;
         $cher->img = $request->file('img')->store('public/images');
         $cher->birth_day = $request->birth_day;
@@ -42,6 +44,7 @@ class TeacherController extends Controller
         $cher->first_name = $request->first_name;
         $cher->last_name = $request->last_name;
         $cher->address = $request->address;
+        $cher->role = $request->role;
         $cher->email = $request->email;
         $cher->gender = $request->gender;
         $cher->img = $request->file('img')->store('public/images');
@@ -59,5 +62,12 @@ class TeacherController extends Controller
 
         }
         return $result;
+    }
+
+    public function approve($allow)
+    {
+        $accepted = new Accepted();
+        $accepted->allow = $allow;
+        $accepted->save();
     }
 }

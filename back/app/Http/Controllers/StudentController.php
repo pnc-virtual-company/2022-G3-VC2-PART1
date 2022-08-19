@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Accepted;
 use Illuminate\Http\Request;
+
 
 class StudentController extends Controller
 {
@@ -20,12 +22,23 @@ class StudentController extends Controller
         $std->class = $request->class;
         $std->address = $request->address;
         $std->email = $request->email;
-        $std->img = $request->file('img')->store('public/images');
+        $std->role = $request->role;
+
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
+
         $std->birth_day = $request-> birth_day;
         $std->gender = $request->gender;
-        $std->password = $request->password;
+        $std->password = bcrypt($request->password);
         $std->save();
-        return response()->json(['message' => 'added']);
+        $token = $std->createToken('mytoken')->plainTextToken;
+            $response = [
+                'user' => $std,
+                'token' => $token
+            ];
+        return response($response,201);
     }
     public function show( $id)
     {
@@ -42,10 +55,14 @@ class StudentController extends Controller
         $std->first_name = $request->first_name;
         $std->last_name = $request->last_name;
         $std->class = $request->class;
+        $std->role = $request->role;
         $std->address = $request->address;
         $std->email = $request->email;
         $std->gender = $request->gender;
-        $std->img = $request->file('img')->store('public/images');
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
         $std->birth_day = $request->birth_day;
         $std->password = $request->password;
         $std->update();
@@ -62,7 +79,7 @@ class StudentController extends Controller
         return $result;
     }
 
-    public function getReqStudent($id)
+      public function getReqStudent($id)
     {
         return Student::with(['dayOff','approve'])->where('id','=',$id)->get();
 
@@ -73,17 +90,23 @@ class StudentController extends Controller
         return Student::withCount(['dayOff'])->where('id','=',$id)->get();
     }
 
-    public function approved($allow)
+    public function approved($allow,$student_id)
     {
-        return Student::with(['approve'])->get();
+        return Accepted::where('allow', '=', strtoupper($allow))->where('student_id','=',$student_id)->get();
     }
 
 
     public function img(Request $request,$id)
     {
         $std = Student::findOrFail($id);
-        $std->img = $request->img;
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $std->img = $request->file('img')->storeAs('public/images', $newName);
+        $std['img'] = URL('storage/images/' . $newName);
         $std->update();
         return response()->json(['message' =>'items updated']);
     }
+
+
+
 }

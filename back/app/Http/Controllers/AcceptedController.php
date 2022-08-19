@@ -20,7 +20,7 @@ class AcceptedController extends Controller
         $req->student_id = $request->student_id;
         $req->teacher_id = $request->teacher_id;
         $req->student_request_id = $request->student_request_id;
-        $req->allow = $request->allow;
+        $req->allow = strtoupper($request->allow);
         $req->save();
         return response()->json(['message' => "Saved"]);
     }

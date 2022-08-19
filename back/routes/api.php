@@ -11,7 +11,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 
 
-<<<<<<< HEAD
 Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
 Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
 
@@ -37,11 +36,9 @@ Route::post("/student", [StudentController::class , 'store']);
 // Route::post("/student", [StudentController::class , 'updateRequest']);
 // Route::delete("/student/{id}", [StudentController::class , 'deleteRequest']);
 // Route::delete("/studentReq/{id}", [StudentController::class , 'makeRequest']);
-=======
 // Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
 // Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
 // Route::get('/student', [App\Http\Controllers\StudentController::class , 'index']);
->>>>>>> 34919ba5fb030caf254530fe0669c7b9f3aac3e0
 
 
 
@@ -69,13 +66,11 @@ Route::controller(TeacherController::class)->group(function () {
 });
 
 // //request routes
-<<<<<<< HEAD
 Route::get("/request", [StudentRequestController::class , 'index']);
 Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
 Route::put("/request/{id}", [StudentRequestController::class , 'update']);
 // Route::post("/request", [StudentRequestController::class , 'store']);
 Route::get("/request/{id}", [StudentRequestController::class , 'show']);
-=======
 Route::controller(StudentRequestController::class)->group(function () {
     Route::get("/request", 'index');
     Route::delete("/request/{id}", 'destroy');
@@ -92,7 +87,6 @@ Route::controller(StudentRequestController::class)->group(function () {
     Route::post("/accept", 'store');
     Route::get("/accept/{id}", 'show');
 });
->>>>>>> 34919ba5fb030caf254530fe0669c7b9f3aac3e0
 
 
 // // find student request
@@ -104,11 +98,8 @@ Route::controller(StudentRequestController::class)->group(function () {
 // find the request of student which one is approved or not
 // Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
 
-<<<<<<< HEAD
 //update img
-=======
 // update img
->>>>>>> c447f89683f4c9fd2298b84fff6c03bf3bd7e996
 Route::put("/img/{id}", [StudentController::class , 'img']);
 
 // //admine route

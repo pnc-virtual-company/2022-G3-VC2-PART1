@@ -9,10 +9,10 @@
                 <h2 class=" mt-6 text-xl ml-12"> Filter by leave types</h2>
                 <select @change="selectOption" v-model=" selectTypeLeave" class="p-2 mt-4  mb-4 text-black placeholder-gray-400 bg-white border border-gray-400 focus:border-blue-500 border-b-3 w-4/5 ml-12">
                     <option value="show all">Show all</option>
-                    <option value="family's event">Family Event</option>
-                    <option value="sick">sick </option>
-                    <option value="Go home">Go home</option>
-                    <option value="Trip">Trip</option>
+                    <option value="family's event">Family's Event</option>
+                    <option value="sick">Sick </option>
+                    <option value="interview">Interview</option>
+                    <option value="trip">Trip</option>
                 </select>
            </div>
             <div class="w-full mr-16 flex-wrap-center mb-4">

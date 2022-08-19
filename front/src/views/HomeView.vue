@@ -6,7 +6,8 @@
 
 <script>
 // @ is an alias to /src
-import StudentHome from '@/components/StudentHome.vue'
+// import StudentHome from '@/components/StudentHome.vue'
+import StudentHome from '@/components/student/StudentHome.vue';
 import axios from '../axios-http';
 // import '../input.css'
 export default {

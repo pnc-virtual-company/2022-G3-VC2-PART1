@@ -49,7 +49,7 @@ Route::get("/teacher/{id}", [TeacherController::class , 'show']);
 Route::get("/request", [StudentRequestController::class , 'index']);
 Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
 Route::put("/request/{id}", [StudentRequestController::class , 'update']);
-Route::post("/request", [StudentRequestController::class , 'store']);
+// Route::post("/request", [StudentRequestController::class , 'store']);
 Route::get("/request/{id}", [StudentRequestController::class , 'show']);
 
 // //request routes

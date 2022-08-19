@@ -68,8 +68,8 @@ Route::get("/countRequest/{id}", [StudentController::class , 'countStudentReq'])
 // find the request of student which one is approved or not
 Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
 
-//update img
-// Route::put("/img/{id}", [StudentController::class , 'img']);
+// update img
+Route::put("/img/{id}", [StudentController::class , 'img']);
 
 // //admine route
 // Route::get("/admin", [AdminController::class , 'index']);

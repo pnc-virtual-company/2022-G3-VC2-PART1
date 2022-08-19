@@ -34,11 +34,12 @@ class StudentController extends Controller
         $std['img']=URL('storage/images/'.$newName);
 
 
-        $name = $request->file('img')->getClientOriginalName();
-        $newName = time() . $name;
-        $std->img = $request->file('img')->storeAs('public/images', $newName);
-        $std['img'] = URL('storage/images/' . $newName);
+        $imageName = time() .'.'. $request->file('img')->getClientOriginalExtension();
 
+        $request->file('img')->move(
+            base_path() . '/public/storage/images', $imageName
+        );
+        $std['img'] = URL('storage/images/' . $imageName);
         $std->birth_day = $request-> birth_day;
         $std->gender = $request->gender;
         $std->password = bcrypt($request->password);
@@ -86,10 +87,18 @@ class StudentController extends Controller
         $std->img = $request->file('img')->storeAs('public/images',$newName);
         $std['img']=URL('storage/images/'.$newName);
 
-        $name = $request->file('img')->getClientOriginalName();
-        $newName = time() . $name;
-        $std->img = $request->file('img')->storeAs('public/images', $newName);
-        $std['img'] = URL('storage/images/' . $newName);
+        // $name = $request->file('img')->getClientOriginalName();
+        // $newName = time() . $name;
+        // $std->img = $request->file('img')->storeAs('public/images', $newName);
+        // $std['img'] = URL('storage/images/' . $newName);
+
+        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
+
+        $request->file('img')->move(
+            base_path() . '/public/storage/images', $imageName
+        );
+        $std['img'] = URL('storage/images/' . $imageName);
+
         $std->birth_day = $request->birth_day;
         $std->password = $request->password;
         $std->update();
@@ -125,12 +134,12 @@ class StudentController extends Controller
     public function img(Request $request,$id)
     {
         $std = Student::findOrFail($id);
-        $name = $request->file('img')->getClientOriginalName();
-        $newName = time() . $name;
-        $std->img = $request->file('img')->storeAs('public/images', $newName);
-        $std['img'] = URL('storage/images/' . $newName);
+        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
+        $request->file('img')->move(
+            base_path() . '/public/storage/images', $imageName
+        );
+        $std['img'] = URL('storage/images/' . $imageName);
         $std->update();
-        return response()->json(['message' =>'items updated']);
     }
 
 

@@ -19,7 +19,7 @@ class Teacher extends Model
         return $this->hasMany(Accepted::class);
     }
 
-    public function request()
+    public function request() 
     {
         return $this->hasMany(StudentRequest::class);
     }

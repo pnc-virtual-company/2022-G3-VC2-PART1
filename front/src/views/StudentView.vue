@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="student">
     <ShowStudentLeave @select-Option="selectOption"></ShowStudentLeave>
     <StudentLeave :selectOptions='selectOptions'/>
   </div>
@@ -11,7 +11,7 @@ import StudentLeave from '@/components/student/StudentLeave.vue';
 import ShowStudentLeave from '@/components/student/ShowStudentLeave.vue';
 
 export default {
-  name: 'HomeView',
+  name: 'StudentView',
   components: {
     StudentLeave,
     ShowStudentLeave

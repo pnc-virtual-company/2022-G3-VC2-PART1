@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 
+
 Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
 Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
 
@@ -40,6 +41,9 @@ Route::post("/student", [StudentController::class , 'store']);
 // Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
 // Route::get('/student', [App\Http\Controllers\StudentController::class , 'index']);
 
+// Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
+// Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
+// Route::get('/student', [App\Http\Controllers\StudentController::class , 'index']);
 
 
 
@@ -77,6 +81,7 @@ Route::put("/request/{id}", [StudentRequestController::class , 'update']);
 // Route::post("/request", [StudentRequestController::class , 'store']);
 Route::get("/request/{id}", [StudentRequestController::class , 'show']);
 
+
 Route::controller(StudentRequestController::class)->group(function () {
     Route::get("/request", 'index');
     Route::delete("/request/{id}", 'destroy');
@@ -86,6 +91,16 @@ Route::controller(StudentRequestController::class)->group(function () {
 });
 
 // //accept routes
+
+// Route::controller(StudentRequestController::class)->group(function () {
+//     Route::get("/accept", 'index');
+//     Route::delete("/accept/{id}", 'destroy');
+//     Route::put("/accept/{id}", 'update');
+//     Route::post("/accept", 'store');
+//     Route::get("/accept/{id}", 'show');
+// });
+
+
 Route::controller(StudentRequestController::class)->group(function () {
     Route::get("/accept", 'index');
     Route::delete("/accept/{id}", 'destroy');
@@ -93,7 +108,6 @@ Route::controller(StudentRequestController::class)->group(function () {
     Route::post("/accept", 'store');
     Route::get("/accept/{id}", 'show');
 });
-
 
 // // find student request
 // Route::get("/stdReq/{id}", [StudentController::class , 'getReqStudent']);
@@ -104,6 +118,7 @@ Route::controller(StudentRequestController::class)->group(function () {
 // find the request of student which one is approved or not
 // Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
 
+//update img
 // update img
 Route::put("/img/{id}", [StudentController::class , 'img']);
 

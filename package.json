@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2",
+    "vue-cli-plugin-tailwind": "^3.0.0"
+  }
+}

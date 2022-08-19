@@ -1,6 +1,6 @@
 <template>
     <svg class="ml-10 mt-5 w-20 text-teal-700 mr-5 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" /></svg>
-    <div class="border-t-4 border-indigo-200 border-t-teal-700 w-3/4 mt-5 m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="border-t-4  border-t-teal-700 w-3/4 mt-5 m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
         <h5 class="m-auto mb-2 mt-5 text-4xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Your leave detial</h5>
         <div class="flex justify-between items-end text-lg">
             <div class="p-5">

@@ -69,7 +69,7 @@ Route::controller(StudentController::class)->group(function () {
 // Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
 
 //update img
-// Route::put("/img/{id}", [StudentController::class , 'img']);
+Route::put("/img/{id}", [StudentController::class , 'img']);
 
 // //admine route
 // Route::get("/admin", [AdminController::class , 'index']);

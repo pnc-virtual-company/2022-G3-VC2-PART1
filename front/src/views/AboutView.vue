@@ -1,16 +1,16 @@
 <template>
   <div class="about">
-    <StudentLeave/>
+    <StudentDetailLeave/>
   </div>
-
-<template >
+</template >
 
 <script>
 // import StudentLeave from '@/components/StudentLeave.vue';
-import StudentLeave from '@/components/student/StudentLeave.vue';
+import StudentDetailLeave from '@/components/student/StudentDetailLeave.vue';
+// import '../input.css'
 export default {
   components: {
-    StudentLeave,
+    StudentDetailLeave,
   }
 }
 </script>

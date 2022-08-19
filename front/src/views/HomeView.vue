@@ -8,6 +8,7 @@
 // @ is an alias to /src
 import StudentHome from '@/components/StudentHome.vue'
 import axios from '../axios-http';
+// import '../input.css'
 export default {
   components: {
     StudentHome,

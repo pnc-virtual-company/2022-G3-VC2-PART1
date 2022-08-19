@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
-// use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-// use Laravel\Sanctum\Contracts\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 class Student extends Model
 {
-    use HasFactory, HasApiTokens;
+    use HasApiTokens, HasFactory, Notifiable;
     public function dayOff()
     {
         return $this->hasMany(StudentRequest::class);

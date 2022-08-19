@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> 
@@ -15,18 +16,16 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+=======
+  <TheNavigation></TheNavigation>
+</template>
+<script>
+import TheNavigation from '@/components/navigation/TheNavigation.vue';
+ 
+export default{
+  components:{
+    TheNavigation
+  }
+>>>>>>> 34919ba5fb030caf254530fe0669c7b9f3aac3e0
 }
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>

@@ -40,8 +40,8 @@ nav a {
 }
 
 
-/* nav a.router-link-exact-active { */
-  /* background: rgb(230, 180, 88); */
-  /* padding: 10px; */
-/* } */
+nav a.router-link-exact-active {
+  background: rgb(230, 180, 88); 
+   padding: 10px;
+}
 </style> 

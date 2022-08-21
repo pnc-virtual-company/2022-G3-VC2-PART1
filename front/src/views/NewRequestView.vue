@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     addRequest(data){
+      console.log(data);
       axios.post("request", data)
     },
   },

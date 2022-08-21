@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="addRequest" class="md:w-11/12 border border-gray-600 m-auto p-3 md:p-7 rounded-md py-3lx"> 
+    <form @submit.prevent="addRequest" class="request-form md:w-11/12 lg:w-9/12 m-auto p-3 md:p-7 rounded-md py-3lx"> 
         <h1 class="font-bold text-center text-orange-400 m-auto mb-7 text-3xl">Request Leave Form</h1>
         <div class="form-controll my-4 text-left text-base">
             <label for="reason" class="cursor-pointer mb-2 font-bold">Select Your Leave Type:</label>
@@ -15,7 +15,7 @@
             <div class="cursor-pointer my-4 sm:mr-3 sm:w-2/4  text-left form-controll ">
                 <label class="font-bold" for="">Start Date</label> <br>
                 <input v-model="start_date" class="w-full bg-stone-200 p-2 outline-0" placeholder="First Name" type="datetime-local">
-                <small v-if="no_start_date || not_correct_date" class="text-red-500">{{valid_date}}</small>
+                <small v-if="no_start_date" class="text-red-500">Please click icon calendar to input your date and time</small>
             </div>
             
             <div class="cursor-pointer w-full my-4 sm:w-2/4 text-left form-controll">
@@ -98,7 +98,7 @@ export default{
             // console.log(Math.abs((date2 - date1)/1000/60/60)) // to count hour
             if(this.start_date.trim() != "" && this.end_date.trim() != "" && this.reason.trim() != "" && this.leave_type.trim() != ""){
                 if( Math.sign(date2 - date1) != -1){
-                    let data = {student_id:20, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type}
+                    let data = {student_id:1, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type}
                     this.$emit('request', data)
                     this.setDefault()
                     this.not_correct_date = false;
@@ -128,4 +128,9 @@ export default{
     textarea {
         resize: none;
     }
+    .request-form {
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+
+    }
 </style>
+

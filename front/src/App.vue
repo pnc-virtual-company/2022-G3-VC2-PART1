@@ -1,6 +1,5 @@
 <template>
   <TheNavigation></TheNavigation>
-
  <router-view></router-view>
 </template>
 

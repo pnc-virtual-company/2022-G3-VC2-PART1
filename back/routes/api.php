@@ -120,7 +120,7 @@ Route::controller(StudentRequestController::class)->group(function () {
 
 //update img
 // update img
-Route::put("/img/{id}", [StudentController::class , 'img']);
+Route::put("img/{id}", [StudentController::class , 'img']);
 
 // //admine route
 // Route::get("/admin", [AdminController::class , 'index']);

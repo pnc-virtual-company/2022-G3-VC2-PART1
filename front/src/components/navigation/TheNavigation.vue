@@ -13,17 +13,32 @@
       </router-link>
   </div>
     <div class="w-[15%] flex mx-12 ml-10 justify-around ">
-      <img src="../../assets/profile.png" alt="" class="h-14 rounded-full object-cover bg-gray-100  border-gray-300 border mt-1">
+      <img @click="onProfile" src="../../assets/profile.png" alt="" class="h-14 rounded-full object-cover bg-gray-100  border-gray-300 border mt-1">
       <div class="text-sm flex items-center text-black ">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 cursor-pointer " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-white-500 >
         <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
         </svg>
       </div>
     </div>
-
-   
 </nav>
+<student-profile :profile="isClik"></student-profile>
 </template>
+
+<script>
+export default {
+    data(){
+      return{
+        isClik:false
+      }
+    },
+    methods:{
+      onProfile(){
+        this.isClik = !this.isClik;
+        this.$emit('profile',this.isClik)
+      }
+    }
+}
+</script>
 
 <style>
 

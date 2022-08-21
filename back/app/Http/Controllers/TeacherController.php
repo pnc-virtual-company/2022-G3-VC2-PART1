@@ -70,4 +70,9 @@ class TeacherController extends Controller
         $accepted->allow = $allow;
         $accepted->save();
     }
+
+    public function getAllEmails ()
+    {
+        return Teacher::all(['email']);
+    }
 }

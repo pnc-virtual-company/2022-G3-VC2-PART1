@@ -8,7 +8,7 @@ use App\Http\Controllers\StudentRequestController;
 use App\Http\Controllers\AcceptedController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MailController;
+use App\Http\Controllers\EmailController;
 
 
 Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
@@ -99,9 +99,11 @@ Route::controller(StudentRequestController::class)->group(function () {
 // Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
 
 //update img
-// update img
-Route::put("/img/{id}", [StudentController::class , 'img']);
+Route::put("/img/{id}", [StudentController::class , 'updateImg']);
 
 // //admine route
 // Route::get("/admin", [AdminController::class , 'index']);
-// Route::post("/sendMail", [MailController::class , 'sendMail']);
+Route::get('/sendMail/{subject}/{message}', [EmailController::class , 'sendMail']);
+
+//get all email teachers
+Route::get('/allEmails',[TeacherController::class,'getAllEmails']);

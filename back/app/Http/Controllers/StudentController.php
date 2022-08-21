@@ -58,8 +58,8 @@ class StudentController extends Controller
         $std->address = $request->address;
         $std->email = $request->email;
         $std->gender = $request->gender;
-        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
 
+        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
         $request->file('img')->move(
             base_path() . '/public/storage/images', $imageName
         );
@@ -97,7 +97,7 @@ class StudentController extends Controller
     }
 
 
-    public function img(Request $request,$id)
+    public function updateImg(Request $request,$id)
     {
         $std = Student::findOrFail($id);
         $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();

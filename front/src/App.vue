@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 <TheNavigation/>
   <nav>
     <router-link to="/">Home</router-link> |
@@ -18,12 +19,36 @@
     color: #2c3e50;
     }
 </style>
+=======
+  <TheNavigation></TheNavigation>
+
+ <router-view></router-view>
+</template>
+
+<style>
+body{
+  background: #fff;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+</style>
+
+>>>>>>> 29681d007effae1936571d7881d10be56a26dffd
 <script>
+
+
 import TheNavigation from '@/components/navigation/TheNavigation.vue';
  
 export default{
   components:{
     TheNavigation
   }
+
 }
 </script>
+
+

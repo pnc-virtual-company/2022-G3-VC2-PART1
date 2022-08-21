@@ -36,6 +36,11 @@ Route::post("/student", [StudentController::class , 'store']);
 // Route::post("/student", [StudentController::class , 'updateRequest']);
 // Route::delete("/student/{id}", [StudentController::class , 'deleteRequest']);
 // Route::delete("/studentReq/{id}", [StudentController::class , 'makeRequest']);
+
+// Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
+// Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
+// Route::get('/student', [App\Http\Controllers\StudentController::class , 'index']);
+
 // Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
 // Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
 // Route::get('/student', [App\Http\Controllers\StudentController::class , 'index']);
@@ -50,6 +55,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::controller(StudentController::class)->group(function () {
     Route::post("/student", 'store');
     Route::get("/logout", 'logout');
+    Route::post("/student", 'store');
+    Route::delete("/student/{id}", 'deleteRequest');
+    Route::delete("/studentReq/{id}", 'makeRequest');
+
     Route::get("/student", 'index');
     Route::put("/student", 'updateRequest');
     Route::get("/student/{id}", 'deleteRequest');
@@ -71,6 +80,8 @@ Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
 Route::put("/request/{id}", [StudentRequestController::class , 'update']);
 // Route::post("/request", [StudentRequestController::class , 'store']);
 Route::get("/request/{id}", [StudentRequestController::class , 'show']);
+
+
 Route::controller(StudentRequestController::class)->group(function () {
     Route::get("/request", 'index');
     Route::delete("/request/{id}", 'destroy');
@@ -80,6 +91,16 @@ Route::controller(StudentRequestController::class)->group(function () {
 });
 
 // //accept routes
+
+// Route::controller(StudentRequestController::class)->group(function () {
+//     Route::get("/accept", 'index');
+//     Route::delete("/accept/{id}", 'destroy');
+//     Route::put("/accept/{id}", 'update');
+//     Route::post("/accept", 'store');
+//     Route::get("/accept/{id}", 'show');
+// });
+
+
 Route::controller(StudentRequestController::class)->group(function () {
     Route::get("/accept", 'index');
     Route::delete("/accept/{id}", 'destroy');
@@ -87,7 +108,6 @@ Route::controller(StudentRequestController::class)->group(function () {
     Route::post("/accept", 'store');
     Route::get("/accept/{id}", 'show');
 });
-
 
 // // find student request
 // Route::get("/stdReq/{id}", [StudentController::class , 'getReqStudent']);

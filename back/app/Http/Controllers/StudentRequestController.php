@@ -14,6 +14,7 @@ class StudentRequestController extends Controller
 
     public function store(Request $request)
     {
+
         $req = new StudentRequest();
         $req->student_id = $request->student_id;
         $req->start_date = $request->start_date;
@@ -54,7 +55,6 @@ class StudentRequestController extends Controller
         $result = ['message' => "Item remove successfully"];
         if (!StudentRequest::destroy($id)) {
             $result = ['message' => "Item not found"];
-
         }
         return $result;
     }

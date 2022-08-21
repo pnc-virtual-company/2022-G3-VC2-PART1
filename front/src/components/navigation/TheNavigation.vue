@@ -1,13 +1,14 @@
 <template>
 <nav class="justify-between bg-white-500  p-0.5 shadow-8xl border-b-2 border-gray-250  ">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
-   <img class="w-40 ml-5" src="../../assets/logo.png" alt="">
+
+   <img class="w-40 ml-5" src="../../assets/logo.jpg" alt="">
   </div>
   <div class="flex items-center flex-wrap">
-      <router-link to="/" class="text-black mx-9 hover:text-orange-500  text-xl block mt-4 lg:inline-block lg:mt-0 ">
+      <router-link to="/student_list" class="text-black mx-9 hover:text-orange-500  text-xl block mt-4 lg:inline-block lg:mt-0 ">
         List all leave
       </router-link>
-      <router-link to="/about" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-black  text-xl border-b-2-orange-500">
+      <router-link to="/new_request" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-black  text-xl border-b-2-orange-500">
         New Request
       </router-link>
   </div>
@@ -22,7 +23,6 @@
 
    
 </nav>
-  <router-view/>
 </template>
 
 <style>

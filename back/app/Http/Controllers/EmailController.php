@@ -5,17 +5,26 @@ namespace App\Http\Controllers;
 use App\Mail\sendMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Teacher;
+use App\Models\Student;
+use App\Models\StudentRequest;
+
+
 class EmailController extends Controller
 {
-    public function sendMail($subject,$message,$emails)
+    public function sendMail($id,$leaveType,$message)
     {
-        $sbj = $subject;
+        $emails = Teacher::all(['email']);
+        $studentRequest = StudentRequest::find($id);
+        $student = Student::find($id);
+        $username = $student['first_name'].' '.$student['last_name'];
         $msg = $message;
         $body = [
-            'sbj' => $sbj,
-            'msg' => $msg,
+            'username' => $username,
+            'details' => $msg,
+            'leaveType' => $leaveType,
         ];
-        $emails =array ('ronalkot7@gmail.com', 'ulvy.romy@student.passerellesnumeriques.org','thibtik1234@gmail.com');
+
         foreach ($emails as $email) {
             Mail::to($email)->send(new sendMail($body));//file in Mail folder
         }

@@ -23,8 +23,9 @@ class sendMail extends Mailable
     {
         return $this->from('ulvyromy156@gami.com')->subject("Day off")->view('sends.send')
         ->with([
-            'username' => $this->msg,
-            'subject' => $this->sbj,
+            'username' => $this->username,
+            'details' => $this->details,
+            'leaveType' => $this->leaveType,
         ]);
     }
 }

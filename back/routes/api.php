@@ -57,13 +57,11 @@ Route::controller(StudentController::class)->group(function () {
     Route::get("/logout", 'logout');
     Route::post("/student", 'store');
     Route::delete("/student/{id}", 'deleteRequest');
-    Route::delete("/studentReq/{id}", 'makeRequest');
-
+    Route::post("/studentReq/{id}", 'makeRequest');
     Route::get("/student", 'index');
     Route::put("/student", 'updateRequest');
-    Route::get("/student/{id}", 'deleteRequest');
-    Route::get("/studentReq/{id}", 'makeRequest');
 });
+Route::post("/studentReq/{id}", [StudentRequestController::class , 'store']);
 
 // Route::get("/student", [StudentController:
 Route::controller(TeacherController::class)->group(function () {
@@ -74,12 +72,7 @@ Route::controller(TeacherController::class)->group(function () {
     Route::get("/teacher/{id}", 'show');
 });
 
-// //request routes
-Route::get("/request", [StudentRequestController::class , 'index']);
-Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
-Route::put("/request/{id}", [StudentRequestController::class , 'update']);
-// Route::post("/request", [StudentRequestController::class , 'store']);
-Route::get("/request/{id}", [StudentRequestController::class , 'show']);
+
 
 
 Route::controller(StudentRequestController::class)->group(function () {
@@ -123,7 +116,7 @@ Route::put("/img/{id}", [StudentController::class , 'updateImg']);
 
 // //admine route
 // Route::get("/admin", [AdminController::class , 'index']);
-Route::get('/sendMail/{subject}/{message}', [EmailController::class , 'sendMail']);
+Route::get('/sendMail/{id}/{leaveType}/{msg}', [EmailController::class , 'sendMail']);
 
 //get all email teachers
 Route::get('/allEmails',[TeacherController::class,'getAllEmails']);

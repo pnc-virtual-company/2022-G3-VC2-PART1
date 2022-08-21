@@ -20,7 +20,7 @@ class StudentController extends Controller
     {
         $request -> validate([
             'email' => 'string|required|email|unique:users',
-        ]); 
+        ]);
         $std = new Student();
         $std->first_name = $request->first_name;
         $std->last_name = $request->last_name;
@@ -53,7 +53,7 @@ class StudentController extends Controller
     }
     public function show( $id)
     {
-        
+
         $result = ['message' => "Item not found"];
         if (Student::find($id)) {
             $result = Student::find($id);
@@ -65,7 +65,7 @@ class StudentController extends Controller
     {
         $request -> validate([
             'email' => 'string|required|email|unique:users',
-        ]); 
+        ]);
         $std = Student::findOrFail($id);
 
         // delete old image
@@ -80,8 +80,7 @@ class StudentController extends Controller
         $std->address = $request->address;
         $std->email = $request->email;
         $std->gender = $request->gender;
-<<<<<<< HEAD
-=======
+
 
         // add new image
         $name = $request->file('img')->getClientOriginalName();
@@ -89,13 +88,6 @@ class StudentController extends Controller
         $std->img = $request->file('img')->storeAs('public/images',$newName);
         $std['img']=URL('storage/images/'.$newName);
 
-        // $name = $request->file('img')->getClientOriginalName();
-        // $newName = time() . $name;
-        // $std->img = $request->file('img')->storeAs('public/images', $newName);
-        // $std['img'] = URL('storage/images/' . $newName);
-
-        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
->>>>>>> 29681d007effae1936571d7881d10be56a26dffd
 
         $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
         $request->file('img')->move(
@@ -135,12 +127,8 @@ class StudentController extends Controller
         return Accepted::where('allow', '=', strtoupper($allow))->where('student_id','=',$student_id)->get();
     }
 
-<<<<<<< HEAD
 
     public function updateImg(Request $request,$id)
-=======
-    public function img(Request $request,$id)
->>>>>>> 29681d007effae1936571d7881d10be56a26dffd
     {
         $std = Student::findOrFail($id);
         $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();

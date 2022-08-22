@@ -15,7 +15,6 @@ return new class extends Migration
             $table->dateTime("start_date");
             $table->dateTime("end_date");
             $table->string("reason");
-            $table->string("status")->default('padding');
             $table->string("leave_type");
             $table->string("allow")->default("Padding");
             $table->timestamps();

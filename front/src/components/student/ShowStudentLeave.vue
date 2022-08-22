@@ -11,8 +11,7 @@
                     <option value="show all">Show all</option>
                     <option value="family's event">Family's Event</option>
                     <option value="sick">Sick </option>
-                    <option value="interview">Interview</option>
-                    <option value="trip">Trip</option>
+                    <option value="broder or sister married">broder or sister married</option>
                 </select>
            </div>
             <div class="w-full mr-16 flex-wrap-center mb-4">

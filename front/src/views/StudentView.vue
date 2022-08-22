@@ -33,32 +33,42 @@ export default {
       this.selectTypeLeave = leaveType
       this.selectStatus = status 
     },
-    // checkStatus(status, data){
-    //   if(status == 'all'){
-    //     data
-    //   }else if(status == 'family'){
-    // }
+    checkStatus( data, status){
+      if(status == 'all'){
+        data
+      }else if(status == "padding"){
+        data = data.filter(status=>status.allow.toLowerCase == 'padding');
+      }else if(status == "canceled"){
+        data = data.filter(status=>status.allow.toLowerCase == 'canceled');
+      }else if(status == "rejected"){
+        data = data.filter(status=>status.allow.toLowerCase == 'rejected');
+      }else{
+        data = data.filter(status=>status.allow.toLowerCase == 'approved');
+      }
+    }
   },
   computed:{
     selectOptions(){
         let dataStudents = this.listStudentLeave
-        if(this.selectTypeLeave =='show all'  || this.selectStatus =='show all'){
-          dataStudents
+        if(this.selectTypeLeave =='show all'){
+          dataStudents = this.listStudentLeave
+          this.checkStatus(dataStudents, this.selectStatus);
         }
-        else if (this.selectStatus !=''){
-          dataStudents = this.listStudentLeave.filter(student=>student.allow.toLowerCase() == this.selectStatus.toLowerCase())
+        else if (this.selectTypeLeave == "family's event"){
+          dataStudents = this.listStudentLeave.filter(student=>student.leave_type == "family's event");
+          this.checkStatus(dataStudents, this.selectStatus);
         }
-        else if(this.selectTypeLeave !=''){
-          dataStudents = this.listStudentLeave.filter(student=>student.leave_type.toLowerCase() == this.selectTypeLeave.toLowerCase() )
+        else if(this.selectTypeLeave =='sick'){
+          dataStudents = this.listStudentLeave.filter(student=>student.leave_type == 'sick');
+          this.checkStatus(dataStudents, this.selectStatus);
+          
+        }else{
+          dataStudents = this.listStudentLeave.filter(student=>student.leave_type == 'broder or sister married');
+          this.checkStatus(dataStudents, this.selectStatus);
         }
         return dataStudents
       }
   },
-  //  provide(){
-  //   return{
-  //     listStudentLeave: this.listStudentLeave
-  //   }
-  // },
   mounted(){
     this.getListStudent();
   }

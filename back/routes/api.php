@@ -8,7 +8,7 @@ use App\Http\Controllers\StudentRequestController;
 use App\Http\Controllers\AcceptedController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MailController;
+use App\Http\Controllers\EmailController;
 
 
 Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
@@ -57,13 +57,11 @@ Route::controller(StudentController::class)->group(function () {
     Route::get("/logout", 'logout');
     Route::post("/student", 'store');
     Route::delete("/student/{id}", 'deleteRequest');
-    Route::delete("/studentReq/{id}", 'makeRequest');
-
+    Route::post("/studentReq/{id}", 'makeRequest');
     Route::get("/student", 'index');
     Route::put("/student", 'updateRequest');
-    Route::get("/student/{id}", 'deleteRequest');
-    Route::get("/studentReq/{id}", 'makeRequest');
 });
+Route::post("/studentReq/{id}", [StudentRequestController::class , 'store']);
 
 // Route::get("/student", [StudentController:
 Route::controller(TeacherController::class)->group(function () {
@@ -119,9 +117,11 @@ Route::controller(StudentRequestController::class)->group(function () {
 // Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
 
 //update img
-// update img
-Route::put("/img/{id}", [StudentController::class , 'img']);
+Route::put("/img/{id}", [StudentController::class , 'updateImg']);
 
 // //admine route
 // Route::get("/admin", [AdminController::class , 'index']);
-// Route::post("/sendMail", [MailController::class , 'sendMail']);
+Route::get('/sendMail/{id}/{leaveType}/{msg}', [EmailController::class , 'sendMail']);
+
+//get all email teachers
+Route::get('/allEmails',[TeacherController::class,'getAllEmails']);

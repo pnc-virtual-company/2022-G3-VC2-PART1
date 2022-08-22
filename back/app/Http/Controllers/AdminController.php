@@ -12,7 +12,7 @@ class AdminController extends Controller
 
     //GET ALL USERS
     public function index()
-    { 
+    {
         $listStudent= [];
         $listTeacher = [];
         array_push($listStudent, Student::get());

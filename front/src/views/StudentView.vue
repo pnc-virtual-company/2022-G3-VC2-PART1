@@ -1,7 +1,7 @@
 <template>
   <div class="student">
     <ShowStudentLeave @select-Option="selectOption"></ShowStudentLeave>
-    <StudentLeave :selectOptions='selectOptions'/>
+    <StudentLeave :selectOptions='selectOptions' />
   </div>
 </template>
 <script>
@@ -19,8 +19,8 @@ export default {
   data(){
     return{
       listStudentLeave:[],
-      selectTypeLeave:'',
-      status:'',
+      selectTypeLeave:"show all",
+      selectStatus:"show all",
     }
   },
   methods:{
@@ -31,28 +31,34 @@ export default {
     },
     selectOption(leaveType,status){
       this.selectTypeLeave = leaveType
-      this.status = status 
+      this.selectStatus = status 
     },
+    // checkStatus(status, data){
+    //   if(status == 'all'){
+    //     data
+    //   }else if(status == 'family'){
+    // }
   },
-
   computed:{
     selectOptions(){
-        let data=this.listStudentLeave
-        if(this.selectTypeLeave =='show all'){
-          data
+        let dataStudents = this.listStudentLeave
+        if(this.selectTypeLeave =='show all'  || this.selectStatus =='show all'){
+          dataStudents
         }
-        if(this.status == 'show all' ){
-          data
+        else if (this.selectStatus !=''){
+          dataStudents = this.listStudentLeave.filter(student=>student.allow.toLowerCase() == this.selectStatus.toLowerCase())
         }
-        else if (this.status ){
-          data=this.listStudentLeave.filter(list=>list.allow.toLowerCase()==this.status.toLowerCase())
+        else if(this.selectTypeLeave !=''){
+          dataStudents = this.listStudentLeave.filter(student=>student.leave_type.toLowerCase() == this.selectTypeLeave.toLowerCase() )
         }
-        else if(this.selectTypeLeave ){
-          data = this.listStudentLeave.filter(list=>list.leave_type.toLowerCase()==this.selectTypeLeave.toLowerCase() )
-        }
-        return data
+        return dataStudents
       }
   },
+  //  provide(){
+  //   return{
+  //     listStudentLeave: this.listStudentLeave
+  //   }
+  // },
   mounted(){
     this.getListStudent();
   }

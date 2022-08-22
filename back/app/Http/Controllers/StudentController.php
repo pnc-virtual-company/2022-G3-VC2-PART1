@@ -20,7 +20,7 @@ class StudentController extends Controller
     {
         $request -> validate([
             'email' => 'string|required|email|unique:users',
-        ]); 
+        ]);
         $std = new Student();
         $std->first_name = $request->first_name;
         $std->last_name = $request->last_name;
@@ -53,7 +53,7 @@ class StudentController extends Controller
     }
     public function show( $id)
     {
-        
+
         $result = ['message' => "Item not found"];
         if (Student::find($id)) {
             $result = Student::find($id);
@@ -65,7 +65,7 @@ class StudentController extends Controller
     {
         $request -> validate([
             'email' => 'string|required|email|unique:users',
-        ]); 
+        ]);
         $std = Student::findOrFail($id);
 
         // delete old image
@@ -92,7 +92,6 @@ class StudentController extends Controller
         // $newName = time() . $name;
         // $std->img = $request->file('img')->storeAs('public/images', $newName);
         // $std['img'] = URL('storage/images/' . $newName);
-
         $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
 
         $request->file('img')->move(
@@ -132,10 +131,8 @@ class StudentController extends Controller
         return Accepted::where('allow', '=', strtoupper($allow))->where('student_id','=',$student_id)->get();
     }
 
+    public function updateImg(Request $request,$id)
 
-    
-
-    public function img(Request $request,$id)
     {
         $std = Student::findOrFail($id);
         $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();

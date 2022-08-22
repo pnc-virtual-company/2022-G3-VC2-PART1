@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("reason");
             $table->string("status")->default('padding');
             $table->string("leave_type");
-            $table->date("request_date");
             $table->string("allow")->default("Padding");
             $table->timestamps();
         });

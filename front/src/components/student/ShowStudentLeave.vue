@@ -7,7 +7,7 @@
         <div class="flex justify-around bg-gray-200 w-[98%] m-auto">
             <div class="w-full ml-16 ">
                 <h2 class=" mt-6 text-xl ml-12"> Filter by leave types</h2>
-                <select @change="selectOption" v-model=" selectTypeLeave" class="p-2 mt-4  mb-4 text-black placeholder-gray-400 bg-white border border-gray-400 focus:border-blue-500 border-b-3 w-4/5 ml-12">
+                <select @change="selectOption" v-model="selectTypeLeave" class="p-2 mt-4  mb-4 text-black placeholder-gray-400 bg-white border border-gray-400 focus:border-blue-500 border-b-3 w-4/5 ml-12">
                     <option value="show all">Show all</option>
                     <option value="family's event">Family's Event</option>
                     <option value="sick">Sick </option>
@@ -19,7 +19,7 @@
                 <h2 class="mt-6 text-xl  ml-[5rem]">Filter by status</h2>
                 <div class="flex justify-evenly items-end mr-16 mt-[-12px]">
                     <select @change="selectOption" v-model="selectStatus" class="p-2 mt-7 mb-4 text-black border placeholder-gray-400 bg-white border-gray-400 focus:border-blue-500 border-b-1 w-4/5 ml-[2rem]" >
-                         <option value="show all">Show all</option>
+                        <option  value="show all">Show all</option>
                         <option value="canceled">Canceled</option>
                         <option value="approved">Approved</option>
                         <option value="rejected">Rejected </option>

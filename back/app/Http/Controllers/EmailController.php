@@ -27,8 +27,8 @@ class EmailController extends Controller
             'email'=>$email
         ];
 
-        foreach ($emails as $email) {
-            Mail::to($email)->send(new sendMail($body));//file in Mail folder
+        foreach ($emails as $eml) {
+            Mail::to($eml)->send(new sendMail($body));//file in Mail folder
         }
 
     }

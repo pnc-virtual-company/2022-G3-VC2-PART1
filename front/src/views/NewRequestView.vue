@@ -14,8 +14,11 @@ export default {
   },
   methods: {
     addRequest(data){
-      console.log(data);
-      axios.post("request", data)
+      axios.post("request", data).then(res=>{
+        console.log(res)
+        console.log(data.student_id)
+        axios.get('sendMail/'+data.student_id+"/"+data.leave_type+"/"+data.reason, )
+      })
     },
   },
   computed:{

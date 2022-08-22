@@ -81,6 +81,7 @@ class StudentController extends Controller
         $std->email = $request->email;
         $std->gender = $request->gender;
 
+
         // add new image
         $name = $request->file('img')->getClientOriginalName();
         $newName = time() . $name;
@@ -130,6 +131,9 @@ class StudentController extends Controller
     {
         return Accepted::where('allow', '=', strtoupper($allow))->where('student_id','=',$student_id)->get();
     }
+
+
+    
 
     public function img(Request $request,$id)
     {

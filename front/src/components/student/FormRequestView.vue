@@ -91,7 +91,6 @@ export default{
                 this.no_leave_type = false;
             }
         },
-
         addRequest(){
             let date2 = new Date(this.end_date)
             let date1 = new Date(this.start_date)
@@ -113,8 +112,6 @@ export default{
     }
     }
 }
-
-    
 </script>
 
 

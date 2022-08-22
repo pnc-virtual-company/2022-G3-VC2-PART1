@@ -31,7 +31,6 @@ nav {
   padding: 30px;
   display: flex;
   justify-content: space-between;
-  /* background: rgb(10, 165, 255); */
 }
 
 nav a {

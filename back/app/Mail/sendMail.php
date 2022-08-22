@@ -11,7 +11,6 @@ class sendMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $userEmail;
     public function __construct($body)
     {
          foreach ($body as $x => $val) {
@@ -21,11 +20,15 @@ class sendMail extends Mailable
 
     public function build()
     {
-        return $this->from($this->email)->subject("Day off")->view('sends.send')
+        return $this->from("ulvyromy156@gamail.com")->subject("Day off")->view('sends.send')
         ->with([
             'username' => $this->username,
             'details' => $this->details,
             'leaveType' => $this->leaveType,
+            'email' => $this->email,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'days' => $this->days
         ]);
     }
 }

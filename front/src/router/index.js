@@ -19,7 +19,6 @@ const routes = [
     name: 'student_ist',
     component: StudentView
   },
-  // { path: '/student_list/:studentID', component: StudentDetailLeave },
 ]
 
 const router = createRouter({

@@ -21,7 +21,7 @@ class sendMail extends Mailable
 
     public function build()
     {
-        return $this->from('ulvyromy156@gami.com')->subject("Day off")->view('sends.send')
+        return $this->from($this->email)->subject("Day off")->view('sends.send')
         ->with([
             'username' => $this->username,
             'details' => $this->details,

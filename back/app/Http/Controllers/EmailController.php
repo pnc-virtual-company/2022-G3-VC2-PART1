@@ -19,10 +19,12 @@ class EmailController extends Controller
         $student = Student::find($id);
         $username = $student['first_name'].' '.$student['last_name'];
         $msg = $message;
+        $email = $student['email'];
         $body = [
             'username' => $username,
             'details' => $msg,
             'leaveType' => $leaveType,
+            'email'=>$email
         ];
 
         foreach ($emails as $email) {

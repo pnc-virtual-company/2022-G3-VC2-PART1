@@ -1,8 +1,8 @@
 
 <template>
   <TheNavigation></TheNavigation>
-  <!-- <student-signup/>
-  <user-login/> -->
+  <!-- <student-signup/> -->
+  <user-login/>
   <router-view></router-view>
 </template>
 

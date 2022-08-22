@@ -56,8 +56,7 @@ export default {
         return {
             url: null,
             editstudent:null,
-            canceled:"false"
-            
+            students:[]
         }
 },
 

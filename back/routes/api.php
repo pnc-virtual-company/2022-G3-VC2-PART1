@@ -72,16 +72,21 @@ Route::controller(TeacherController::class)->group(function () {
     Route::get("/teacher/{id}", 'show');
 });
 
+// //request routes
+Route::get("/request", [StudentRequestController::class , 'index']);
+Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
+Route::put("/request/{id}", [StudentRequestController::class , 'update']);
+Route::post("/request", [StudentRequestController::class , 'store']);
+Route::get("/request/{id}", [StudentRequestController::class , 'show']);
 
 
-
-Route::controller(StudentRequestController::class)->group(function () {
-    Route::get("/request", 'index');
-    Route::delete("/request/{id}", 'destroy');
-    Route::put("/request/{id}", 'update');
-    Route::post("/request", 'store');
-    Route::get("/request/{id}", 'show');
-});
+// Route::controller(StudentRequestController::class)->group(function () {
+//     Route::get("/request", 'index');
+//     Route::delete("/request/{id}", 'destroy');
+//     Route::put("/request/{id}", 'update');
+//     Route::post("/request", 'store');
+//     Route::get("/request/{id}", 'show');
+// });
 
 // //accept routes
 

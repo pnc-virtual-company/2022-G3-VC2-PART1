@@ -11,7 +11,7 @@
                     <option value="show all">Show all</option>
                     <option value="family's event">Family's Event</option>
                     <option value="sick">Sick </option>
-                    <option value="broder or sister married">broder or sister married</option>
+                    <option value="broder or sister marry">broder or sister married</option>
                 </select>
            </div>
             <div class="w-full mr-16 flex-wrap-center mb-4">
@@ -19,7 +19,6 @@
                 <div class="flex justify-evenly items-end mr-16 mt-[-12px]">
                     <select @change="selectOption" v-model="selectStatus" class="p-2 mt-7 mb-4 text-black border placeholder-gray-400 bg-white border-gray-400 focus:border-blue-500 border-b-1 w-4/5 ml-[2rem]" >
                         <option  value="show all">Show all</option>
-                        <option value="canceled">Canceled</option>
                         <option value="approved">Approved</option>
                         <option value="rejected">Rejected </option>
                         <option value="padding">Padding </option>

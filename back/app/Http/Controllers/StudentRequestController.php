@@ -9,7 +9,8 @@ class StudentRequestController extends Controller
 {
     public function index()
     {
-        return StudentRequest::all();
+        // return StudentRequest::all();
+        return StudentRequest::with('student')->get();
     }
 
     public function store(Request $request)
@@ -43,13 +44,20 @@ class StudentRequestController extends Controller
         $req->start_date = $request->start_date;
         $req->end_date = $request->end_date;
         $req->reason = $request->reason;
-        $req->allow = $request->allow;
+        $req->status = $request->status;
         $req->duration = $request->duration;
         $req->leave_type = $request->leave_type;
         $req->update();
         return response()->json(['message' => 'items updated']);
     }
 
+    public function update_status(Request $request, $id)
+    {
+        $req = StudentRequest::findOrFail($id);
+        $req->status = $request->status;
+        $req->update();
+        return response()->json(['message' => 'status updated!']);
+    }
     public function destroy($id)
     {
         $result = ['message' => "Item remove successfully"];

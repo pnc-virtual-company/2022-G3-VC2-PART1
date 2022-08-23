@@ -37,8 +37,7 @@ export default{
     selectOptions:Function,
    },
    data(){
-    return{
-      
+    return{  
     }
    },
    methods:{

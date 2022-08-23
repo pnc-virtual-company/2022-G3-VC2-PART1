@@ -5,8 +5,8 @@
   </div>
 </template>
 <script>
-import axios from "../axios-http.js";
-import '../input.css'
+import axios from "../../axios-http.js";
+import '../../input.css'
 import StudentLeave from '@/components/student/StudentLeave.vue';
 import ShowStudentLeave from '@/components/student/ShowStudentLeave.vue';
 
@@ -38,9 +38,8 @@ export default {
         data
       }else if(status == "padding"){
         data = data.filter(status=>status.allow.toLowerCase == 'padding');
-      }else if(status == "canceled"){
-        data = data.filter(status=>status.allow.toLowerCase == 'canceled');
-      }else if(status == "rejected"){
+      }
+      else if(status == "rejected"){
         data = data.filter(status=>status.allow.toLowerCase == 'rejected');
       }else{
         data = data.filter(status=>status.allow.toLowerCase == 'approved');

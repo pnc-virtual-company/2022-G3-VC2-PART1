@@ -10,6 +10,12 @@
       <router-link to="/new_request" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
         New Request
       </router-link>
+      <router-link to="/list_allStudent" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
+        Teacher(ListStudent)
+      </router-link>
+      <router-link to="/checkStudentLeave" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
+        Teacher(checkstudentLeave)
+      </router-link>
   </div>
     <div class="w-[15%] flex mx-12 ml-10 justify-around ">
       <img src="../../assets/profile.png" alt="" class="h-14 rounded-full object-cover bg-gray-100  border-gray-300 border mt-1">

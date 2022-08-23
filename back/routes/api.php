@@ -68,6 +68,7 @@ Route::controller(TeacherController::class)->group(function () {
     Route::get("/teacher",  'index');
     Route::delete("/teacher/{id}", 'destroy');
     Route::put("/teacher/{id}", 'update');
+    Route::put("/teacher/approve/{id}", 'approve');
     Route::post("/teacher", 'store');
     Route::get("/teacher/{id}", 'show');
 });
@@ -78,6 +79,7 @@ Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
 Route::put("/request/{id}", [StudentRequestController::class , 'update']);
 Route::post("/request", [StudentRequestController::class , 'store']);
 Route::get("/request/{id}", [StudentRequestController::class , 'show']);
+Route::put("/request/update_status/{id}", [StudentRequestController::class , 'update_status']);
 
 
 // Route::controller(StudentRequestController::class)->group(function () {

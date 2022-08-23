@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from "../axios-http";
+import axios from "../../axios-http";
 export default {
   data(){
     return{
@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     addRequest(data){
-      console.log(data)
+      // console.log(data)
       axios.post("/request", data)
     },
   },

@@ -26,6 +26,7 @@ class sendMail extends Mailable
             'username' => $this->username,
             'details' => $this->details,
             'leaveType' => $this->leaveType,
+            'email' => $this->email,
         ]);
     }
 }

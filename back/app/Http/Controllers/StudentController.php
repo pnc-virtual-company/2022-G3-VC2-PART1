@@ -87,18 +87,7 @@ class StudentController extends Controller
     }
 
 
-    public function updateImg(Request $request,$id)
-    {
-        $std = Student::findOrFail($id);
-        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
-        $request->file('img')->move(
-            base_path() . '/public/storage/images', $imageName
-        );
-        $std['img'] = URL('storage/images/' . $imageName);
-        $std->update();
-    }
-
-
+    
 
 
 }

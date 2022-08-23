@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Models\Accepted;
+use App\Models\StudentRequest;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -65,9 +66,11 @@ class TeacherController extends Controller
 
     public function approve(Request $request,$id)
     {
-        $accepted = Accepted::findOrFail($id);
-        $accepted->allow = $request->allow;
-        $accepted->save();
+        $studReq = StudentRequest::findOrFail($id);
+        $studReq->status = $request->status;
+        $studReq->update();
+        return response()->json(['message' => 'updated']);
+
     }
 
     public function getAllEmails ()

@@ -14,15 +14,14 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 Route::post('/login', [LoginController::class , 'login']);
-Route::post('/student', [LoginController::class , 'store']);
+Route::post('/student', [StudentController::class , 'store']);
 
 /*------------------------------------------ -------------------------------------------- All Normal students Routes List -------------------------------------------- --------------------------------------------*/
 Route::middleware(['auth', 'user-access:student'])->group(function () {
-
     Route::get("/student/{id}", [StudentController::class , 'show']);
+    Route::get("/student", [StudentController::class , 'index']);
     Route::get('/logout', [LoginController::class , 'logout']);
     Route::get("/getReq/{id}", [StudentController::class , 'getReqStudent']);
-
 });
 
 
@@ -118,7 +117,7 @@ Route::middleware(['auth', 'user-access:teacher'])->group(function () {
 // // Route::get("/countRequest/{id}", [StudentController::class , 'countStudentReq']);
 
 // // find the request of student which one is approved or not
-// // Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
+// Route::get("/approved/{allow}/{stdID}", [StudentController::class , 'approved']);
 
 // //update img
 // Route::put("/img/{id}", [StudentController::class , 'updateImg']);

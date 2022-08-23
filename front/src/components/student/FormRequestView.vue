@@ -1,5 +1,5 @@
 <template>
-    <form style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" @submit.prevent="addRequest" class="md:w-11/12 border  m-auto p-3 md:p-7 rounded-md py-3lx"> 
+    <form style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" @submit.prevent="addRequest" class="md:w-8/12 border  m-auto p-3 md:p-7 rounded-md py-3lx"> 
         <h1 class="font-bold text-center text-orange-400 m-auto mb-7 text-3xl">Request Leave Form</h1>
         <div class="form-controll my-4 text-left text-base">
             <label for="reason" class="cursor-pointer mb-2 font-bold">Select Your Leave Type:</label>
@@ -49,7 +49,7 @@
             <textarea v-model="reason" placeholder="Write your reason..." class="bg-stone-200 border border-gray-600 rounded p-4 text-black w-full p-2 outline-0" name="" id="" cols="30" rows="7"></textarea>
         </div>
         <div class="flex justify-center">
-            <button  type="submit" class="sm:w-1/4 w-full rounded-md text-white text-xl bg-blue-500 p-3">Send</button>
+            <button  type="submit" class="sm:w-1/4 w-full rounded-md text-white text-xl bg-orange-500 p-3">Send</button>
         </div>
     </form>
 </template>

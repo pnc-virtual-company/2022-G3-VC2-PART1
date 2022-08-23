@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="addRequest" class="request-form md:w-11/12 lg:w-6/12 m-auto p-3 md:p-7 rounded-md py-3lx"> 
+    <form style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" @submit.prevent="addRequest" class="md:w-11/12 border  m-auto p-3 md:p-7 rounded-md py-3lx"> 
         <h1 class="font-bold text-center text-orange-400 m-auto mb-7 text-3xl">Request Leave Form</h1>
         <div class="form-controll my-4 text-left text-base">
             <label for="reason" class="cursor-pointer mb-2 font-bold">Select Your Leave Type:</label>
@@ -73,6 +73,7 @@ export default{
             start_date: '',
             end_date: '',
             reason: '',
+            
         }
     },
     methods: {
@@ -86,7 +87,9 @@ export default{
             this.leave_type =""
             this.reason=""
             this.valid_date = "Please click icon calendar to input your date and time"
-
+            this.duration=0
+            this.part_of_start_day="Morning"
+            this.part_of_end_day= "Morning"
         },
         checkValidation(){
             if(this.reason.trim() == ""){
@@ -106,21 +109,19 @@ export default{
             }else{
                 this.no_end_date = false;
             }
-
             if(this.leave_type.trim() == ""){
                 this.no_leave_type = true;
             }else{
                 this.no_leave_type = false;
             }
         },
-
         addRequest(){
             if(this.duration > 0 && this.start_date.trim() != "" && this.end_date.trim() != "" && this.reason.trim() != "" && this.leave_type.trim() != ""){
                 let data = {student_id:1, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type, duration: this.duration}
-                console.log(data)
                 this.$emit('request', data)
                 this.setDefault()
                 this.not_correct_date = false;
+
             }else{
                 this.checkValidation()
             }
@@ -146,6 +147,9 @@ export default{
             if(this.duration < 0){
                 this.valid_date = "End date must be greater than start date!"
                 this.not_correct_date = true;
+            }else{
+                this.valid_date = "Please click icon calendar to input your date!"
+                this.not_correct_date = false;
             }
         }
         
@@ -156,13 +160,8 @@ export default{
             return this.duration
         }
     }
-}
-
-    
+} 
 </script>
-
-
-
 
 <style>
 

@@ -20,15 +20,24 @@ class EmailController extends Controller
         $username = $student['first_name'].' '.$student['last_name'];
         $msg = $message;
         $email = $student['email'];
+        $days = (int)date('d', strtotime($student['start_date'])) - (int)date('d', strtotime($student['end_date']));
+        $start_date = date('y-m-d', strtotime($student['start_date']));
+        $end_date = date('y-m-d', strtotime($student['end_date']));
+        if($days  == 0){
+            $days = 'Half';
+        }
         $body = [
             'username' => $username,
             'details' => $msg,
             'leaveType' => $leaveType,
-            'email'=>$email
+            'start_date'=>$start_date,
+            'end_date'=>$end_date,
+            'email' => $email,
+            'days' => $days,
         ];
 
-        foreach ($emails as $email) {
-            Mail::to($email)->send(new sendMail($body));//file in Mail folder
+        foreach ($emails as $eml) {
+            Mail::to($eml)->send(new sendMail($body));//file in Mail folder
         }
 
     }

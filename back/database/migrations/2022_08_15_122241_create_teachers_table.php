@@ -12,12 +12,10 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->date('birth_day');
             $table->string('gender');
             $table->string('email')->unique()->email();
-            $table->string('address');
+            $table->string('phone_number');
             $table->string('password');
-            $table->string('img')->default("public/images/");
             $table->timestamps();
         });
     }

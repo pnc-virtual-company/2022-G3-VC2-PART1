@@ -16,19 +16,15 @@ class LoginController extends Controller
     {
         $user = Student::where('email', $request->email)->first();
         //check password
-        if(!$user || !!Hash::check($user->password,$user->password)){
+        if(!$user || !Hash::check($request->password,$user->password)){
             return response()->json(['sms'=>"Invaliid password"]);
         }
         $token = $user->createToken('myToken')->plainTextToken;
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-        return response()->json($response);
-    } 
+        return response()->json(['token' => $token]);
+    }
     public function logout()
     {
-        $cookie = Cookie::forget('jwt');
-        return response()->json(['mes' => 'Logged out Successfully'])->withCookie($cookie);
+        auth('sanctum')->user()->tokens()->delete();
+        return response()->json(['mes' => 'Logged out Successfully']);
     }
 }

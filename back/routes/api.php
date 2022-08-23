@@ -9,27 +9,31 @@ use App\Http\Controllers\AcceptedController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmailController;
+use Illuminate\Support\Facades\Auth;
 
 
+Auth::routes();
 Route::post('/login', [LoginController::class , 'login']);
-Route::post('/student', [StudentController::class , 'store']);
+Route::post('/student', [LoginController::class , 'store']);
 
-// Route::group(['middleware' => ['auth:sanctum']], function () {
+/*------------------------------------------ -------------------------------------------- All Normal students Routes List -------------------------------------------- --------------------------------------------*/
+Route::middleware(['auth', 'user-access:student'])->group(function () {
 
-//     Route::post('/logout', [App\Http\Controllers\LoginController::class , 'logout']);
-//     Route::get('/student', [App\Http\Controllers\StudentController::class , 'index']);
-//     Route::delete('/student/{id}', [App\Http\Controllers\StudentController::class , 'destroy']);
-//     Route::put('/student/{id}', [App\Http\Controllers\StudentController::class , 'update']);
+    Route::get("/student/{id}", [StudentController::class , 'show']);
+    Route::get('/logout', [LoginController::class , 'logout']);
+    Route::get("/getReq/{id}", [StudentController::class , 'getReqStudent']);
 
-// });
+});
 
-// Route::group(['namespace' => 'Admin'], function () {
-// // Controllers Within The "App\Http\Controllers\Admin" Namespace
-// });
 
-// //student routes
-// Route::get("/student", [StudentController::class , 'index']);
-// Route::get("/student/{id}", [StudentController::class , 'show']);
+/*------------------------------------------ -------------------------------------------- All teachers Routes List -------------------------------------------- --------------------------------------------*/
+Route::middleware(['auth', 'user-access:teacher'])->group(function () {
+
+    Route::get("/teacher/{id}", [TeacherController::class , 'show']);
+
+});
+
+
 // Route::delete("/student/{id}", [StudentController::class , 'destroy']);
 // Route::put("/student/{id}", [StudentController::class , 'update']);
 // Route::post("/student", [StudentController::class , 'store']);

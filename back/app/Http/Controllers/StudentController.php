@@ -6,7 +6,7 @@ use App\Models\Student;
 use App\Models\Accepted;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\File;
+// use Illuminate\Support\Facades\File;
 
 
 class StudentController extends Controller
@@ -97,6 +97,7 @@ class StudentController extends Controller
         $std['img'] = URL('storage/images/' . $imageName);
         $std->update();
     }
+
 
 
 

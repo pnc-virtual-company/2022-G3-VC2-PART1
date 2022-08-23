@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <form  @submit.prevent="onRegister" class=" shadow max-w-6xl  m-auto mt-5   rounded-md p-5 mb-5">
         <h1 class="font-bold text-4xl text-orange-400 text-center mb-3 ">Create  Account Student</h1>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -126,4 +126,4 @@ export default {
 
 <style>
 
-</style>
+</style> -->

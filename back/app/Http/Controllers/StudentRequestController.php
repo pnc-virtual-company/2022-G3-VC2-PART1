@@ -14,12 +14,13 @@ class StudentRequestController extends Controller
 
     public function store(Request $request)
     {
-
         $req = new StudentRequest();
         $req->student_id = $request->student_id;
         $req->start_date = $request->start_date;
         $req->end_date = $request->end_date;
         $req->reason = $request->reason;
+        $req->duration = $request->duration;
+        $req->request_date = $request->request_date;
         $req->leave_type = $request->leave_type;
         $req->allow = $request->allow;
         $req->save();
@@ -42,6 +43,8 @@ class StudentRequestController extends Controller
         $req->start_date = $request->start_date;
         $req->end_date = $request->end_date;
         $req->reason = $request->reason;
+        $req->allow = $request->allow;
+        $req->duration = $request->duration;
         $req->leave_type = $request->leave_type;
         $req->allow = $request->allow;
         $req->update();

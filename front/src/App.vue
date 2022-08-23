@@ -2,7 +2,7 @@
 <template>
   <TheNavigation></TheNavigation>
   <!-- <student-signup/> -->
-  <user-login/>
+  <!-- <user-login/> -->
   <router-view></router-view>
 </template>
 
@@ -20,12 +20,6 @@ export default{
   body{
     background: white;
   }
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    }
   
 </style>
 

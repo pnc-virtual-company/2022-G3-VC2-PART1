@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    
     <StudentHome :student_data="students"/>
   </div>
 </template>
@@ -8,6 +9,7 @@
 import StudentHome from '@/components/student/StudentHome.vue';
 import axios from '../axios-http';
 export default {
+  // name:"home",
   components: {
     StudentHome,
   },

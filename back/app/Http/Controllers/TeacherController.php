@@ -21,11 +21,29 @@ class TeacherController extends Controller
         $cher->address = $request->address;
         $cher->email = $request->email;
         $cher->gender = $request->gender;
-        $cher->img = $request->file('img')->store('public/images');
+
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $cher->img = $request->file('img')->storeAs('public/images', $newName);
+        $cher['img'] = URL('storage/images/' . $newName);
+
+
+        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
+
+        $request->file('img')->move(
+            base_path() . '/public/storage/images', $imageName
+        );
+        $cher['img'] = URL('storage/images/' . $imageName);
         $cher->birth_day = $request->birth_day;
         $cher->password = $request->password;
         $cher->save();
-        return response()->json(['message' => "Item saved successfully"]);
+
+        $token = $cher->createToken('mytoken')->plainTextToken;
+        $response = [
+            'user' => $cher,
+            'token' => $token
+        ];
+        return response($response, 201);
     }
 
     public function show($id)
@@ -44,7 +62,19 @@ class TeacherController extends Controller
         $cher->address = $request->address;
         $cher->email = $request->email;
         $cher->gender = $request->gender;
-        $cher->img = $request->file('img')->store('public/images');
+
+        $name = $request->file('img')->getClientOriginalName();
+        $newName = time() . $name;
+        $cher->img = $request->file('img')->storeAs('public/images', $newName);
+        $cher['img'] = URL('storage/images/' . $newName);
+
+
+        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
+
+        $request->file('img')->move(
+            base_path() . '/public/storage/images', $imageName
+        );
+        $cher['img'] = URL('storage/images/' . $imageName);
         $cher->birth_day = $request->birth_day;
         $cher->password = $request->password;
         $cher->update();

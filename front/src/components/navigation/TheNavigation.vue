@@ -20,7 +20,7 @@
       </div>
     </div>
 </nav>
-<student-profile :profile="isClik"></student-profile>
+<!-- <student-profile :profile="isClik"></student-profile> -->
 </template>
 
 <script>

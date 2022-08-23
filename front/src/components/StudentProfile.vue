@@ -49,7 +49,7 @@
 </div>
 </template>
 <script>
-import axios from '../axios-http'
+// import axios from '../axios-http'
 export default {
   props:['profile'],
     data() {
@@ -63,23 +63,21 @@ export default {
 methods: {
   onFileChange(e) {
     const file = e.target.files[0];
-    this.editstudent=file.name
-    console.log(this.editstudent)
     this.url = URL.createObjectURL(file);
-    this.updateImage()
+    // this.updateImage()
   },
   onChnage(){
     this.$refs.file.click();
   },
 
-  updateImage(){
-    axios
-      .patch('/student/1', this.editstudent)
-      .then(response => console.log(response.data))
-  }
+  // updateImage(){
+  //   axios
+  //     .patch('/student/1', this.editstudent)
+  //     .then(response => console.log(response.data))
+  // }
 },
   mounted(){
-    this.updateImage();
+    // this.updateImage();
   },
 }
 </script>

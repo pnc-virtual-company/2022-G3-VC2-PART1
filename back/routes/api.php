@@ -14,25 +14,25 @@ use App\Http\Controllers\EmailController;
 Route::post('/login', [App\Http\Controllers\LoginController::class , 'login']);
 Route::post('/register', [App\Http\Controllers\StudentController::class , 'store']);
 
-// Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/student', [App\Http\Controllers\StudentController::class , 'index']);
     Route::delete('/student/{id}', [App\Http\Controllers\StudentController::class , 'destroy']);
     Route::put('/student/{id}', [App\Http\Controllers\StudentController::class , 'update']);
     Route::post('/logout', [App\Http\Controllers\LoginController::class , 'logout']);
 
-// });
+});
 
 // Route::group(['namespace' => 'Admin'], function () {
 // // Controllers Within The "App\Http\Controllers\Admin" Namespace
 // });
 
 // //student routes
-Route::get("/student", [StudentController::class , 'index']);
-Route::get("/student/{id}", [StudentController::class , 'show']);
-Route::delete("/student/{id}", [StudentController::class , 'destroy']);
-Route::put("/student/{id}", [StudentController::class , 'update']);
-Route::post("/student", [StudentController::class , 'store']);
+// Route::get("/student", [StudentController::class , 'index']);
+// Route::get("/student/{id}", [StudentController::class , 'show']);
+// Route::delete("/student/{id}", [StudentController::class , 'destroy']);
+// Route::put("/student/{id}", [StudentController::class , 'update']);
+// Route::post("/student", [StudentController::class , 'store']);
 // Route::post("/student", [StudentController::class , 'updateRequest']);
 // Route::delete("/student/{id}", [StudentController::class , 'deleteRequest']);
 // Route::delete("/studentReq/{id}", [StudentController::class , 'makeRequest']);

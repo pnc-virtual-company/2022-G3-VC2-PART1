@@ -4,12 +4,23 @@ import NewRequest from '../views/NewRequestView.vue'
 import StudentView from '../views/StudentView.vue'
 import HomeView from '../views/HomeView.vue'
 import StudentDetailLeave from '../views/StudentDetailView.vue'
+import UserLogin from '../views/UserLogin.vue'
 
 
 const routes = [
   {
-    path: '/',
+    path:"/",
+    redirect:"/login"
+  },
+  {
+    path: '/home',
+    name:'Home',
     component: HomeView
+  },
+  {
+    path: '/Login',
+    name:'Login',
+    component: UserLogin
   },
   {
     path: '/new_request',

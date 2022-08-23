@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from "../axios-http";
+import axios from "../../axios-http";
 export default {
   data(){
     return{
@@ -16,7 +16,6 @@ export default {
     addRequest(data){
       axios.post("request", data).then(res=>{
         console.log(res)
-        console.log(data.student_id)
         axios.get('sendMail/'+data.student_id+"/"+data.leave_type+"/"+data.reason, )
       })
     },

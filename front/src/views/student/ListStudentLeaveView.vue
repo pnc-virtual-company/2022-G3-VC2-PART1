@@ -1,12 +1,11 @@
 <template>
   <div class="student">
     <ShowStudentLeave @select-Option="selectOption"></ShowStudentLeave>
-    <StudentLeave :selectOptions='selectOptions'/>
+    <StudentLeave  :selectOptions='selectOptions'/>
   </div>
 </template>
 <script>
-import axios from "../axios-http.js";
-import '../input.css'
+import axios from "../../axios-http.js";
 import StudentLeave from '@/components/student/StudentLeave.vue';
 import ShowStudentLeave from '@/components/student/ShowStudentLeave.vue';
 
@@ -33,24 +32,27 @@ export default {
       this.selectTypeLeave = leaveType
       this.status = status 
     },
+
+    checkStatus(status, data){
+      if(status == ""){
+        data
+      }else{
+        data = data.filter(request_status => request_status.status == status);
+      }
+      return data;
+    }
   },
 
   computed:{
     selectOptions(){
-        let data=this.listStudentLeave
-        if(this.selectTypeLeave =='show all'){
-          data
+        let datas=this.listStudentLeave
+        if(this.selectTypeLeave == ''){
+          datas
+        }else{
+          datas = datas.filter(data => data.leave_type == this.selectTypeLeave)
         }
-        if(this.status == 'show all' ){
-          data
-        }
-        else if (this.status ){
-          data=this.listStudentLeave.filter(list=>list.allow.toLowerCase()==this.status.toLowerCase())
-        }
-        else if(this.selectTypeLeave ){
-          data = this.listStudentLeave.filter(list=>list.leave_type.toLowerCase()==this.selectTypeLeave.toLowerCase() )
-        }
-        return data
+        let result = this.checkStatus(this.status, datas)
+        return result;
       }
   },
   mounted(){

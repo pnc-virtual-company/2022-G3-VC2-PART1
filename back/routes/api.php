@@ -15,9 +15,22 @@ Route::post('/student', [StudentController::class , 'store']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function (){
-    Route::get('/student', [StudentController::class , 'index']);
-    Route::get('/student/{id}', [StudentController::class , 'show']);
+
+    ///student routes
+    Route::get('/countStudentReq/{id}', [StudentController::class , 'countStudentReq']);
+    Route::get('/getReqStudent/{id}', [StudentController::class , 'getReqStudent']);
+    Route::post('/resetPassword/{id}', [StudentController::class , 'resetPassword']);
+    Route::post('/approved/{status}/{id}', [StudentController::class , 'approved']);
+
+    //student CRUD
+    Route::apiResource('/teacher', StudentController::class);
+
+    //logout route
     Route::post('/logout', [LoginController::class , 'logout']);
+
+    
+
+
 
 
 });

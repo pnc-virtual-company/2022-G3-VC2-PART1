@@ -79,5 +79,17 @@ class TeacherController extends Controller
         return Teacher::all(['email']);
     }
 
- 
+    public function resetPassword(Request $request, $id)
+    {
+        $teacher = Teacher::findOrFail($id);
+        if ($teacher['password'] == $request->password) {
+            $teacher->password = $request->password;
+            $teacher->update();
+            return response()->json(['success' => 'Password reseted'], 204);
+        }
+        return response()->json(['success' => 'Password not reseted'], 404);
+
+    }
+
+
 }

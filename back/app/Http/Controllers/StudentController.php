@@ -7,6 +7,7 @@ use App\Models\Accepted;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\File;
+use App\Models\StudentRequest;
 
 
 class StudentController extends Controller
@@ -79,9 +80,9 @@ class StudentController extends Controller
         return Student::withCount(['dayOff'])->where('id', '=', $id)->get();
     }
 
-    public function approved($allow, $student_id)
+    public function approved($status, $student_id)
     {
-        return Accepted::where('allow', '=', strtoupper($allow))->where('student_id', '=', $student_id)->get();
+        return StudentRequest::where('status', '=', strtoupper($status))->where('student_id', '=', $student_id)->get();
     }
 
     public function resetPassword(Request $request,$id)

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Accepted;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Models\StudentRequest;
 
@@ -85,14 +85,14 @@ class StudentController extends Controller
         return StudentRequest::where('status', '=', strtoupper($status))->where('student_id', '=', $student_id)->get();
     }
 
-    public function resetPassword(Request $request,$id)
+    public function resetPassword(Request $request, $id)
     {
-        $student =  Student::findOrFail($id);
-        if($student['password'] ==  $request->password)
-        {
-            $student->password = $request->password;
+        $student = Student::findOrFail($id);
+
+        if (Hash::check($request->password, $student['password'])) {
+            $student->password = bcrypt($request->new_password);
             $student->update();
-            return response()->json(['success' => 'Password reseted'],204);
+            return response()->json(['success' => 'Password reseted'], 204);
         }
         return response()->json(['success' => 'Password not reseted'], 404);
 

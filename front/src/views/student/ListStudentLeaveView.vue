@@ -60,3 +60,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .student{
+    width: 95%;
+    margin: auto;
+  }
+</style>

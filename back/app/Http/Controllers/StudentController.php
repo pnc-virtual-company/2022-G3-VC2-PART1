@@ -84,7 +84,18 @@ class StudentController extends Controller
         return Accepted::where('allow', '=', strtoupper($allow))->where('student_id', '=', $student_id)->get();
     }
 
+    public function resetPassword(Request $request,$id)
+    {
+        $student =  Student::findOrFail($id);
+        if($student['password'] ==  $request->password)
+        {
+            $student->password = $request->password;
+            $student->update();
+            return response()->json(['success' => 'Password reseted'],204);
+        }
+        return response()->json(['success' => 'Password not reseted'], 404);
 
+    }
 
 
 

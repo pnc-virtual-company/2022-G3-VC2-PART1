@@ -22,7 +22,7 @@ class StudentRequestController extends Controller
         $req->reason = $request->reason;
         $req->duration = $request->duration;
         $req->request_date = $request->request_date;
-        $req->allow = $request->allow;
+        $req->status = $request->status;
         $req->leave_type = $request->leave_type;
         $req->save();
         return response()->json(['message' => "Item saved successfully"]);

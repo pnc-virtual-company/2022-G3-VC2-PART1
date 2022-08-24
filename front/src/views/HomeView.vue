@@ -3,19 +3,25 @@
     <StudentHome :student_data="students"/>
   </div>
 </template>
-<script>
 
+<script>
 import StudentHome from '@/components/student/StudentHome.vue';
 import axios from '../axios-http';
 export default {
   components: {
     StudentHome,
   },
+
   data(){
     return{
       students: []
     }
   },
+
+  mounted(){
+    this.getData();
+  },
+
   methods: {
     getData(){
       axios.get('student')
@@ -23,9 +29,6 @@ export default {
         this.students = res.data;
       })
     }
-  },
-  mounted(){
-    this.getData();
-  },
+  }
 }
 </script>

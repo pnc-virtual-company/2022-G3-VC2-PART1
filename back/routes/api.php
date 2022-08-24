@@ -12,7 +12,12 @@ use App\Http\Controllers\EmailController;
 
 Route::post('/login', [LoginController::class , 'login']);
 Route::post('/student', [StudentController::class , 'store']);
-Route::get('/student', [StudentController::class , 'index']);
-Route::get('/student/{id}', [StudentController::class , 'show']);
 
 
+Route::group(['middleware' => ['auth:sanctum']], function (){
+    Route::get('/student', [StudentController::class , 'index']);
+    Route::get('/student/{id}', [StudentController::class , 'show']);
+    Route::post('/logout', [LoginController::class , 'logout']);
+
+
+});

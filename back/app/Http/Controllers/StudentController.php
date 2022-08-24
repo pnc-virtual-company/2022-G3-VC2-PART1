@@ -28,15 +28,14 @@ class StudentController extends Controller
         $std->password = bcrypt($request->password);
         $std->save();
         $token = $std->createToken('mytoken')->plainTextToken;
-            $response = [
-                'user' => $std,
-                'token' => $token
-            ];
-        return response($response,201);
+        $response = [
+            'user' => $std,
+            'token' => $token
+        ];
+        return response($response, 201);
     }
-    public function show( $id)
+    public function show($id)
     {
-
         $result = ['message' => "Item not found"];
         if (Student::find($id)) {
             $result = Student::find($id);
@@ -44,9 +43,8 @@ class StudentController extends Controller
         return $result;
     }
 
-    public function update(Request $request,  $id)
+    public function update(Request $request, $id)
     {
-
         $std = Student::findOrFail($id);
         $std->first_name = $request->first_name;
         $std->last_name = $request->last_name;
@@ -70,24 +68,24 @@ class StudentController extends Controller
         return $result;
     }
 
-      public function getReqStudent($id)
+    public function getReqStudent($id)
     {
-        return Student::with(['dayOff','approve'])->where('id','=',$id)->get();
+        return Student::with(['dayOff', 'approve'])->where('id', '=', $id)->get();
 
     }
 
     public function countStudentReq($id)
     {
-        return Student::withCount(['dayOff'])->where('id','=',$id)->get();
+        return Student::withCount(['dayOff'])->where('id', '=', $id)->get();
     }
 
-    public function approved($allow,$student_id)
+    public function approved($allow, $student_id)
     {
-        return Accepted::where('allow', '=', strtoupper($allow))->where('student_id','=',$student_id)->get();
+        return Accepted::where('allow', '=', strtoupper($allow))->where('student_id', '=', $student_id)->get();
     }
 
 
-    
+
 
 
 }

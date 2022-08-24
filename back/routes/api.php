@@ -12,25 +12,9 @@ use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Auth;
 
 
-Auth::routes();
 Route::post('/login', [LoginController::class , 'login']);
 Route::post('/student', [StudentController::class , 'store']);
 
-/*------------------------------------------ -------------------------------------------- All Normal students Routes List -------------------------------------------- --------------------------------------------*/
-Route::middleware(['auth', 'user-access:student'])->group(function () {
-    Route::get("/student/{id}", [StudentController::class , 'show']);
-    Route::get("/student", [StudentController::class , 'index']);
-    Route::get('/logout', [LoginController::class , 'logout']);
-    Route::get("/getReq/{id}", [StudentController::class , 'getReqStudent']);
-});
-
-
-/*------------------------------------------ -------------------------------------------- All teachers Routes List -------------------------------------------- --------------------------------------------*/
-Route::middleware(['auth', 'user-access:teacher'])->group(function () {
-
-    Route::get("/teacher/{id}", [TeacherController::class , 'show']);
-
-});
 
 
 // Route::delete("/student/{id}", [StudentController::class , 'destroy']);
@@ -50,10 +34,12 @@ Route::middleware(['auth', 'user-access:teacher'])->group(function () {
 
 
 
-// Route::group(['middleware' => 'auth:sanctum'], function () {
-//     Route::get("/student", 'StudentController@index');
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/student/{id}', [StudentController::class , 'show']);
+    Route::get('/student', [StudentController::class , 'index']);
 
-// });
+
+});
 
 // Route::controller(StudentController::class)->group(function () {
 //     Route::post("/student", 'store');

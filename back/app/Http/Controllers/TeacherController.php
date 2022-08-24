@@ -78,8 +78,5 @@ class TeacherController extends Controller
         return Teacher::all(['email']);
     }
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+ 
 }

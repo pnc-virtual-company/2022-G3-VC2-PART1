@@ -26,12 +26,10 @@ class sendMail extends Mailable
             'details' => $this->details,
             'leaveType' => $this->leaveType,
             'email' => $this->email,
-<<<<<<< HEAD
-=======
+
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'days' => $this->days
->>>>>>> 3a7dcb8a6c661fb72e887d8aa3395a9ea7ea0bbf
         ]);
     }
 }

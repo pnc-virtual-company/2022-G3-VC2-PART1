@@ -17,10 +17,12 @@
 </template>
 
 <script>
+
 export default {
   props: {
     student_data: Object,
-  }
+  },
+  
 }
 </script>
 

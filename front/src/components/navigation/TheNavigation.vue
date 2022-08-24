@@ -1,13 +1,13 @@
 <template>
-<nav class="justify-between bg-white-500  p-0.5 shadow-8xl border-b-2 border-gray-250  ">
+<nav class="justify-between bg-sky-400  p-0.5 shadow-8xl border-b-2 border-gray-250  ">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <router-link to="/" ><img  class="w-40 ml-5" src="../../assets/logo.jpg" alt="" ></router-link>
+    <router-link to="/" ><img  class="w-40 ml-5" src="../../assets/logo.png" alt="" ></router-link>
   </div>
   <div class="flex items-center flex-wrap">
-      <router-link to="/student_list" class="text-black mx-9 hover:text-orange-500  text-xl block mt-4 lg:inline-block lg:mt-0 ">
+      <router-link to="/student_list" class="text-white mx-9 hover:text-orange-500  text-xl block mt-4 lg:inline-block lg:mt-0 ">
         List all leave
       </router-link>
-      <router-link to="/new_request" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-black  text-xl border-b-2-orange-500">
+      <router-link to="/new_request" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
         New Request
       </router-link>
   </div>
@@ -46,7 +46,6 @@ nav {
   padding: 30px;
   display: flex;
   justify-content: space-between;
-  /* background: rgb(10, 165, 255); */
 }
 
 nav a {
@@ -55,8 +54,8 @@ nav a {
 }
 
 
-/* nav a.router-link-exact-active { */
-  /* background: rgb(230, 180, 88); */
-  /* padding: 10px; */
-/* } */
+nav a.router-link-exact-active { 
+  /* background: rgb(230, 180, 88);  */
+  border-bottom: 3px solid orange;
+}
 </style> 

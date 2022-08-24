@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Models\Accepted;
+use App\Models\StudentRequest;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -18,26 +19,11 @@ class TeacherController extends Controller
         $cher = new Teacher();
         $cher->first_name = $request->first_name;
         $cher->last_name = $request->last_name;
-        $cher->address = $request->address;
-        $cher->email = $request->email;
         $cher->gender = $request->gender;
-
-        $name = $request->file('img')->getClientOriginalName();
-        $newName = time() . $name;
-        $cher->img = $request->file('img')->storeAs('public/images', $newName);
-        $cher['img'] = URL('storage/images/' . $newName);
-
-
-        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
-
-        $request->file('img')->move(
-            base_path() . '/public/storage/images', $imageName
-        );
-        $cher['img'] = URL('storage/images/' . $imageName);
-        $cher->birth_day = $request->birth_day;
-        $cher->password = $request->password;
+        $cher->email = $request->email;
+        $cher->phone_number = $request->phone_number;
+        $cher->password = bcrypt($request->password);
         $cher->save();
-
         $token = $cher->createToken('mytoken')->plainTextToken;
         $response = [
             'user' => $cher,
@@ -56,27 +42,13 @@ class TeacherController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $cher = Teacher::findOrFail($id);
+        $cher = new Teacher();
         $cher->first_name = $request->first_name;
         $cher->last_name = $request->last_name;
-        $cher->address = $request->address;
-        $cher->email = $request->email;
         $cher->gender = $request->gender;
-
-        $name = $request->file('img')->getClientOriginalName();
-        $newName = time() . $name;
-        $cher->img = $request->file('img')->storeAs('public/images', $newName);
-        $cher['img'] = URL('storage/images/' . $newName);
-
-
-        $imageName = time() . '.' . $request->file('img')->getClientOriginalExtension();
-
-        $request->file('img')->move(
-            base_path() . '/public/storage/images', $imageName
-        );
-        $cher['img'] = URL('storage/images/' . $imageName);
-        $cher->birth_day = $request->birth_day;
-        $cher->password = $request->password;
+        $cher->email = $request->email;
+        $cher->phone_number = $request->phone_number;
+        $cher->password = bcrypt($request->password);
         $cher->update();
         return response()->json(['message' => 'items updated']);
     }
@@ -92,13 +64,20 @@ class TeacherController extends Controller
 
     public function approve(Request $request,$id)
     {
-        $accepted = Accepted::findOrFail($id);
-        $accepted->allow = $request->allow;
-        $accepted->save();
+        $studReq = StudentRequest::findOrFail($id);
+        $studReq->status = $request->status;
+        $studReq->update();
+        return response()->json(['message' => 'updated']);
+
     }
 
     public function getAllEmails ()
     {
         return Teacher::all(['email']);
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }

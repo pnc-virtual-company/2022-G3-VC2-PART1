@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     
-    <StudentHome :student_data="students"/>
+    <StudentHome :student_data="currentUser"/>
   </div>
 </template>
 <script>
@@ -15,19 +15,18 @@ export default {
   },
   data(){
     return{
-      students: []
+      currentUser:{},
+      token:localStorage.getItem('token')
     }
+    
   },
   methods: {
     getData(){
-      axios.get('student')
-      .then(res =>  {
-        this.students = res.data;
+      axios.get('student').then(res=>{
+         console.log(res)
       })
     }
   },
-  mounted(){
-    this.getData();
-  },
+ 
 }
 </script>

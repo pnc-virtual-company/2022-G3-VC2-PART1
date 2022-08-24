@@ -2,7 +2,7 @@
     <form @submit.prevent="onLogin" class=" shadow-lg w-6/12 m-auto mt-5  rounded-md p-5 mb-5 ">
         <div class="flex justify-between -mx-2 mb-6">
             <div class="">
-                <img  src="../assets/logo.jpg" alt="">
+                <img  src="../assets/logo.png" alt="">
                 <h1 class="text-2xl text-center">Welcome to PNC SLMS</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                     Pariatur laboriosam    </p>
@@ -62,28 +62,14 @@ export default {
             let user={email:this.email,password:this.password,}
             let result= await axios.post('login',user)
                 console.log(result)
-            if(result.status==200 && result.data.sms!="Invaliid password"){
+            if(result.status==200 && result.data.message=="success login"){
                 localStorage.setItem('token',JSON.stringify(result.data));
                 this.$router.push("/home");
-            }else{
-                this.$router.push("/login");
-            }
-            
-        },
-        mounted(){
-            let userLogin = localStorage.getItem('token');
-            if(userLogin){
-                this.$router.push('/home')
-            }else{
-                this.$router.push("/login");
             }
             
         }
-    }
+    },
+    
 }
 </script>
 
-
-<style>
-
-</style>

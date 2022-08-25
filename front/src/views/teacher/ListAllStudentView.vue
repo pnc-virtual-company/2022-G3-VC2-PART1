@@ -1,5 +1,5 @@
 <template>
-    <ListAllStudent :listAllStudents="listAllStudents"></ListAllStudent>
+    <ListAllStudent @delete_student="deleteStudent" :listAllStudents="listAllStudents"></ListAllStudent>
 </template>
 <script>
 
@@ -19,7 +19,13 @@ export default {
             axios.get('student').then((res)=>{
                 this.listAllStudents = res.data
             })
-        }
+        },
+        deleteStudent(id){
+            axios.delete('student/'+id).then((response) => {
+                this.getAllStudents()
+                console.log(response.data);
+      })
+    },
     },
     mounted(){
         this.getAllStudents();

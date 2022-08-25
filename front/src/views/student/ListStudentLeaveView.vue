@@ -1,12 +1,11 @@
 <template>
   <div class="student">
     <ShowStudentLeave @select-Option="selectOption"></ShowStudentLeave>
-    <StudentLeave :selectOptions='selectOptions' />
+    <StudentLeave  :selectOptions='selectOptions'/>
   </div>
 </template>
 <script>
 import axios from "../../axios-http.js";
-import '../../input.css'
 import StudentLeave from '@/components/student/StudentLeave.vue';
 import ShowStudentLeave from '@/components/student/ShowStudentLeave.vue';
 
@@ -19,8 +18,8 @@ export default {
   data(){
     return{
       listStudentLeave:[],
-      selectTypeLeave:"show all",
-      selectStatus:"show all",
+      selectTypeLeave:'',
+      status:'',
     }
   },
   methods:{
@@ -31,41 +30,29 @@ export default {
     },
     selectOption(leaveType,status){
       this.selectTypeLeave = leaveType
-      this.selectStatus = status 
+      this.status = status 
     },
-    checkStatus( data, status){
-      if(status == 'all'){
+
+    checkStatus(status, data){
+      if(status == ""){
         data
-      }else if(status == "padding"){
-        data = data.filter(status=>status.allow.toLowerCase == 'padding');
-      }
-      else if(status == "rejected"){
-        data = data.filter(status=>status.allow.toLowerCase == 'rejected');
       }else{
-        data = data.filter(status=>status.allow.toLowerCase == 'approved');
+        data = data.filter(request_status => request_status.status == status);
       }
+      return data;
     }
   },
+
   computed:{
     selectOptions(){
-        let dataStudents = this.listStudentLeave
-        if(this.selectTypeLeave =='show all'){
-          dataStudents = this.listStudentLeave
-          this.checkStatus(dataStudents, this.selectStatus);
-        }
-        else if (this.selectTypeLeave == "family's event"){
-          dataStudents = this.listStudentLeave.filter(student=>student.leave_type == "family's event");
-          this.checkStatus(dataStudents, this.selectStatus);
-        }
-        else if(this.selectTypeLeave =='sick'){
-          dataStudents = this.listStudentLeave.filter(student=>student.leave_type == 'sick');
-          this.checkStatus(dataStudents, this.selectStatus);
-          
+        let datas=this.listStudentLeave
+        if(this.selectTypeLeave == ''){
+          datas
         }else{
-          dataStudents = this.listStudentLeave.filter(student=>student.leave_type == 'broder or sister married');
-          this.checkStatus(dataStudents, this.selectStatus);
+          datas = datas.filter(data => data.leave_type == this.selectTypeLeave)
         }
-        return dataStudents
+        let result = this.checkStatus(this.status, datas)
+        return result;
       }
   },
   mounted(){
@@ -73,3 +60,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .student{
+    width: 95%;
+    margin: auto;
+  }
+</style>

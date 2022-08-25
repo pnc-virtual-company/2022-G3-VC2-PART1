@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Accepted;
 use Illuminate\Http\Request;
-
-// use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
+use App\Models\StudentRequest;
 
 
 class StudentController extends Controller
@@ -14,6 +15,7 @@ class StudentController extends Controller
     public function index()
     {
         return Student::get();
+        
     }
 
     public function store(Request $request)
@@ -28,15 +30,14 @@ class StudentController extends Controller
         $std->password = bcrypt($request->password);
         $std->save();
         $token = $std->createToken('mytoken')->plainTextToken;
-            $response = [
-                'user' => $std,
-                'token' => $token
-            ];
-        return response($response,201);
+        $response = [
+            'user' => $std,
+            'token' => $token
+        ];
+        return response($response, 201);
     }
-    public function show( $id)
+    public function show($id)
     {
-
         $result = ['message' => "Item not found"];
         if (Student::find($id)) {
             $result = Student::find($id);
@@ -44,9 +45,8 @@ class StudentController extends Controller
         return $result;
     }
 
-    public function update(Request $request,  $id)
+    public function update(Request $request, $id)
     {
-
         $std = Student::findOrFail($id);
         $std->first_name = $request->first_name;
         $std->last_name = $request->last_name;
@@ -70,24 +70,35 @@ class StudentController extends Controller
         return $result;
     }
 
-      public function getReqStudent($id)
+    public function getReqStudent($id)
     {
-        return Student::with(['dayOff','approve'])->where('id','=',$id)->get();
+        return Student::with(['dayOff', 'approve'])->where('id', '=', $id)->get();
 
     }
 
     public function countStudentReq($id)
     {
-        return Student::withCount(['dayOff'])->where('id','=',$id)->get();
+        return Student::withCount(['dayOff'])->where('id', '=', $id)->get();
     }
 
-    public function approved($allow,$student_id)
+    public function approved($status, $student_id)
     {
-        return Accepted::where('allow', '=', strtoupper($allow))->where('student_id','=',$student_id)->get();
+        return StudentRequest::where('status', '=', strtoupper($status))->where('student_id', '=', $student_id)->get();
     }
 
+    public function resetPassword(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
 
-    
+        if (Hash::check($request->password, $student['password'])) {
+            $student->password = bcrypt($request->new_password);
+            $student->update();
+            return response()->json(['success' => 'Password reseted'], 204);
+        }
+        return response()->json(['success' => 'Password not reseted'], 404);
+
+    }
+
 
 
 }

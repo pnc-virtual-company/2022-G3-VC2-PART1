@@ -21,8 +21,8 @@ class StudentRequestController extends Controller
         $req->end_date = $request->end_date;
         $req->reason = $request->reason;
         $req->duration = $request->duration;
-        $req->request_date = $request->request_date;
-        $req->status = $request->status;
+
+        $req->status = strtoupper($request->status);
         $req->leave_type = $request->leave_type;
         $req->save();
         return response()->json(['message' => "Item saved successfully"]);
@@ -44,20 +44,13 @@ class StudentRequestController extends Controller
         $req->start_date = $request->start_date;
         $req->end_date = $request->end_date;
         $req->reason = $request->reason;
-        $req->status = $request->status;
+        $req->status = strtoupper($request->status);
         $req->duration = $request->duration;
         $req->leave_type = $request->leave_type;
         $req->update();
         return response()->json(['message' => 'items updated']);
     }
 
-    public function update_status(Request $request, $id)
-    {
-        $req = StudentRequest::findOrFail($id);
-        $req->status = $request->status;
-        $req->update();
-        return response()->json(['message' => 'status updated!']);
-    }
     public function destroy($id)
     {
         $result = ['message' => "Item remove successfully"];
@@ -66,4 +59,6 @@ class StudentRequestController extends Controller
         }
         return $result;
     }
+
+    
 }

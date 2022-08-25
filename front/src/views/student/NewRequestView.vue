@@ -9,13 +9,23 @@ import axios from "../../axios-http";
 export default {
   data(){
     return{
+      
     }
   },
   methods: {
     addRequest(data){
-      // console.log(data)
-      axios.post("/request", data)
+      axios.post("request", data).then(res=>{
+        console.log(res)
+        axios.get('sendMail/'+data.student_id+"/"+data.leave_type+"/"+data.reason, )
+      })
     },
   },
+  computed:{
+
+  },
+
+  mounted(){
+
+  }
 }
 </script>

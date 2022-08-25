@@ -8,7 +8,7 @@
     <div class="overflow-auto rounded-lg shadow mt-12 ">
       <table class=" w-[99%] m-auto">
         <thead class="bg-orange-300 border-b-2 border-gray-200 ">
-            <tr class="text-xl text-white-1">
+            <tr class="text-sm text-white-1">
               <th class="p-3  font-semibold tracking-wide text-center ">Name</th>
               <th class="p-3  font-semibold tracking-wide text-center ">Leave Type</th>
               <th class="p-3  font-semibold tracking-wide text-center ">Start Date</th>
@@ -20,14 +20,14 @@
         </thead>
         <tbody>
           <tr class="bg-gray-70 border-b-2 border-gray-190 hover:bg-sky-100 "  v-for="studentReq of listAllStudentsLeave" :key="studentReq" :id="studentReq.id">
-            <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]">{{studentReq.student.first_name}} {{studentReq.student.last_name}} </td>
+            <td  class="p-2 text-sm text-gray-700 text-center text-[1rem]">{{studentReq.student.first_name}} {{studentReq.student.last_name}} </td>
             <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]">{{studentReq.leave_type}}</td>
             <td  class="p-4    text-gray-700 flex justify-center m-21 text-[1.1rem]"> {{studentReq.start_date}} </td> 
             <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]">{{studentReq.end_date}}</td>
             <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]">{{studentReq.created_at}}</td>
             <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]" >
-              <button @click="setId(studentReq.id)" type="button" class="bg-red-300 p-2 text-red-900 mr-1 rounded">Reject</button>
-              <button @click="status('approved', studentReq.id)" type="button" class="bg-green-300 p-2 ml-1 text-green-800 rounded">Approve</button>
+              <button  @click="setId(studentReq.id)"  type="button" class="bg-red-300 p-2 text-red-900 mr-1 rounded">Reject</button>
+              <button  @click="status('approved', studentReq.id)"   type="button" class="bg-green-300 p-2 ml-1 text-green-800 rounded">Approve</button>
             </td>
             <td  class="p-4   text-gray-700 flex justify-center m-21 text-[1.1rem]">
               <button type="button" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" @click="hideShowDetail=!hideShowDetail">{{hideShowDetail? "Hide" : "Show Detail"}}</button>

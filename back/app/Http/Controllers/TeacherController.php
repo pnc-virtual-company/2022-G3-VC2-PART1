@@ -71,7 +71,6 @@ class TeacherController extends Controller
         $studReq->status = $request->status;
         $studReq->update();
         return response()->json(['message' => 'updated']);
-
     }
 
     public function getAllEmails ()
@@ -79,8 +78,17 @@ class TeacherController extends Controller
         return Teacher::all(['email']);
     }
 
-    public function __construct()
+    public function resetPassword(Request $request, $id)
     {
-        $this->middleware('auth');
+        $teacher = Teacher::findOrFail($id);
+        if ($teacher['password'] == $request->password) {
+            $teacher->password = $request->password;
+            $teacher->update();
+            return response()->json(['success' => 'Password reseted'], 204);
+        }
+        return response()->json(['success' => 'Password not reseted'], 404);
+
     }
+
+
 }

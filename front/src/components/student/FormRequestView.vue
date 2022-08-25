@@ -117,7 +117,7 @@ export default{
         },
         addRequest(){
             if(this.duration > 0 && this.start_date.trim() != "" && this.end_date.trim() != "" && this.reason.trim() != "" && this.leave_type.trim() != ""){
-                let data = {student_id:1, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type, duration: this.duration}
+                let data = {student_id:1, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type, duration: this.duration, status:"padding"}
                 this.$emit('request', data)
                 this.setDefault()
                 this.not_correct_date = false;

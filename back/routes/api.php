@@ -24,15 +24,20 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/approved/{status}/{id}', [StudentController::class , 'approved']);
 
     //student CRUD
-    Route::apiResource('/teacher', StudentController::class);
+    Route::apiResource('/student', StudentController::class);
 
     //logout route
-    
-    
-    
-    
-    
-    
+
+    Route::post('/logout', [LoginController::class , 'logout']);
+
+    //teacher routes
+    Route::apiResource('/student', StudentController::class);
+
+
+
+
+
+
 });
 Route::apiResource('/teacher', TeacherController::class);
 Route::post('/logout', [LoginController::class , 'logout']);

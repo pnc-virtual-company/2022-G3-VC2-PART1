@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Accepted;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Models\StudentRequest;
-use Illuminate\Support\Facades\Hash;
-
 class StudentController extends Controller
 {
     public function index()
@@ -85,11 +83,9 @@ class StudentController extends Controller
         return StudentRequest::where('status', '=', strtoupper($status))->where('student_id', '=', $student_id)->get();
     }
 
-    public function resetPassword(Request $request,$id)
+    public function resetPassword(Request $request, $id)
     {
         $student =  Student::findOrFail($id);
-        // return response()->json(['ms'=> Hash::check($request->password,$student['password'])]) ;
-        // return $student['password'];
         if( Hash::check($request->password,$student['password']))
         {
             $student->password = bcrypt($request->new_password);

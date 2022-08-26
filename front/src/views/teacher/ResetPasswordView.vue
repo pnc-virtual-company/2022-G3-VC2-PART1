@@ -17,11 +17,9 @@
             resetPassword(data){
                 axios.put("resetPassword/9", data)
                 .then( res =>  {
-                    console.log(res.status);
-                    this.old_password = ''
+                    this.old_password = res.data.success
                 })
                 .catch(err => {
-                    console.log(err)
                     this.old_password = err.response.data.success
                     }
                 )

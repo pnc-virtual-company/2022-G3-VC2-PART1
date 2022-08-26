@@ -13,6 +13,7 @@ use App\Http\Controllers\EmailController;
 Route::post('/login', [LoginController::class , 'login']);
 Route::post('/student', [StudentController::class , 'store']);
 Route::get('/student', [StudentController::class , 'index']);
+Route::get('/request', [StudentRequestController::class , 'index']);
 
 
 Route::put('/resetPassword/{id}', [StudentController::class , 'resetPassword']);

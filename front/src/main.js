@@ -1,6 +1,8 @@
 
 import { createApp } from 'vue'
 import App from './App.vue'
+import './index.css'
+import 'flowbite';
 import router from './router'
 import './assets/tailwind.css'
 import FormRequest from './components/student/FormRequestView'

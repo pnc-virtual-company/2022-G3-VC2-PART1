@@ -1,7 +1,7 @@
 <template>
   <div class="student">
     <ShowStudentLeave @select-Option="selectOption"></ShowStudentLeave>
-    <StudentLeave  :selectOptions='selectOptions'/>
+    <StudentLeave v-if="selectOptions.length>=1"  :selectOptions='selectOptions'/>
   </div>
 </template>
 <script>

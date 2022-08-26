@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 class LoginController extends Controller
 {
+
     public function studentLogin(Request $request)
     {
         $user = Student::where('email', $request->email)->first();
@@ -40,4 +41,6 @@ class LoginController extends Controller
         return response()->json(['mes' => 'Logged out Successfully']);
     }
 }
+
+
 

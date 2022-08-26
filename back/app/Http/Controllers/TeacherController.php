@@ -6,6 +6,7 @@ use App\Models\Teacher;
 use App\Models\Accepted;
 use App\Models\StudentRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
@@ -69,7 +70,6 @@ class TeacherController extends Controller
         $studReq->status = $request->status;
         $studReq->update();
         return response()->json(['message' => 'updated']);
-
     }
 
     public function getAllEmails ()
@@ -77,5 +77,18 @@ class TeacherController extends Controller
         return Teacher::all(['email']);
     }
 
- 
+    public function resetPassword(Request $request, $id)
+    {
+        $student = Teacher::findOrFail($id);
+
+        if (Hash::check($request->password, $student['password'])) {
+            $student->password = bcrypt($request->new_password);
+            $student->update();
+            return response()->json(['success' => 'Password reseted'], 204);
+        }
+        return response()->json(['success' => 'Password not reseted'], 404);
+
+    }
+
+
 }

@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 // import StudentDetailLeave from '../views/StudentDetailView.vue'
 import UserLogin from '../components/UserLogin.vue'
 import NewRequest from '../views/student/NewRequestView.vue'
-import StudentView from '../views/student/ListStudentLeaveView.vue'
 import HomeView from '../views/HomeView.vue'
 import PageNotFound from '../components/PageNotFound.vue'
+import StudentView from '../views/student/ListStudentLeaveView.vue'
+// import ListAllStudentView from '../views/teacher/ListAllStudentView.vue'
+import CheckStudentLeaveView from '../views/teacher/CheckStudentLeaveView.vue'
+import ResetPasswordView from '../views/teacher/ResetPasswordView.vue'
 
 const routes = [
   {
@@ -39,11 +41,19 @@ const routes = [
     name: 'student_ist',
     component: StudentView,
     meta:{requireAuth:true}
-
   },
   {
     path: '/:pathMatch(.*)*',
     component: PageNotFound
+  },
+  {
+    path: '/checkStudentLeave',
+    name: 'checkStudentLeave',
+    component: CheckStudentLeaveView
+  },
+  {
+    path: '/reset_password',
+    component: ResetPasswordView,
   }
 ]
 
@@ -65,6 +75,5 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-
 
 export default router

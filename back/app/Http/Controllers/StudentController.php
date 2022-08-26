@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Accepted;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
-
-
+use App\Models\StudentRequest;
 class StudentController extends Controller
 {
     public function index()
@@ -100,9 +99,22 @@ class StudentController extends Controller
         return Student::withCount(['dayOff'])->where('id', '=', $id)->get();
     }
 
-    public function approved($allow, $student_id)
+    public function approved($status, $student_id)
     {
-        return Accepted::where('allow', '=', strtoupper($allow))->where('student_id', '=', $student_id)->get();
+        return StudentRequest::where('status', '=', strtoupper($status))->where('student_id', '=', $student_id)->get();
+    }
+
+    public function resetPassword(Request $request, $id)
+    {
+        $student =  Student::findOrFail($id);
+        if( Hash::check($request->password,$student['password']))
+        {
+            $student->password = bcrypt($request->new_password);
+            $student->save();
+            return response()->json(['success' => 'Password updated!'],201);
+        }
+        return response()->json(['success' => 'Password incorrect!'], 404);
+
     }
 
     public function updateImg(Request $request,$id)

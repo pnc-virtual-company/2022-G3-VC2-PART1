@@ -1,18 +1,16 @@
 <template>
   <div class="student">
     <ShowStudentLeave @select-Option="selectOption"></ShowStudentLeave>
-    <StudentLeave  :selectOptions='selectOptions'/>
+    <student-leave  :selectOptions='selectOptions'/>
   </div>
 </template>
 <script>
 import axios from "../../axios-http.js";
-import StudentLeave from '@/components/student/StudentLeave.vue';
-import ShowStudentLeave from '@/components/student/ShowStudentLeave.vue';
+import ShowStudentLeave from '@/components/student/FilterStudentView.vue';
 
 export default {
   name: 'StudentView',
   components: {
-    StudentLeave,
     ShowStudentLeave
   },
   data(){
@@ -57,7 +55,7 @@ export default {
   },
   mounted(){
     this.getListStudent();
-  }
+  },
 }
 </script>
 

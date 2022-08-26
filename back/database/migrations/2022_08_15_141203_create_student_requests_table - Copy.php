@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("reason");
             $table->string("duration");
             $table->string("leave_type");
-            $table->string("status")->default("Padding");
+            $table->string("status")->default("padding");
             $table->timestamps();
         });
     }

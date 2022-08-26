@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     addRequest(data){
+      console.log(data)
       axios.post("request", data).then(res=>{
         console.log(res)
         axios.get('sendMail/'+data.student_id+"/"+data.leave_type+"/"+data.reason, )

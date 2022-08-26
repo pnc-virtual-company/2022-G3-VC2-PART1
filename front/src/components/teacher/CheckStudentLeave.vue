@@ -22,7 +22,7 @@
           <tr class="bg-gray-70 border-b-2 border-gray-190 hover:bg-sky-100 "  v-for="studentReq of listAllStudentsLeave" :key="studentReq" :id="studentReq.id">
             <td  class="p-2 text-sm text-gray-700 text-center text-[1rem]">{{studentReq.student.first_name}} {{studentReq.student.last_name}} </td>
             <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]">{{studentReq.leave_type}}</td>
-            <td  class="p-4    text-gray-700 flex justify-center m-21 text-[1.1rem]"> {{studentReq.start_date}} </td> 
+            <td  class="p-4    text-gray-700 text-center m-21 text-[1.1rem]"> {{studentReq.start_date}} </td> 
             <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]">{{studentReq.end_date}}</td>
             <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]">{{studentReq.created_at}}</td>
             <td  class="p-4 text-sm text-gray-700 text-center text-[1.1rem]" >
@@ -30,16 +30,18 @@
               <button  @click="status('approved', studentReq.id)"   type="button" class="bg-green-300 p-2 ml-1 text-green-800 rounded">Approve</button>
             </td>
             <td  class="p-4   text-gray-700 flex justify-center m-21 text-[1.1rem]">
-              <button type="button" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" @click="hideShowDetail=!hideShowDetail">{{hideShowDetail? "Hide" : "Show Detail"}}</button>
+              <button :id="studentReq.id+'hideshow'" type="button" class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" @click="hideShowDetail(studentReq.id)" >Show Details</button>
             </td> 
-            <p v-if="hideShowDetail" class="p-4    text-gray-700 flex justify-center m-21 text-[1.1rem]">Dureation : 3day </p> 
-            <p v-if="hideShowDetail" class="p-4    text-gray-700 flex justify-center m-21 text-[1.1rem]">Reason : {{studentReq.reason}} </p> 
+            <div style="display: none"  :id="studentReq.id+'t'">
+              <p  class="p-4    text-gray-700 flex justify-center  text-[1.1rem] w-[80%] ml-auto" >Dureation : {{studentReq.duration}} day </p> 
+              <p  class="p-4    text-gray-700 flex text-[1.1rem] w-[80%] ml-auto justify-center" >Reason : {{studentReq.reason}} </p> 
+            </div>
           </tr>  
         </tbody>
       </table>
     </div>
   </div>
-
+<!-- ======================Popup rejected =====================-->
   <div class="container mx-auto">
     <div class="flex justify-center">
       <div v-show="isReject" class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 ">
@@ -56,6 +58,7 @@
     </div>
   </div>
 
+<!-- ======================Popup Approved=====================-->
   <div class="container mx-auto ">
     <div class="flex justify-center">
       <div v-show="isAppove" class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 " >
@@ -66,7 +69,7 @@
             <h3 class="text-2xl mb-6 mt-10 m-auto"> Approve is successfully</h3>
           </div>
           <div class="mt-4 ml-[10rem]">
-            <button @click="isAppove = false" class="px-6 py-2 text-white border bg-blue-600 rounded" > OK </button>
+            <button @click="isAppove = false " class="px-6 py-2 text-white border bg-blue-600 rounded" > OK </button>
           </div>
         </div>
       </div>
@@ -82,7 +85,8 @@ export default{
    },
    data(){
     return{  
-      hideShowDetail:false,
+      isShowDetail:false,
+      // showLeaveDetail:'',
       isAppove: false,
       isReject:false,
       id:null,
@@ -100,6 +104,24 @@ export default{
         this.isReject = false
       }
       this.$emit('status', data, id);
+    },
+    hideShowDetail(id){
+        if(this.isShowDetail){
+          this.hideLeaveStudentDetail(id)
+        }else{
+          this.showLeaveStudentDetail(id)
+        }
+        this.isShowDetail = !this.isShowDetail
+    },
+    showLeaveStudentDetail(id){
+        document.getElementById(id+'t').style.display = 'block'
+        document.getElementById(id+'hideshow').textContent = 'Hide'
+        
+    },
+    hideLeaveStudentDetail(id){
+      document.getElementById(id+'t').style.display = 'none'
+      document.getElementById(id+'hideshow').textContent = 'Show Details'
+      
     }
    }
 }

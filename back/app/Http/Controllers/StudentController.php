@@ -8,14 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Models\StudentRequest;
-
-
 class StudentController extends Controller
 {
     public function index()
     {
         return Student::get();
-        
     }
 
     public function store(Request $request)
@@ -88,16 +85,18 @@ class StudentController extends Controller
 
     public function resetPassword(Request $request, $id)
     {
-        $student = Student::findOrFail($id);
-
-        if (Hash::check($request->password, $student['password'])) {
+        $student =  Student::findOrFail($id);
+        if( Hash::check($request->password,$student['password']))
+        {
             $student->password = bcrypt($request->new_password);
-            $student->update();
-            return response()->json(['success' => 'Password reseted'], 204);
+            $student->save();
+            return response()->json(['success' => 'Password updated!'],201);
         }
-        return response()->json(['success' => 'Password not reseted'], 404);
+        return response()->json(['success' => 'Password incorrect!'], 404);
 
     }
+
+
 
 
 

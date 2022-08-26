@@ -72,7 +72,6 @@ class TeacherController extends Controller
         $studReq->status = $request->status;
         $studReq->update();
         return response()->json(['message' => 'updated']);
-
     }
 
     public function getAllEmails ()

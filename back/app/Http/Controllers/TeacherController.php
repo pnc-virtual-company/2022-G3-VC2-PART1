@@ -64,6 +64,7 @@ class TeacherController extends Controller
 
     public function approve(Request $request,$id)
     {
+
         $studReq = StudentRequest::findOrFail($id);
         $studReq->status = $request->status;
         $studReq->update();
@@ -76,8 +77,5 @@ class TeacherController extends Controller
         return Teacher::all(['email']);
     }
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+ 
 }

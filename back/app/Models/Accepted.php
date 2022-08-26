@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Accepted extends Model
 {
     use HasFactory;
-    public function teacher()
-    {
-        return $this->belongsTo(Student::class);
-    }
+    // public function teacher()
+    // {
+    //     return $this->belongsTo(Student::class);
+    // }
 
-    public function student()
-    {
-        return $this->belongsTo(Teacher::class);
-    }
+    // public function student()
+    // {
+    //     return $this->belongsTo(Teacher::class);
+    // }
 }

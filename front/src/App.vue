@@ -1,25 +1,32 @@
 
 <template>
-  <TheNavigation></TheNavigation>
-  <!-- <student-signup/> -->
-  <!-- <user-login/> -->
+  <TheNavigation v-if="logined" ></TheNavigation>
+  <UserLogin @login="login"></UserLogin>
   <router-view></router-view>
 </template>
 
 <script>
-import TheNavigation from '@/components/navigation/TheNavigation.vue';
-
 export default{
   components:{
-    TheNavigation
+    
+  },
+  data(){
+    return {
+        logined:true,
+    }
+  },
+  methods: {
+    login(data){
+      console.log(data)
+      this.logined=data;
+    }
   }
 }
 </script>
 
-<style>
+<style scoped>
   body{
     background: white;
   }
-  
 </style>
 

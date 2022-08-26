@@ -26,6 +26,7 @@ class sendMail extends Mailable
             'details' => $this->details,
             'leaveType' => $this->leaveType,
             'email' => $this->email,
+
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'days' => $this->days

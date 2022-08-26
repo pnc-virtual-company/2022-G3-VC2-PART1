@@ -20,7 +20,7 @@ class StudentRequestController extends Controller
         $req->end_date = $request->end_date;
         $req->reason = $request->reason;
         $req->duration = $request->duration;
-        $req->request_date = $request->request_date;
+
         $req->status = $request->status;
         $req->leave_type = $request->leave_type;
         $req->allow = $request->allow;

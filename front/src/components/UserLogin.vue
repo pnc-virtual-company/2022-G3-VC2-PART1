@@ -59,10 +59,11 @@ export default {
                 }
             }
 
-            
             // login to database
+                this.logined = true;
+                // console.log(this.logined);
+                this.$emit('login', this.logined);
             if(this.email.trim()!= ""  && this.password.trim()!= "" ){ 
-                
                 let user={email:this.email,password:this.password,}
                 let result= await axios.post(this.role,user)
                 if(result.status==200 && result.data.message=="success login"){
@@ -70,9 +71,6 @@ export default {
                     localStorage.setItem('role',this.role);
                     localStorage.setItem('userId',JSON.stringify(result.data.id));
                     this.$router.push("/home");
-                    this.logined = true;
-                    console.log(this.logined);
-                    this.$emit('login', this.logined);
                     
                 }
             }

@@ -6,6 +6,7 @@ import './assets/tailwind.css'
 import FormRequest from './components/student/FormRequestView'
 import UserLogin from './components/UserLogin.vue'
 
+
 import FormResetPassword from './components/teacher/FormResetPassword'
 import StudentLeave from '@/components/student/StudentLeave.vue';
 

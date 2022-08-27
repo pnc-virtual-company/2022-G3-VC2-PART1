@@ -1,14 +1,15 @@
 
 <template>
-  <TheNavigation v-if="logined" ></TheNavigation>
-  <UserLogin @login="login"></UserLogin>
+  <TheNavigation ></TheNavigation>
+  <UserLogin @login="userLogin"></UserLogin>
   <router-view></router-view>
 </template>
 
 <script>
+import TheNavigation from './components/navigation/TheNavigation'
 export default{
   components:{
-    
+    TheNavigation
   },
   data(){
     return {
@@ -16,9 +17,9 @@ export default{
     }
   },
   methods: {
-    login(data){
+    userLogin(data){
       console.log(data)
-      this.logined=data;
+      // this.logined=data;
     }
   }
 }

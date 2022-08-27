@@ -93,6 +93,9 @@ class StudentController extends Controller
             return response()->json(['success' => 'Password updated!'],201);
         }
         return response()->json(['success' => 'Password incorrect!'], 404);
-
     }
+
+
+
+
 }

@@ -1,8 +1,8 @@
 
  <template>
-  <div class="mt-[-47px]  h-screen bg-gray-100  ">
+  <div class="mt-[-47px] bg-gray-100  ">
     <div class="overflow-auto rounded-lg shadow mt-12 ">
-      <table border="1" class=" w-[98%] m-auto">
+      <table  class=" w-[98%] m-auto">
         <thead class="bg-orange-300 border-b-2 border-gray-200 ">
             <tr class="text-base text-white">
               <th class="p-3 font-semibold tracking-wide text-start">Start Date</th>
@@ -38,6 +38,13 @@
 export default{
    props:{
     selectOptions:Function,
+   },
+   data(){
+    return{  
+      
+    }
+   },
+   methods:{
    },
 }
 </script>

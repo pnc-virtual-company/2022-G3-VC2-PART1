@@ -9,7 +9,13 @@ class StudentRequestController extends Controller
 {
     public function index()
     {
-        return StudentRequest::all();
+        return StudentRequest::with('student')->get();
+
+    }
+    public function get_padding()
+    {
+        return StudentRequest::with('student')->where('status','padding')->get();
+
     }
 
     public function store(Request $request)
@@ -49,6 +55,13 @@ class StudentRequestController extends Controller
         $req->leave_type = $request->leave_type;
         $req->update();
         return response()->json(['message' => 'items updated']);
+    }
+    public function update_status(Request $request, $id)
+    {
+        $req = StudentRequest::find($id);
+        $req->status = $request->status;
+        $req->save();
+        return response()->json(['message' => 'status updated']);
     }
 
     public function destroy($id)

@@ -17,6 +17,12 @@ class Student extends Model
         return $this->hasMany(StudentRequest::class);
     }
 
+    protected $hidden=[
+        "password",
+        "email",
+        "phone"
+    ];
+     
 
 
 

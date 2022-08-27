@@ -41,7 +41,6 @@ class TeacherController extends Controller
         }
         return $result;
     }
-
     public function update(Request $request, $id)
     {
         $cher = new Teacher();
@@ -54,7 +53,6 @@ class TeacherController extends Controller
         $cher->update();
         return response()->json(['message' => 'items updated']);
     }
-
     public function destroy($id)
     {
         $result = ['message' => "Item remove successfully"];

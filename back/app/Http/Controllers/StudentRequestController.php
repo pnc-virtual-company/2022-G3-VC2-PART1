@@ -30,6 +30,7 @@ class StudentRequestController extends Controller
 
         // $req->status = strtoupper($request->status);
         $req->leave_type = $request->leave_type;
+        $req->allow = $request->allow;
         $req->save();
         return response()->json(['message' => "Item saved successfully"]);
     }
@@ -53,6 +54,7 @@ class StudentRequestController extends Controller
         $req->status = strtoupper($request->status);
         $req->duration = $request->duration;
         $req->leave_type = $request->leave_type;
+        $req->allow = $request->allow;
         $req->update();
         return response()->json(['message' => 'items updated']);
     }

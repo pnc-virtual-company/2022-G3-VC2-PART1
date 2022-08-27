@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-6   bg-gray-100 ">
+    <div class="mb-6   bg-gray-100  ">
         <div class=" flex justify-center m-auto items-center">
           <img class="h-18 w-20" src="../../assets/group.png" alt="">
           <h1 class="text-4xl text-black-400 font-semibold text-center  p-3 text-orange-400  ">List All Leave</h1>

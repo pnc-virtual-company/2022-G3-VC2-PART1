@@ -1,34 +1,44 @@
 <template>
   <div class="home">
-    <StudentHome :student_data="students"/>
+    <StudentHome />
   </div>
 </template>
 
 <script>
 import StudentHome from '@/components/student/StudentHome.vue';
-import axios from '../axios-http';
+// import axios from '../axios-http';
 export default {
+  // name:"home",
   components: {
     StudentHome,
   },
 
   data(){
     return{
-      students: []
+      // currentUser:{},
+      // token:localStorage.getItem('token')
     }
+    
   },
 
   mounted(){
-    this.getData();
+    // this.getData();
   },
 
   methods: {
-    getData(){
-      axios.get('student')
-      .then(res =>  {
-        this.students = res.data;
-      })
-    }
-  }
+    // getData(){
+    //   axios.get('student').then(res=>{
+    //      console.log(res)
+    //   })
+    // }
+
+  },
 }
+
 </script>
+
+<style scroped>
+  body{
+    background: white;
+  }
+</style>

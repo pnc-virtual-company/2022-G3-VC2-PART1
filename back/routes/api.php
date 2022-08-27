@@ -10,6 +10,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmailController;
 
+Route::post('/studentLogin', [LoginController::class , 'studentLogin']);
+Route::post('/teacherLogin', [LoginController::class , 'teacherLogin']);
+Route::post('/student', [StudentController::class , 'store']);
 Route::post('/login', [LoginController::class , 'login']);
 Route::post('/student', [StudentController::class , 'store']);
 Route::get('/student', [StudentController::class , 'index']);
@@ -46,6 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     //student CRUD
     Route::apiResource('/student', StudentController::class);
 
+});
     //logout route
     Route::post('/logout', [LoginController::class , 'logout']);
     
@@ -54,7 +58,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     
 });
 
-});
+
 Route::apiResource('/teacher', TeacherController::class);
 Route::post('/logout', [LoginController::class , 'logout']);
 // Route::post("/request", [StudentRequestController::class , 'store']);
@@ -86,3 +90,4 @@ Route::put('/request/update_status/{id}', [StudentRequestController::class , 'up
 // Route::get('/request/get_padding', [StudentRequestController::class , 'get_padding']);
 
 Route::get('/get_padding', [StudentRequestController::class , 'get_padding']);
+

@@ -2,7 +2,7 @@
     <form @submit.prevent="onLogin" class="shadow-lg shadow-gray-500 w-7/12 h-5/6 m-auto mt-20  border-t-4 border-orange-400 rounded-md p-5 mb-5 bg-white-200 ">
         <div class="flex justify-between -mx-2 mb-6">
             <div class="">
-                <img  src="../assets/logo.png" alt="">
+                <img class="m-auto w-40"  src="../assets/logo.png" alt="">
                 <h1 class="text-2xl text-center">Welcome to PNC SLMS</h1>
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -29,12 +29,12 @@
         </div>
         
     </form>
+
 </template>
 
 <script>
 import axios from '../axios-http'
 export default {
-    
     data(){
         return{
             email:"",
@@ -59,9 +59,7 @@ export default {
                 }
             }
 
-            // login to database
             if(this.email.trim()!= ""  && this.password.trim()!= "" ){ 
-                
                 let user={email:this.email,password:this.password,}
                 let result= await axios.post(this.role,user)
                 if(result.status==200 && result.data.message=="success login"){
@@ -69,9 +67,6 @@ export default {
                     localStorage.setItem('role',this.role);
                     localStorage.setItem('userId',JSON.stringify(result.data.id));
                     this.$router.push("/home");
-                    this.logined = true;
-                    console.log(this.logined);
-                    this.$emit('login', this.logined);
                 }
             }
         },

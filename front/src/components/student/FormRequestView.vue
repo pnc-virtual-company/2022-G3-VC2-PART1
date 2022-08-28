@@ -1,5 +1,5 @@
 <template>
-    <form style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" @submit.prevent="addRequest" class="md:w-8/12 border  m-auto p-3 md:p-7 rounded-md py-3lx"> 
+    <form style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" @submit.prevent="addRequest" class=" md:w-8/12 lg:w-6/12 border  m-auto p-5 md:p-7 rounded-md py-3lx"> 
         <h1 class="font-bold text-center text-orange-400 m-auto mb-7 text-3xl">Request Leave Form</h1>
         <div class="form-controll my-4 text-left text-base">
             <label for="reason" class="cursor-pointer mb-2 font-bold">Select Your Leave Type:</label>
@@ -49,10 +49,6 @@
             <textarea v-model="reason" cols="30" rows="3" type="text" id="default_outlined" class="block px-2.5 pb-2.5 pt-4 w-full text-lg text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=".... "></textarea> 
             <label for="default_outlined" class="absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-100 top-0 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/4 peer-focus:top-2 peer-focus:scale-100 peer-focus:-translate-y-4 left-0">Descript Your Reason:</label>
         </div>
-
-
-
-        
         <div class="flex justify-center mt-4">
             <button  type="submit" class="sm:w-1/4 w-full rounded-md text-white text-xl bg-blue-500 p-3">Send</button>
         </div>
@@ -78,7 +74,7 @@ export default{
             start_date: '',
             end_date: '',
             reason: '',
-            
+            student_id: localStorage.getItem("userId")
         }
     },
     methods: {
@@ -122,7 +118,7 @@ export default{
         },
         addRequest(){
             if(this.duration > 0 && this.start_date.trim() != "" && this.end_date.trim() != "" && this.reason.trim() != "" && this.leave_type.trim() != ""){
-                let data = {student_id:18, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type, duration: this.duration, status:"padding"}
+                let data = {student_id:this.student_id, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type, duration: this.duration, status:"padding"}
                 this.$emit('request', data)
                 this.setDefault()
                 this.not_correct_date = false;

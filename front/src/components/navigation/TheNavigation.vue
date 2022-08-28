@@ -1,9 +1,8 @@
 <template>
 
-
-<nav class="flex sticky -top-2 bg-blue-400 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+<nav  class="flex sticky -top-2 bg-blue-400 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
-  <router-link to="/" class="flex items-center">
+  <router-link to="/home" class="flex items-center">
       <img src="../../assets/logo.png" class="mr-3 h-9 sm:h-11" alt="Flowbite Logo">
       <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">SLMS</span>
   </router-link>
@@ -19,7 +18,6 @@
           <span class="block text-md font-medium text-gray-500 truncate dark:text-gray-400">khy.phat@student.passerellesnumeriques.org</span>
         </div>
         <ul class="py-1" aria-labelledby="user-menu-button">
-          
           <li class="flex hover:bg-gray-100 items-center p-1">
             <img class="w-7 h-7 rounded-full cursor-pointer" src="https://cdn4.iconfinder.com/data/icons/iready-basic-vol-2/28/003_065_show_more_details_menu1x-512.png" alt="user photo">
             <a href="#" class="block py-2 px-4 text-md text-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Show Details</a>
@@ -50,79 +48,31 @@
     </ul>
   </div>
   </div>
-
-  <!-- <div class="flex items-center flex-wrap">
-      <router-link to="/student_list" class="text-black mx-9 hover:text-orange-500  text-xl block mt-4 lg:inline-block lg:mt-0 ">
-        List all leave
-      </router-link>
-      <router-link to="/new_request" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-black  text-xl border-b-2-orange-500">
-        New Request
-      </router-link>
-      <router-link to="/list_allStudent" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
-        Teacher(ListStudent)
-      </router-link>
-      <router-link to="/checkStudentLeave" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
-        Teacher(checkstudentLeave)
-      </router-link>
-  </div> -->
-
-<!-- =======v-if="hideMenuBar != ''" -->
-<!-- <nav class="justify-between p-0.5 shadow-8xl border-b-2 border-gray-250  "> -->
-
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-     <!-- {{getRoute}} -->
-    <router-link to="/">
-      <img class="w-40 ml-5" src="../../assets/logo.png" alt="">
-    </router-link>
-
-  </div>
-  <div class="flex items-center flex-wrap">
-      <router-link to="/student_list" class="text-black mx-9 hover:text-orange-500  text-xl block mt-4 lg:inline-block lg:mt-0 ">
-        List all leave
-      </router-link>
-      <router-link to="/new_request" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-black  text-xl border-b-2-orange-500">
-        New Request
-      </router-link>
-      <router-link to="/list_allStudent" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
-        Teacher(ListStudent)
-      </router-link>
-      <router-link to="/checkStudentLeave" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
-        Teacher(checkstudentLeave)
-      </router-link>
-  </div>
-
-    <!-- <div class="w-[15%] flex mx-12 ml-10 justify-around ">
-      <img @click="onProfile" src="../../assets/profile.png" alt="" class="h-14 rounded-full object-cover bg-gray-100  border-gray-300 border mt-1">
-      <div @click="onLogout" class="text-sm flex items-center text-black" >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 cursor-pointer " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-white-500 >
-    <div class="w-[15%] items-center flex mx-12 ml-10 justify-around ">
-      <router-link to="/reset_password">
-        <img class="w-10 cursor-pointer h-10 color-blue" src="../../assets/reset_password.png" alt="">
-      </router-link>
-      <img src="../../assets/profile.png" alt="" class="h-10 w-10 cursor-pointer rounded-full object-cover bg-gray-100  border-gray-300 border mt-1">
-      <div class="text-sm flex items-center text-black ">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 cursor-pointer " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-white-500 >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-        </svg>
-      </div>
-    </div> -->
-</nav>
+  </nav>
 
 </template>
 
 <script>
+ import { dataStore } from '../../store/index.js';
+
 export default {
+    setup() {
+      const userStore = dataStore()
+
+      return { userStore }
+    },
     data(){
       return{
+        student: localStorage.getItem('role'),
         isClik:false,
         path:"",
-        hideMenuBar:localStorage.getItem("token"),
       }
     },
     methods:{
       onLogout(){
-        localStorage.clear();
         this.$router.push('/login')
+        localStorage.clear();
+        this.userStore.change(false)
       }
       
 
@@ -143,3 +93,4 @@ nav a.router-link-exact-active {
   color: white; 
 }
 </style> 
+

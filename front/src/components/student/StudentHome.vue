@@ -21,12 +21,10 @@
 
 <script>
 import axios from 'axios';
-// import axios from '../../axios-http'
 export default {
 
   data(){
     return {
-        // token:localStorage.getItem("token"),
         student:{}
     }
   },
@@ -40,10 +38,10 @@ export default {
         console.log(res)
       })
     }
+    
   },
 
   mounted(){
-      
       this.tokenRequest()
   }
   

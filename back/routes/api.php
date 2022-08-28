@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EmailController;
 
+Route::get('get_student_request/{student_id}', [StudentRequestController::class, "get_by_student"]);
 Route::post('/studentLogin', [LoginController::class , 'studentLogin']);
 Route::post('/teacherLogin', [LoginController::class , 'teacherLogin']);
 Route::post('/student', [StudentController::class , 'store']);

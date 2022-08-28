@@ -39,12 +39,5 @@ export default{
    props:{
     selectOptions:Function,
    },
-   data(){
-    return{  
-      
-    }
-   },
-   methods:{
-   },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-<nav  class="justify-between  p-0.5 shadow-8xl border-b-2 border-gray-250  ">
+<nav   class="justify-between  p-0.5 shadow-8xl border-b-2 border-gray-250  ">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
      <!-- {{getRoute}} -->
     <router-link to="/">
@@ -40,6 +40,7 @@ export default {
     methods:{
       onLogout(){
         localStorage.clear();
+        alert("Are sure to logout")
         this.$router.push('/login')
       }
       

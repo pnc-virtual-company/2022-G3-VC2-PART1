@@ -1,7 +1,7 @@
 
 <template>
-  <TheNavigation ></TheNavigation>
-  <UserLogin @login="userLogin"></UserLogin>
+  <TheNavigation v-if="userLogined" ></TheNavigation>
+  <!-- <UserLogin @isNav="userLogin"></UserLogin> -->
   <router-view></router-view>
 </template>
 
@@ -13,15 +13,26 @@ export default{
   },
   data(){
     return {
-        logined:true,
+        userLogined:false,
+        
     }
   },
   methods: {
-    userLogin(data){
-      console.log(data)
-      // this.logined=data;
+
+    userLogin(){
+      if(localStorage.getItem('token')){
+         this.userLogined=true
+      }else{
+        this.userLogined=false
+      }
     }
+  },
+  mounted(){
+    this.userLogin()
   }
+  // computed: {
+  // }
+
 }
 </script>
 

@@ -7,7 +7,14 @@
 
 <script>
     import axios from "../../axios-http.js"
+    import { dataStore } from '../../store/index.js';
+
     export default {
+        setup() {
+            const userStore = dataStore()
+
+            return { userStore }
+        },
         data(){
             return{
                 old_password:""
@@ -15,17 +22,19 @@
         },
         methods:{
             resetPassword(data){
-                axios.put("resetPassword/9", data)
+                let userId = localStorage.getItem('userId')
+                axios.put("resetPassword/"+userId, data)
                 .then( res =>  {
-                    console.log(res.status);
-                    this.old_password = ''
+                    this.old_password = res.data.success
                 })
                 .catch(err => {
-                    console.log(err)
                     this.old_password = err.response.data.success
                     }
                 )
             }
+        },
+        mounted(){
+            this.userStore.change(true);
         }
     }
 </script>

@@ -1,14 +1,21 @@
 <template>
   <div class="student">
     <ShowStudentLeave @select-Option="selectOption"></ShowStudentLeave>
-    <student-leave  :selectOptions='selectOptions'/>
-  </div>
+    <student-leave v-if="selectOptions.length>=1"  :selectOptions='selectOptions'/>
+    <h1 v-else class="text-3xl text-center" >Not Found</h1>
+</div>
 </template>
 <script>
 import axios from "../../axios-http.js";
 import ShowStudentLeave from '@/components/student/FilterStudentView.vue';
+import { dataStore } from '../../store/index.js';
 
 export default {
+  setup() {
+    const userStore = dataStore()
+
+    return { userStore }
+  },
   name: 'StudentView',
   components: {
     ShowStudentLeave
@@ -18,11 +25,12 @@ export default {
       listStudentLeave:[],
       selectTypeLeave:'',
       status:'',
+      student_id: localStorage.getItem('userId')
     }
   },
   methods:{
     getListStudent(){
-      axios.get('request').then((req)=>{ 
+      axios.get('get_student_request/'+this.student_id).then((req)=>{ 
         this.listStudentLeave = req.data
       })
     },
@@ -55,6 +63,7 @@ export default {
   },
   mounted(){
     this.getListStudent();
+    this.userStore.change(true)
   },
 }
 </script>

@@ -6,7 +6,14 @@
 
 <script>
 import axios from "../../axios-http";
+import { dataStore } from '../../store/index.js';
+
 export default {
+  setup() {
+    const userStore = dataStore()
+
+    return { userStore }
+  },
   data(){
     return{
       
@@ -26,7 +33,7 @@ export default {
   },
 
   mounted(){
-
+    this.userStore.change(true);
   }
 }
 </script>

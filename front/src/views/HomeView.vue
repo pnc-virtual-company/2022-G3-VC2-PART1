@@ -6,31 +6,31 @@
 
 <script>
 import StudentHome from '@/components/student/StudentHome.vue';
-// import axios from '../axios-http';
+import { dataStore } from '../store/index.js';
+
 export default {
-  // name:"home",
+  setup() {
+    const userStore = dataStore()
+
+    return { userStore }
+  },
   components: {
     StudentHome,
   },
 
   data(){
     return{
-      // currentUser:{},
-      // token:localStorage.getItem('token')
+
     }
     
   },
 
   mounted(){
-    // this.getData();
+    this.userStore.change(true);
   },
 
   methods: {
-    // getData(){
-    //   axios.get('student').then(res=>{
-    //      console.log(res)
-    //   })
-    // }
+
 
   },
 }

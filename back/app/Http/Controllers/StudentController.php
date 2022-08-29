@@ -107,17 +107,17 @@ class StudentController extends Controller
     public function resetPassword(Request $request, $id)
     {
         $student =  Student::findOrFail($id);
-        if( Hash::check($request->password,$student['password']))
+        if(Hash::check($request->password,$student['password']))
         {
             $student->password = bcrypt($request->new_password);
             $student->save();
             return response()->json(['success' => 'Password updated!'],201);
         }
         return response()->json(['success' => 'Password incorrect!'], 404);
-
     }
 
     public function updateImg(Request $request,$id)
+
 
     {
         $std = Student::findOrFail($id);

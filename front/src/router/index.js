@@ -54,6 +54,7 @@ const routes = [
   {
     path: '/reset_password',
     component: ResetPasswordView,
+    meta:{requireAuth:true}
   }
 ]
 

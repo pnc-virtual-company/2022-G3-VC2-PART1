@@ -31,9 +31,11 @@ export default {
 
   data(){
     return {
+
       student:{},
       token:localStorage.getItem("token"),
       userId:localStorage.getItem("userId")
+      
     }
   },
   methods:{
@@ -48,6 +50,7 @@ export default {
         // console.log(this.student)
       })
     }
+    
   },
   computed: {
     userGender(){

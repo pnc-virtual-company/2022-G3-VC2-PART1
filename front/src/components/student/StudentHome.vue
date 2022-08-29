@@ -30,7 +30,7 @@ export default {
   },
   methods:{
     onStart(){
-        this.$router.push("/student_list");
+        this.$router.push("/list_student_leave");
     },
     tokenRequest(){
       axios.post('student',{headers:{Authorization:`Bearer` + localStorage.getItem("token")}})

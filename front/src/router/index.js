@@ -5,7 +5,7 @@ import NewRequest from '../views/student/NewRequestView.vue'
 import HomeView from '../views/HomeView.vue'
 import PageNotFound from '../components/PageNotFound.vue'
 import StudentView from '../views/student/ListStudentLeaveView.vue'
-// import ListAllStudentView from '../views/teacher/ListAllStudentView.vue'
+import ListAllStudentView from '../views/teacher/ListAllStudentView.vue'
 import CheckStudentLeaveView from '../views/teacher/CheckStudentLeaveView.vue'
 import ResetPasswordView from '../views/teacher/ResetPasswordView.vue'
 
@@ -37,7 +37,7 @@ const routes = [
     meta:{requireAuth:true}
   },
   {
-    path: '/student_list',
+    path: '/list_student_leave',
     name: 'student_ist',
     component: StudentView,
     meta:{requireAuth:true}
@@ -47,13 +47,20 @@ const routes = [
     component: PageNotFound
   },
   {
-    path: '/checkStudentLeave',
+    path: '/check_student_leave',
     name: 'checkStudentLeave',
     component: CheckStudentLeaveView
   },
   {
+    path: '/list_all_students',
+    name: 'list_all_students',
+    component: ListAllStudentView
+  },
+  {
     path: '/reset_password',
     component: ResetPasswordView,
+    meta:{requireAuth:true}
+
   }
 ]
 

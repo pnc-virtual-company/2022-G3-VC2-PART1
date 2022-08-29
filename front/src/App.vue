@@ -1,12 +1,12 @@
 
-<template>
+<template v-cloak>
   <TheNavigation v-if="userStore.login"></TheNavigation>
   <router-view></router-view>
 </template>
 
 <script>
   import TheNavigation from './components/navigation/TheNavigation.vue'
-  import { dataStore } from './store/index.js';
+  import { dataStore } from './store/user-store.js';
 
 export default {
   setup() {
@@ -23,14 +23,17 @@ export default {
     },
   },
   mounted(){
-    console.log(this.userStore.login)
   }
 }
 </script>
 
-<style scoped>
+<style>
   body{
     background: white;
+  }
+
+  [v-cloak] {
+  display: none;
   }
 </style>
 

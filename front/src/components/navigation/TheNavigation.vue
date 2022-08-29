@@ -39,33 +39,47 @@
   </div>
   <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
     <ul class="flex flex-col p-4 mt-4 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-      <li>
-        <router-link to="/student_list" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">List All Leave</router-link>
-      </li>
-      <li>
-        <router-link to="/new_request" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">New Request</router-link>
+      <li v-for="route of routes" :key="route">
+        <router-link :to="route.path" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{route.title}}</router-link>
       </li>
     </ul>
   </div>
   </div>
+    <div v-if="userStore.role =='teacherLogin'" >
+      <router-link to="/list_allStudent" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
+        Teacher(ListStudent)
+      </router-link>
+      <router-link to="/checkStudentLeave" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
+        Teacher(checkstudentLeave)
+      </router-link>
+    </div>
   </nav>
 
 </template>
 
 <script>
- import { dataStore } from '../../store/index.js';
+ import { dataStore } from '../../store/user-store.js';
 
 export default {
     setup() {
       const userStore = dataStore()
-
       return { userStore }
     },
     data(){
       return{
         student: localStorage.getItem('role'),
         isClik:false,
-        path:"",
+
+        teacher_routes:[
+          {title: "Check student leave", path: "check_student_leave"},
+          {title: "List all students", path: "list_all_students"}
+        ],
+        
+        routes:[
+          {title: 'List all leave', path: 'list_student_leave'},
+          {title: 'New request', path: 'new_request'},
+          
+        ]
       }
     },
     methods:{

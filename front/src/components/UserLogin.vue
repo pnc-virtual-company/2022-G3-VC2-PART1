@@ -34,7 +34,14 @@
 
 <script>
 import axios from '../axios-http'
+import { dataStore } from '../store/user-store.js';
+
 export default {
+    setup() {
+        const userStore = dataStore()
+
+        return { userStore }
+    },
     data(){
         return{
             email:"",
@@ -43,8 +50,6 @@ export default {
             no_password:true,
             showPassword:false,
             role:"studentLogin",
-            logined:false,
-            
         }
     },
     methods: {
@@ -55,6 +60,7 @@ export default {
                     this.no_email=false;
                     if(this.email.search("student") == -1){
                         this.role = 'teacherLogin'
+                        this.userStore.changeUserRole('teacherLogin')
                     }
                 }
             }
@@ -73,6 +79,12 @@ export default {
 
          toggleShow() {
             this.showPassword = !this.showPassword;
+        },
+        loginSuccess() {
+            let token = localStorage.getItem('token');
+            if (token != null) {
+                this.$router.push("/home");
+            }
         }
     },
     computed: {
@@ -80,7 +92,9 @@ export default {
             return (this.showPassword) ? "Hide" : "Show";
         },
     },
+    
     mounted(){
+        this.loginSuccess()
     }
    
     

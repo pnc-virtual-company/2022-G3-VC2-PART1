@@ -6,7 +6,7 @@
 
 <script>
 import StudentHome from '@/components/student/StudentHome.vue';
-import { dataStore } from '../store/index.js';
+import { dataStore } from '../store/user-store.js';
 
 export default {
   setup() {

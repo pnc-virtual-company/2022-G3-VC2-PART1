@@ -7,7 +7,7 @@
 
 <script>
     import axios from "../../axios-http.js"
-    import { dataStore } from '../../store/index.js';
+    import { dataStore } from '../../store/user-store.js';
 
     export default {
         setup() {

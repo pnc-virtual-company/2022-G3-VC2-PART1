@@ -8,7 +8,7 @@
 <script>
 import axios from "../../axios-http.js";
 import ShowStudentLeave from '@/components/student/FilterStudentView.vue';
-import { dataStore } from '../../store/index.js';
+import { dataStore } from '../../store/user-store.js';
 
 export default {
   setup() {

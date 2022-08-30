@@ -19,7 +19,8 @@ Route::post('/student', [StudentController::class , 'store']);
 Route::get('/student', [StudentController::class , 'index']);
 Route::get('/request', [StudentRequestController::class , 'index']);
 
-Route::put('/resetPassword/{id}', [StudentController::class , 'resetPassword']);
+Route::put('/teacher/reset_password/{id}', [TeacherController::class, 'resetPassword']);
+Route::put('/student/reset_password/{id}', [StudentController::class , 'resetPassword']);
 Route::group(['middleware' => ['auth:sanctum']], function (){
     
     ///student routes

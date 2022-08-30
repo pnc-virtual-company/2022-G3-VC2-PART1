@@ -79,14 +79,14 @@ class TeacherController extends Controller
 
     public function resetPassword(Request $request, $id)
     {
-        $student = Teacher::findOrFail($id);
-
-        if (Hash::check($request->password, $student['password'])) {
-            $student->password = bcrypt($request->new_password);
-            $student->update();
-            return response()->json(['success' => 'Password reseted'], 204);
+        $teacher =  Teacher::findOrFail($id);
+        if(Hash::check($request->password,$teacher['password']))
+        {
+            $teacher->password = bcrypt($request->new_password);
+            $teacher->save();
+            return response()->json(['success' => 'Password updated!'],201);
         }
-        return response()->json(['success' => 'Password not reseted'], 404);
+        return response()->json(['success' => 'Password incorrect!'], 404);
 
     }
 

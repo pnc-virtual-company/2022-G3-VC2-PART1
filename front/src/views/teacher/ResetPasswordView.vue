@@ -23,14 +23,26 @@
         methods:{
             resetPassword(data){
                 let userId = localStorage.getItem('userId')
-                axios.put("resetPassword/"+userId, data)
-                .then( res =>  {
-                    this.old_password = res.data.success
-                })
-                .catch(err => {
-                    this.old_password = err.response.data.success
-                    }
-                )
+                let role = localStorage.getItem('role');
+                if(role == "studentLogin"){
+                    axios.put("student/reset_password/"+userId, data)
+                    .then( res =>  {
+                        this.old_password = res.data.success
+                    })
+                    .catch(err => {
+                        this.old_password = err.response.data.success
+                        }
+                    )
+                }else {
+                    axios.put("teacher/reset_password/"+userId, data)
+                    .then( res =>  {
+                        this.old_password = res.data.success
+                    })
+                    .catch(err => {
+                        this.old_password = err.response.data.success
+                        }
+                    )
+                }
             }
         },
         mounted(){

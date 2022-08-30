@@ -31,7 +31,7 @@ class LoginController extends Controller
             return response()->json(['sms' => "Invaliid password"]);
         }
         $token = $user->createToken('myToken')->plainTextToken;
-        return response()->json(['token' => $token, 'message' => 'success login'], 200);
+        return response()->json(['token' => $token, 'message' => 'success login','data' => $user], 200);
 
     }
 

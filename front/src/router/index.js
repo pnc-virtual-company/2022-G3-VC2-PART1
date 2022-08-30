@@ -76,7 +76,11 @@ const routes = [
   {
     path: '/check_student_leave',
     name: 'checkStudentLeave',
-    component: CheckStudentLeaveView
+    component: CheckStudentLeaveView,
+    meta:{
+      requireAuth: true,
+      user_login:'teacherLogin'
+    },
   },
   {
     path: '/reset_password',

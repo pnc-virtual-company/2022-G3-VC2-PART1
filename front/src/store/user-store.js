@@ -27,6 +27,5 @@ export const dataStore = defineStore('user_login', {
 
   mounted() {
 
-    // this.changeUserRole();
   }
 })

@@ -29,7 +29,6 @@ export default {
         },
         getAllStudentLeave(){
             axios.get('get_padding').then((res)=>{
-                console.log(res.data)
                 this.listStudentLeave = res.data
             });
         },
@@ -37,8 +36,8 @@ export default {
             axios.delete('student/'+id).then((response) => {
                 this.getAllStudents()
                 console.log(response.data);
-      })
-    },
+            })
+        },
     },
     mounted(){
         // this.userStore.changeUserRole('teacherLogin')

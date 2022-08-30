@@ -20,7 +20,7 @@
             
             <div class="cursor-pointer w-full my-4 sm:w-2/4 text-left form-controll">
                 <label class="font-bold" for="">Part Of Day</label> <br>
-                <select v-model="part_of_start_day" id="start date" class="cursor-pointer bg-stone-200 border-b focus:border-2 focus:border-blue-600 rounded-sm focus:ring-blue-500 focus:border-blue-500 w-full p-3  border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
+                <select v-model="part_of_start_day" id="start date" class="cursor-pointer bg-stone-200 border-b focus:border-2  rounded-sm   w-full p-3  border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
                     <option value="Morning">Morning</option>
                     <option value="Afternoon">Afternoon</option>
                 </select>
@@ -35,7 +35,7 @@
             </div>
             <div class="cursor-pointer my-4 sm:w-2/4  text-left form-controll ">
                 <label class="font-bold" for="">Part Of Day</label> <br>
-                <select v-model="part_of_end_day"  id="end-date" class="cursor-pointer focus:border-2 focus:border-blue-600 bg-stone-200 border-b rounded-sm focus:ring-blue-500 focus:border-blue-500 w-full p-3  border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
+                <select v-model="part_of_end_day"  id="end-date" class="cursor-pointer focus:border-2 focus:border-blue-600 bg-stone-200 border-b rounded-sm  w-full p-3  border-gray-600 placeholder-gray-400 focus:ring-blue-500 ">
                     <option selected value="Morning">Morning</option>
                     <option value="Afternoon">Afternoon</option>
                 </select>
@@ -153,7 +153,6 @@ export default{
                 this.not_correct_date = false;
             }
         }
-        
     },
     computed: {
         countDuration(){

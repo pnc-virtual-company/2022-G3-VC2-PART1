@@ -15,6 +15,7 @@ import { createPinia } from 'pinia'
 
 const app = createApp(App).use(createPinia())
 
+
 app.component('student-leave', StudentLeave)
 app.component('form-request', FormRequest)
 app.component('user-login', UserLogin)

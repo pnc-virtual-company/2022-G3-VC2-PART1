@@ -44,7 +44,7 @@
 <!-- ======================Popup rejected =====================-->
   <div class="container mx-auto">
     <div class="flex justify-center">
-      <div v-show="isReject" class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 ">
+      <div v-show="isReject" class="fixed w-full h-full inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 ">
         <div class="max-w-2xl p-6 bg-white rounded-md shadow-xl mb-44">
           <div class="flex items-center justify-between">
             <h3 class="text-2xl mb-6"> Are you sure you want to reject?</h3>
@@ -61,7 +61,7 @@
 <!-- ======================Popup Approved=====================-->
   <div class="container mx-auto ">
     <div class="flex justify-center">
-      <div v-show="isAppove" class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 " >
+      <div v-show="isAppove" class="fixed w-full h-full inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 " >
         <div class="w-[30%] p-6 bg-white rounded-md shadow-xl mb-44">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 bg-green-300 m-auto rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>

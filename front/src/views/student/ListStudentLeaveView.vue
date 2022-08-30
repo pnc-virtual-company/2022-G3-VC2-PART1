@@ -31,6 +31,7 @@ export default {
   methods:{
     getListStudent(){
       axios.get('get_student_request/'+this.student_id).then((req)=>{ 
+        console.log(req.data);
         this.listStudentLeave = req.data
       })
     },

@@ -80,16 +80,13 @@ Route::get('/sendMail/{id}/{lt}/{mas}',[EmailController::class,'sendMail']);
 
 // ==========just test before login===================
 
-Route::apiResource('/student', StudentController::class);
+// Route::apiResource('/student', StudentController::class);
 
-Route::get("/request", [StudentRequestController::class , 'index']);
-Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
-Route::put("/request/{id}", [StudentRequestController::class , 'update']);
-Route::post("/request", [StudentRequestController::class , 'store']);
-Route::get("/request/{id}", [StudentRequestController::class , 'show']);
-
-Route::put('/request/update_status/{id}', [StudentRequestController::class , 'update_status']);
-// Route::get('/request/get_padding', [StudentRequestController::class , 'get_padding']);
-
-Route::get('/get_padding', [StudentRequestController::class , 'get_padding']);
+// Route::get("/request", [StudentRequestController::class , 'index']);
+// Route::delete("/request/{id}", [StudentRequestController::class , 'destroy']);
+// Route::put("/request/{id}", [StudentRequestController::class , 'update']);
+// Route::post("/request", [StudentRequestController::class , 'store']);
+// Route::get("/request/{id}", [StudentRequestController::class , 'show']);
+// Route::put('/request/update_status/{id}', [StudentRequestController::class , 'update_status']);
+// Route::get('/get_padding', [StudentRequestController::class , 'get_padding']);
 

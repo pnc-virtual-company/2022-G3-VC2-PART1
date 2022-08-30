@@ -3,7 +3,7 @@
         <h1 class="font-bold text-center text-orange-400 m-auto mb-7 text-3xl">Request Leave Form</h1>
         <div class="form-controll my-4 text-left text-base">
             <label for="reason" class="cursor-pointer mb-2 font-bold">Select Your Leave Type:</label>
-            <select v-model="leave_type" id="reason" class="cursor-pointer bg-stone-200 border-b rounded-sm focus:ring-blue-500 focus:border-blue-500 w-full p-2.5  border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
+            <select v-model="leave_type" id="reason" class="cursor-pointer bg-stone-200 border-b rounded-sm focus:ring-blue-500 focus:border-blue-500 w-full p-2.5  border-gray-600 placeholder-gray-400">
                 <option selected="" value="">----</option>
                 <option value="family's event">Family's Event</option>
                 <option value="sick leave">Sick Leave</option>
@@ -20,7 +20,7 @@
             
             <div class="cursor-pointer w-full my-4 sm:w-2/4 text-left form-controll">
                 <label class="font-bold" for="">Part Of Day</label> <br>
-                <select v-model="part_of_start_day" id="start date" class="cursor-pointer bg-stone-200 border-b rounded-sm focus:ring-blue-500 focus:border-blue-500 w-full p-3  border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
+                <select v-model="part_of_start_day" id="start date" class="cursor-pointer bg-stone-200 border-b rounded-sm  focus:border-blue-500 w-full p-3  border-gray-600 placeholder-gray-400 focus:ring-blue-500 ">
                     <option value="Morning">Morning</option>
                     <option value="Afternoon">Afternoon</option>
                 </select>
@@ -35,7 +35,7 @@
             </div>
             <div class="cursor-pointer my-4 sm:w-2/4  text-left form-controll ">
                 <label class="font-bold" for="">Part Of Day</label> <br>
-                <select v-model="part_of_end_day"  id="end-date" class="cursor-pointer bg-stone-200 border-b rounded-sm focus:ring-blue-500 focus:border-blue-500 w-full p-3  border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500">
+                <select v-model="part_of_end_day"  id="end-date" class="cursor-pointer bg-stone-200 border-b rounded-sm focus:ring-blue-500 focus:border-blue-500 w-full p-3  border-gray-600 placeholder-gray-400 ">
                     <option selected value="Morning">Morning</option>
                     <option value="Afternoon">Afternoon</option>
                 </select>
@@ -46,7 +46,7 @@
         <div class="text-base my-4 mr-3 w-full text-left form-controll">
             <label class="font-bold" for="">Descript Your Reason</label> <br>
             <small v-if="no_reason" class="text-red-500">Please write your reason !</small>
-            <textarea v-model="reason" placeholder="Write your reason..." class="bg-stone-200 border border-gray-600 rounded p-4 text-black w-full p-2 outline-0" name="" id="" cols="30" rows="7"></textarea>
+            <textarea v-model="reason" placeholder="Write your reason..." class="bg-stone-200 border border-gray-600 rounded p-4 text-black w-full  outline-0" name="" id="" cols="30" rows="7"></textarea>
         </div>
         <div class="flex justify-center">
             <button  type="submit" class="sm:w-1/4 w-full rounded-md text-white text-xl bg-orange-500 p-3">Send</button>
@@ -117,7 +117,7 @@ export default{
         },
         addRequest(){
             if(this.duration > 0 && this.start_date.trim() != "" && this.end_date.trim() != "" && this.reason.trim() != "" && this.leave_type.trim() != ""){
-                let data = {student_id:18, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type, duration: this.duration, status:"padding"}
+                let data = {student_id:68, start_date: this.start_date, end_date: this.end_date, reason: this.reason, leave_type: this.leave_type, duration: this.duration, status:"padding"}
                 this.$emit('request', data)
                 this.setDefault()
                 this.not_correct_date = false;
@@ -152,7 +152,6 @@ export default{
                 this.not_correct_date = false;
             }
         }
-        
     },
     computed: {
         countDuration(){

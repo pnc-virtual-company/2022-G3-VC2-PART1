@@ -17,6 +17,13 @@ class StudentRequestController extends Controller
         return StudentRequest::with('student')->where('status','padding')->get();
 
     }
+    public function get_by_student($id)
+    {
+        return StudentRequest::where('student_id', $id)->get();
+
+    }
+
+
 
     public function store(Request $request)
     {
@@ -27,8 +34,6 @@ class StudentRequestController extends Controller
         $req->reason = $request->reason;
         $req->duration = $request->duration;
         $req->status = $request->status;
-
-        // $req->status = strtoupper($request->status);
         $req->leave_type = $request->leave_type;
         $req->save();
         return response()->json(['message' => "Item saved successfully"]);
@@ -53,6 +58,7 @@ class StudentRequestController extends Controller
         $req->status = strtoupper($request->status);
         $req->duration = $request->duration;
         $req->leave_type = $request->leave_type;
+        $req->allow = $request->allow;
         $req->update();
         return response()->json(['message' => 'items updated']);
     }

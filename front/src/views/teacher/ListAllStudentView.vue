@@ -5,7 +5,13 @@
 <script>
 import axios from "../../axios-http.js";
 import ListAllStudent from '@/components/teacher/ListAllStudent.vue';
+import { dataStore } from '../../store/user-store.js';
+
 export default {
+    setup() {
+        const userStore = dataStore()
+        return { userStore }
+    },
     components:{
         ListAllStudent,
     },
@@ -34,8 +40,11 @@ export default {
         },
     },
     mounted(){
+        // this.userStore.changeUserRole('teacherLogin')
         this.getAllStudents();
         this.getAllStudentLeave()
+        console.log(this.userStore.login)
+        this.userStore.change(true);
   }
 }
 

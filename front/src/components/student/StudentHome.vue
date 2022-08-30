@@ -1,27 +1,65 @@
 <template>
-  <div class="">
-    <p style="color: 130F40;" class="text-center mt-5 text-6xl">SLMS</p>
-    
-    <div v-for="info in student_data" :key="info" class=" mt-5 m-auto w-ful w-2/4 bg-white rounded-lg border  shadow-md dark:bg-gray-800 dark:border-gray- border-t-4 border-indigo-200 border-t-teal-700">
-      <div class="mt-5 flex flex-col items-center">
-        <img class="mb-3 w-32 h-32 rounded-full shadow-lg" :src="info.img" alt="Bonnie image">
-        <h5 class="mb-1 text-3xl font-medium text-gray-900 dark:text-white">{{info.first_name}} {{info.last_name}}</h5>
-        <span class="text-lg text-gray-500 dark:text-gray-400">{{info.role}}</span>
-      </div>
-      <!-- <p class="text-center text-2xl mt-3">Welcome to your <span class="text-amber-400">SLMS</span></p>
-      <p class="text-center text-2xl">account</p> -->
-      <p class="mt-5 text-slate-400 text-center text-lg">Get start to make new request and see all your</p>
-      <p class="text-slate-400 text-center text-lg">list leave in your account <span class="text-amber-400">SLMS</span></p>
-      
-    </div>
+  <div class="flex justify-center  ">
+    <h1 class=" font-bold  text-green-400 text-3xl mb-5 flex"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Logined successfull</h1>
   </div>
-</template>
+  <div class="max-w-sm rounded overflow-hidden m-auto shadow-lg  ">
+    <img v-if="userGender" class="w-40 rounded-full m-auto" src="../../assets/Man.jpg" alt="Sunset in the mountains">
+    <img v-else class="w-40 rounded-full m-auto" src="../../assets/woman.png" alt="Sunset in the mountains">
+    <div class="px-6 py-4 font-bold flex justify-around ">
+      <div >
+        <p class="text-gray-700 text-base mb-2">FirstName : <span class="text-green-500 italic">{{student.first_name}} </span> </p>
+        <p class="text-gray-700 text-base">Gender : <span class="text-green-500 italic">{{student.gender}}</span>  </p>
+      </div>
+      <div class="">
+        <p class="text-gray-700 text-base mb-2">LastName : <span class="text-green-500 italic">{{student.last_name}}</span>  </p>
+        <p class="text-gray-700 text-base">Batch : <span class="text-green-500 italic">{{student.batch}}</span>  </p>
+      </div>
 
+  </div>
+   <div class="flex justify-end mb-5 mr-5">
+     <button @click="onStart" class="bg-blue-500 hover:bg-blue-700   text-white font-bold py-2 px-4 rounded">
+       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+     </button>
+   </div>
+</div>
+</template>
 <script>
+
+import axios from '../../axios-http.js'
 export default {
-  props: {
-    student_data: Object,
+
+  data(){
+    return {
+
+      student:{},
+      token:localStorage.getItem("token"),
+      userId:localStorage.getItem("userId")
+    }
+  },
+  methods:{
+    onStart(){
+      this.$router.push("/list_student_leave");
+      // this.$router.push("/student_list");
+    },
+    tokenRequest(){
+      axios.get('student/'+this.userId,{headers:{Authorization:`Bearer ${this.token}`}})
+      .then(res=>{
+        this.student=res.data;
+      })
+    },
+    
+  },
+  computed: {
+    userGender(){
+      return this.student.gender=="M" || this.student.gender=="Male" || this.student.gender=="m" || this.student.gender=="male" 
+    }
+    
+  },
+  mounted(){
+      this.tokenRequest()
   }
+  
 }
 </script>
 

@@ -4,10 +4,18 @@
 <script>
 import axios from "../../axios-http.js";
 import CheckStudentLeave from '@/components/teacher/CheckStudentLeave.vue';
+import { dataStore } from '../../store/user-store.js';
+
 export default {
+  setup() {
+    const userStore = dataStore()
+    return { userStore }
+  },
+
     components:{
-    CheckStudentLeave
-},
+        CheckStudentLeave
+    },
+
     data(){
         return{
             status:'',
@@ -30,6 +38,7 @@ export default {
     }, 
     mounted(){
         this.getAllStudentsRequest();
+        this.userStore.change(true);
   }
 }
 

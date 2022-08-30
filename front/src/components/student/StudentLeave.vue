@@ -21,12 +21,11 @@
             <td class="p-4 capitalize text-gray-500 justify-center m-21 text-sm">{{studentList.reason}} </td>
             <td class="p-4 capitalize text-gray-500 justify-center m-21 text-sm">{{studentList.duration}} day</td>
             <td class="p-4 capitalize text-gray-500 justify-center m-21 text-sm">{{studentList.leave_type}} </td>
-            <td v-if="studentList.status == 'padding'" class="p-4 capitalize text-sm text-yellow-500 text-center text-sm">{{studentList.status}}</td>
-            <td v-else-if="studentList.status == 'approved'" class="p-4 text-sm capitalize text-green-500 text-center text-sm">{{studentList.status}}</td>
-            <td v-else-if="studentList.status == 'canceled'" class="p-4 text-sm capitalize text-blue-500 text-center text-sm">{{studentList.status}}</td>
-            <td v-else class="p-4 text-sm text-red-500 capitalize text-center text-sm">{{studentList.status}}</td>
-            <!-- <td class="p-4 text-sm text-gray-500 text-center text-sm">{{studentList.status}}</td>  -->
-            <td class="p-4 text-sm text-gray-500 text-center text-sm">{{studentList.created_at}}</td>
+            <td v-if="studentList.status == 'padding'" class="p-4 capitalize text-sm text-yellow-500 text-center ">{{studentList.status}}</td>
+            <td v-else-if="studentList.status == 'approved'" class="p-4 capitalize text-green-500 text-center text-sm">{{studentList.status}}</td>
+            <td v-else-if="studentList.status == 'canceled'" class="p-4 capitalize text-blue-500 text-center text-sm">{{studentList.status}}</td>
+            <td v-else class="p-4  text-red-500 capitalize text-center text-sm">{{studentList.status}}</td>
+            <td class="p-4  text-gray-500 text-center text-sm">{{studentList.created_at}}</td>
           </tr>  
         </tbody>
       </table>
@@ -38,13 +37,6 @@
 export default{
    props:{
     selectOptions:Function,
-   },
-   data(){
-    return{  
-      
-    }
-   },
-   methods:{
    },
 }
 </script>

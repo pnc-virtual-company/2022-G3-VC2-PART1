@@ -1,34 +1,44 @@
 <template>
   <div class="home">
-    <StudentHome :student_data="students"/>
+    <StudentHome />
   </div>
 </template>
 
 <script>
 import StudentHome from '@/components/student/StudentHome.vue';
-import axios from '../axios-http';
+import { dataStore } from '../store/user-store.js';
+
 export default {
+  setup() {
+    const userStore = dataStore()
+
+    return { userStore }
+  },
   components: {
     StudentHome,
   },
 
   data(){
     return{
-      students: []
+
     }
+    
   },
 
   mounted(){
-    this.getData();
+    this.userStore.change(true);
   },
 
   methods: {
-    getData(){
-      axios.get('student')
-      .then(res =>  {
-        this.students = res.data;
-      })
-    }
-  }
+
+
+  },
 }
+
 </script>
+
+<style scroped>
+  body{
+    background: white;
+  }
+</style>

@@ -4,7 +4,7 @@
     <div class="typewriter mr-6">
       <h1 class="font-bold text-2xl">Welcome to web application SLMS</h1>
       <h1>With this app you can do :</h1>
-      <div v-for="(benifit, index) in benifits" :key="index" class="flex w-96 shadow-lg rounded-lg  mt-5">
+      <div v-for="(benifit, index) in benifits" :key="index" class="flex w-100 shadow-lg rounded-lg  mt-5">
         <div class="bg-green-600 py-4 px-6 rounded-l-lg flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,26 +43,25 @@ import axios from "../../axios-http.js";
 export default {
   data() {
     return {
-      student: {},
-      token: localStorage.getItem("token"),
-      userId: localStorage.getItem("userId"),
-      benifits:['can know which day you requested','see all list requests','see which list teacher allow or not','can request to teacher']
-    };
+      student:{},
+      token:localStorage.getItem("token"),
+      userId:localStorage.getItem("userId"),
+      benifits:['can request to teacher','can see specific about your request','can know how many time you have requests']
+    }
   },
-  methods: {
-    onStart() {
-      this.$router.push("/student_list");
+  methods:{
+    onStart(){
+      this.$router.push("/list_student_leave");
+      // this.$router.push("/student_list");
     },
-    tokenRequest() {
-      axios
-        .get("student/" + this.userId, {
-          headers: { Authorization: `Bearer ${this.token}` },
-        })
-        .then((res) => {
-          this.student = res.data;
-          // console.log(this.student)
-        });
-    },
+    tokenRequest(){
+      axios.get('student/'+this.userId,{headers:{Authorization:`Bearer ${this.token}`}})
+      .then(res=>{
+        this.student=res.data;
+        // console.log(this.student)
+      })
+    }
+    
   },
   computed: {
     userGender() {

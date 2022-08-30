@@ -19,9 +19,9 @@
     </div> -->
     <div class="container mx-auto ">
       <div class="mt-12 flex ml-[8rem] ">
-        <div class="w-2/6 mb-5 ">
+        <div class="w-2/6 mb-5">
             <p class="mb-3 text-sm">Search batch</p>
-          <div class="relative w-full">
+          <div class="w-full">
             <select @change="selectOption" v-model="selectTypeLeave" class="p-3 rounded-md mb-4 text-black placeholder-gray-400 bg-white border border-gray-400 focus:border-blue-500 border-b-3 w-full">
                     <option selected="" value="">Show all</option>
                     <option value="2020">2020</option>
@@ -29,8 +29,9 @@
                 </select>
           </div>
          </div>
+
         <div class="w-2/6 ml-9 mt-[29px]">
-          <div class="relative w-full">
+          <div class="w-full">
             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
             </div>

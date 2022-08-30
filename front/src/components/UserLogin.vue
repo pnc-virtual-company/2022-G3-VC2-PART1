@@ -21,7 +21,7 @@
                             <svg v-else  class="w-6 h-6 mt-2 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                         </div>  
                     </div>
-                    <button   class=" w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded-full">
+                    <button  class=" w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded-full">
                         Login
                     </button>
                     
@@ -34,7 +34,14 @@
 
 <script>
 import axios from '../axios-http'
+import { dataStore } from '../store/user-store.js';
+
 export default {
+    setup() {
+        const userStore = dataStore()
+
+        return { userStore }
+    },
     data(){
         return{
             email:"",
@@ -45,31 +52,20 @@ export default {
             role:"studentLogin",
             logined:false,
             isNav:true,
-            
-            
         }
     },
     methods: {
-        async onLogin() {
-            if (this.password.trim() == "") {
+        async onLogin(){
+            if(this.password.trim()!= ""  ){
                 this.no_password=false
-            }
-            if (this.email.trim() == "") {
-                this.no_email=false
-            }
-            
-            if (this.no_email == true && this.no_password == true) {
-                if (this.email.search("passerellesnumeriques.org") < 0) {
-                    console.log(this.email.search("passerellesnumeriques.org"));
-                    this.no_email = false;
-                    this.checkMail()
-                    console.log(this.not_email_pnc);
-                  
-                }
-                else if (this.email.search("passerellesnumeriques.org") > 0) {
-                    if (this.email.search("student") == -1) {
+                if(this.email.search("passerellesnumeriques.org")>0){
+                    this.no_email=false;
+                    if(this.email.search("student") == -1){
                         this.role = 'teacherLogin'
+                        console.log("role: " + this.role)
                     }
+                }
+
                     // login to database
 
                     let user = { email: this.email, password: this.password, }
@@ -88,6 +84,19 @@ export default {
                         }
 
                     }
+            }
+
+            if(this.email.trim()!= ""  && this.password.trim()!= "" ){ 
+                let user={email:this.email,password:this.password,}
+                let result= await axios.post(this.role,user)
+                if(result.status==200 && result.data.message=="success login"){
+                    localStorage.setItem('token',JSON.stringify(result.data.token));
+                    localStorage.setItem('role',this.role);
+                    localStorage.setItem('userId',JSON.stringify(result.data.id));
+                    this.$router.push("/home");
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 8000);
                 }
             }
         },
@@ -95,16 +104,23 @@ export default {
          toggleShow() {
             this.showPassword = !this.showPassword;
         },
+        loginSuccess() {
+            let token = localStorage.getItem('token');
+            
+            if (token != null) {
+                this.$router.push("/home");
+            }
+        }
     },
     computed: {
         buttonLabel() {
             return (this.showPassword) ? "Hide" : "Show";
         },
     },
-    mounted(){
-    }
-   
     
+    mounted(){
+        this.loginSuccess()
+    }
 }
 </script>
 

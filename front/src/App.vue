@@ -45,8 +45,7 @@ export default {
     this.userLogin()
 
   }
-  // computed: {
-  // }
+  
 
 }
 </script>

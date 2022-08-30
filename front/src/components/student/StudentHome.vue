@@ -1,70 +1,116 @@
 <template>
-  <div class="flex justify-center  ">
-    <h1 class=" font-bold  text-green-400 text-3xl mb-5 flex"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Logined successfull</h1>
-  </div>
-  <div class="max-w-sm rounded overflow-hidden m-auto shadow-lg  ">
-    <img v-if="userGender" class="w-40 rounded-full m-auto" src="../../assets/Man.jpg" alt="Sunset in the mountains">
-    <img v-else class="w-40 rounded-full m-auto" src="../../assets/woman.png" alt="Sunset in the mountains">
-    <div class="px-6 py-4 font-bold flex justify-around ">
-      <div >
-        <p class="text-gray-700 text-base mb-2">FirstName : <span class="text-green-500 italic">{{student.first_name}} </span> </p>
-        <p class="text-gray-700 text-base">Gender : <span class="text-green-500 italic">{{student.gender}}</span>  </p>
+  <div class="flex justify-between mt-2">
+    <img class="w-2/4" src="../../assets/Homepage.svg" alt="" />
+    <div class="typewriter mr-6">
+      <h1 class="font-bold text-2xl">Welcome to web application SLMS</h1>
+      <h1>With this app you can do :</h1>
+      <div v-for="(benifit, index) in benifits" :key="index" class="flex w-96 shadow-lg rounded-lg  mt-5">
+        <div class="bg-green-600 py-4 px-6 rounded-l-lg flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="text-white fill-current"
+            viewBox="0 0 16 16"
+            width="20"
+            height="20"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="
+            px-4
+            py-6
+            bg-white
+            rounded-r-lg
+            flex
+            justify-between
+            items-center
+            w-full
+            border border-l-transparent border-gray-200
+          "
+        >
+          <div>{{benifit}}</div>
+        </div>
       </div>
-      <div class="">
-        <p class="text-gray-700 text-base mb-2">LastName : <span class="text-green-500 italic">{{student.last_name}}</span>  </p>
-        <p class="text-gray-700 text-base">Batch : <span class="text-green-500 italic">{{student.batch}}</span>  </p>
-      </div>
-
+    </div>
   </div>
-   <div class="flex justify-end mb-5 mr-5">
-     <button @click="onStart" class="bg-blue-500 hover:bg-blue-700   text-white font-bold py-2 px-4 rounded">
-       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
-     </button>
-   </div>
-</div>
 </template>
 <script>
-
-import axios from '../../axios-http.js'
+import axios from "../../axios-http.js";
 export default {
-
-  data(){
+  data() {
     return {
-
-      student:{},
-      token:localStorage.getItem("token"),
-      userId:localStorage.getItem("userId")
-      
-    }
+      student: {},
+      token: localStorage.getItem("token"),
+      userId: localStorage.getItem("userId"),
+      benifits:['can know which day you requested','see all list requests','see which list teacher allow or not','can request to teacher']
+    };
   },
-  methods:{
-    onStart(){
+  methods: {
+    onStart() {
       this.$router.push("/student_list");
-        
     },
-    tokenRequest(){
-      axios.get('student/'+this.userId,{headers:{Authorization:`Bearer ${this.token}`}})
-      .then(res=>{
-        this.student=res.data;
-        // console.log(this.student)
-      })
-    }
-    
+    tokenRequest() {
+      axios
+        .get("student/" + this.userId, {
+          headers: { Authorization: `Bearer ${this.token}` },
+        })
+        .then((res) => {
+          this.student = res.data;
+          // console.log(this.student)
+        });
+    },
   },
   computed: {
-    userGender(){
-      return this.student.gender=="M" || this.student.gender=="Male" || this.student.gender=="m" || this.student.gender=="male" 
-    }
-    
+    userGender() {
+      return (
+        this.student.gender == "M" ||
+        this.student.gender == "Male" ||
+        this.student.gender == "m" ||
+        this.student.gender == "male"
+      );
+    },
   },
-  mounted(){
-      this.tokenRequest()
-  }
-  
-}
+  mounted() {
+    this.tokenRequest();
+  },
+};
 </script>
 
-<style>
+<style scoped>
+/* DEMO-SPECIFIC STYLES */
+.typewriter h1 {
+  color: blue;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 3s steps(30, end), blink-caret 0.5s step-end infinite;
+}
 
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
+}
 </style>

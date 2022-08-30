@@ -8,6 +8,7 @@ import StudentView from '../views/student/ListStudentLeaveView.vue'
 // import ListAllStudentView from '../views/teacher/ListAllStudentView.vue'
 import CheckStudentLeaveView from '../views/teacher/CheckStudentLeaveView.vue'
 import ResetPasswordView from '../views/teacher/ResetPasswordView.vue'
+import Teacher from '../components/teacher/TeacherHome.vue'
 
 const routes = [
   {
@@ -24,6 +25,16 @@ const routes = [
     
   },
   {
+    path: '/teacher',
+    name:'teacher',
+    component: Teacher,
+    meta:{
+      requireAuth: true,
+      role:'teacher'
+    },
+    
+  },
+  {
     path: '/login',
     name:'login',
     component: UserLogin,
@@ -34,7 +45,10 @@ const routes = [
   {
     path: '/new_request',
     component: NewRequest,
-    meta:{requireAuth:true}
+    meta:{
+      requireAuth:true,
+      role:'student'
+    }
   },
   {
     path: '/student_list',
@@ -64,17 +78,24 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // console.log(to.meta.requireAuth)
+  console.log(to.meta.requireAuth)
+  console.log(!localStorage.getItem("token"))
   if (to.meta.requireAuth) {
     if (!localStorage.getItem("token") ) {
       next("/login");
-    } else {
+    } else{
       next();
     }
   } 
-  else {
-    next();
+  else{
+    next()
   }
+  
+  
 });
+
+
+
+
 
 export default router

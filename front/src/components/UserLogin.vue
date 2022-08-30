@@ -46,6 +46,7 @@ export default {
             logined:false,
             isNav:true,
             
+            
         }
     },
     methods: {
@@ -67,7 +68,7 @@ export default {
                 }
                 else if (this.email.search("passerellesnumeriques.org") > 0) {
                     if (this.email.search("student") == -1) {
-                        this.role = 'teacherLogin/'
+                        this.role = 'teacherLogin'
                     }
                     // login to database
 
@@ -79,8 +80,12 @@ export default {
                         localStorage.setItem('token', JSON.stringify(result.data.token));
                         localStorage.setItem('role', this.role);
                         localStorage.setItem('userId', JSON.stringify(result.data.id));
-                        this.$emit('login-succes', this.login);
-                        this.$router.push("/home");
+                        // this.$emit('login-succes', this.login);
+                        if(this.role=="studentLogin"){
+                            this.$router.push("/home");
+                        }else if (this.role=="teacherLogin"){
+                            this.$router.push("/teacher");
+                        }
 
                     }
                 }

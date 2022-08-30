@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia'
 
 export const dataStore = defineStore('user_login', {
-  state: () => ({ login: false }),
+  state: () => ({ 
+    login: false ,
+    user: "Khy"
+  }),
   // getters: {
   //   double: state => state.count * 2,
   // },

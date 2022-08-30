@@ -15,8 +15,8 @@ Route::post('/studentLogin', [LoginController::class , 'studentLogin']);
 Route::post('/teacherLogin', [LoginController::class , 'teacherLogin']);
 Route::post('/student', [StudentController::class , 'store']);
 Route::post('/login', [LoginController::class , 'login']);
-Route::post('/student', [StudentController::class , 'store']);
-Route::get('/student', [StudentController::class , 'index']);
+// Route::post('/student', [StudentController::class , 'store']);
+// Route::get('/student', [StudentController::class , 'index']);
 Route::get('/request', [StudentRequestController::class , 'index']);
 
 Route::put('/resetPassword/{id}', [StudentController::class , 'resetPassword']);
@@ -58,9 +58,9 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     // Route::apiResource('/student', StudentController::class);
     
 });
-
-
 Route::apiResource('/teacher', TeacherController::class);
+
+
 Route::post('/logout', [LoginController::class , 'logout']);
 // Route::post("/request", [StudentRequestController::class , 'store']);
 

@@ -19,7 +19,6 @@ class Student extends Model
 
     protected $hidden=[
         "password",
-        "email",
         "phone"
     ];
      

@@ -60,7 +60,7 @@ export default {
                     this.no_email=false;
                     if(this.email.search("student") == -1){
                         this.role = 'teacherLogin'
-                        this.userStore.changeUserRole('teacherLogin')
+                        console.log("role: " + this.role)
                     }
                 }
             }
@@ -73,6 +73,9 @@ export default {
                     localStorage.setItem('role',this.role);
                     localStorage.setItem('userId',JSON.stringify(result.data.id));
                     this.$router.push("/home");
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 8000);
                 }
             }
         },
@@ -82,6 +85,7 @@ export default {
         },
         loginSuccess() {
             let token = localStorage.getItem('token');
+            
             if (token != null) {
                 this.$router.push("/home");
             }

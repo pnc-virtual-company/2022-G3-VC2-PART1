@@ -1,5 +1,8 @@
 <template>
 
+
+
+
 <nav  class="flex sticky -top-2 bg-blue-400 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
   <router-link to="/home" class="flex items-center">
@@ -14,8 +17,8 @@
       <!-- Dropdown menu -->
       <div class="z-50 hidden my-4 text-base list-none bg-blue-400 rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 block" id="user-dropdown"  style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(644px, 82px);">
         <div class="py-3 px-4">
-          <span class="block text-md text-gray-900 dark:text-white">Khy Phat</span>
-          <span class="block text-md font-medium text-gray-500 truncate dark:text-gray-400">khy.phat@student.passerellesnumeriques.org</span>
+          <span class="block text-md text-white dark:text-white">Name:   {{studentData.first_name}} {{studentData.last_name}}</span>
+          <span class="block text-md font-medium text-white truncate dark:text-gray-400">Email:  {{studentData.email}}</span>
         </div>
         <ul class="py-1" aria-labelledby="user-menu-button">
           <li class="flex hover:bg-gray-100 items-center p-1">
@@ -45,20 +48,13 @@
     </ul>
   </div>
   </div>
-    <div v-if="userStore.role =='teacherLogin'" >
-      <router-link to="/list_allStudent" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
-        Teacher(ListStudent)
-      </router-link>
-      <router-link to="/checkStudentLeave" class=" hover:text-orange-500 mx-12 block mt-4 lg:inline-block lg:mt-0 text-white  text-xl border-b-2-orange-500">
-        Teacher(checkstudentLeave)
-      </router-link>
-    </div>
   </nav>
 
 </template>
 
 <script>
  import { dataStore } from '../../store/user-store.js';
+ import axios from 'axios';
 
 export default {
     setup() {
@@ -67,9 +63,10 @@ export default {
     },
     data(){
       return{
-        student: localStorage.getItem('role'),
+        role: localStorage.getItem('role'),
         isClik:false,
-
+        studentData:[],
+        
         teacher_routes:[
           {title: "Check student leave", path: "check_student_leave"},
           {title: "List all students", path: "list_all_students"}
@@ -80,24 +77,35 @@ export default {
           {title: 'New request', path: 'new_request'},
           
         ]
+
       }
     },
     methods:{
       onLogout(){
-        this.$router.push('/login')
         localStorage.clear();
         this.userStore.change(false)
-      }
-      
+        alert("Are sure to logout")
+        this.$router.push('/login')
+      },
 
-    },
-    // computed:{
-    //   getRoute(){
-    //     console.log(this.$router)
-    //    return this.$route.query.path
+      getStudentData() {
+        axios.get('http://localhost:8000/api/student/'+ localStorage.getItem("userId")).then((res)=>{
+            this.studentData= res.data;   
+        })
+      },  
+      changeUserRole() {
+        console.log(this.role)
+        if(this.role =="teacherLogin"){
+          this.routes = this.teacher_routes
+          console.log(this.routes);
+      }
+    }
       
-    //   }
-    // }
+    },
+    mounted() {
+      this.changeUserRole()
+      this.getStudentData()
+    }
 }
 </script>
 

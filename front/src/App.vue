@@ -1,6 +1,6 @@
-
 <template v-cloak>
   <TheNavigation v-if="userStore.login"></TheNavigation>
+
   <router-view></router-view>
 </template>
 
@@ -22,8 +22,29 @@ export default {
       return localStorage.getItem('userId');
     },
   },
+
+  data(){
+    return {
+        userLogined:false,
+        
+    }
+  },
+  methods: {
+
+    userLogin(){
+      if(localStorage.getItem('token')){
+         this.userLogined=true
+      }else{
+        this.userLogined=false
+      }
+    }
+  },
   mounted(){
+    this.userLogin()
   }
+  // computed: {
+  // }
+
 }
 </script>
 

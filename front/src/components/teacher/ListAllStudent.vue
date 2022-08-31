@@ -92,9 +92,9 @@
 
 <!-- ===============Table list All Students =============-->
 
-    <div class="mt-[-35px]   h-screen bg-gray-100  ">
+    <div class="mt-[-35px]    bg-gray-100  ">
       <div class="overflow-auto rounded-lg shadow mt-12 ">
-        <table class=" w-[98%] ml-12 ">
+        <table class=" w-[98%] m-auto ">
           <thead class="bg-orange-300 border-b-2 border-gray-200 ">
               <tr class="text-ms text-white">
                 <th class="p-3  font-semibold tracking-wide text-center ">Student ID</th>

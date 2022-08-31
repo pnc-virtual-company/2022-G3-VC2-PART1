@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\sendMail;
+use App\Mail\mailToStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Teacher;
@@ -39,6 +40,23 @@ class EmailController extends Controller
         foreach ($emails as $eml) {
             Mail::to($eml)->send(new sendMail($body));//file in Mail folder
         }
+
+    }
+
+    public function mailToStudent($id, $status)
+    {
+        $studentRequest = StudentRequest::find($id);
+        $student = Student::find($studentRequest['student_id']);
+        $username = $student['first_name'] . ' ' . $student['last_name'];
+        $email = $student['email'];
+        $studentRequest['status'] = $status;
+        $body = [
+            'username' => $username,
+            'status' => $status,
+        ];
+
+        Mail::to($email)->send(new mailToStudent($body)); //file in Mail folder
+        return 'success';
 
     }
 }

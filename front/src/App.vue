@@ -1,6 +1,5 @@
 <template v-cloak>
   <TheNavigation v-if="userStore.login"></TheNavigation>
-
   <router-view></router-view>
 </template>
 
@@ -15,7 +14,7 @@ export default {
     return { userStore }
   },
   components:{
-    TheNavigation
+    TheNavigation,
   },  
   computed: {
     getUserId(){
@@ -42,8 +41,7 @@ export default {
   mounted(){
     this.userLogin()
   }
-  // computed: {
-  // }
+  
 
 }
 </script>

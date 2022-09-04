@@ -6,7 +6,7 @@
 
 
 <script>
-    import axios from "../../axios-http.js"
+    import axiosClient from "../../axios-http.js"
     import { dataStore } from '../../store/user-store.js';
 
     export default {
@@ -25,7 +25,7 @@
                 let userId = localStorage.getItem('userId')
                 let role = localStorage.getItem('role');
                 if(role == "studentLogin"){
-                    axios.put("student/reset_password/"+userId, data)
+                    axiosClient.put("student/reset_password/"+userId, data)
                     .then( res =>  {
                         this.old_password = res.data.success
                     })
@@ -34,7 +34,7 @@
                         }
                     )
                 }else {
-                    axios.put("teacher/reset_password/"+userId, data)
+                    axiosClient.put("teacher/reset_password/"+userId, data)
                     .then( res =>  {
                         this.old_password = res.data.success
                     })

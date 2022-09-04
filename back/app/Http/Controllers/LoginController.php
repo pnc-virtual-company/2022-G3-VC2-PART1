@@ -5,7 +5,6 @@ use App\Models\Login;
 use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 class LoginController extends Controller
@@ -19,9 +18,11 @@ class LoginController extends Controller
             return response()->json(['sms'=>"Invaliid password"]);
         }
         $token = $user->createToken('myToken')->plainTextToken;
+        // $cookie = cookie('jwt', $token, 60*24*30);
         return response()->json(['token' => $token,'message'=>'success login','id'=>$user['id']],200);
 
     }
+
 
     public function teacherLogin(Request $request)
     {
@@ -31,15 +32,16 @@ class LoginController extends Controller
             return response()->json(['sms' => "Invaliid password"]);
         }
         $token = $user->createToken('myToken')->plainTextToken;
-        return response()->json(['token' => $token, 'message' => 'success login','data' => $user], 200);
+        // $cookie = cookie('jwt', $token, 60*24*30);
+        return response()->json(['token' => $token,'message'=>'success login','id'=>$user['id']],200);
 
     }
 
-    public function logout()
-    {
-        auth('sanctum')->user()->tokens()->delete();
-        return response()->json(['mes' => 'Logged out Successfully']);
+    public function logout() {
+        $cookie = Cookie::forget('jwt');
+        return response()->json(['mes'=>'Logged out Successfully'])->withCookie($cookie);
     }
+
 }
 
 

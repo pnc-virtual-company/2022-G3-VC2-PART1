@@ -122,7 +122,7 @@ export default{
                 this.$emit('request', data)
                 this.setDefault()
                 this.not_correct_date = false;
-
+                
             }else{
                 this.checkValidation()
             }

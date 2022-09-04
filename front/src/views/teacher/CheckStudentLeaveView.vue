@@ -2,7 +2,7 @@
     <CheckStudentLeave @status="updateStatus" :listAllStudentsLeave="listAllStudentsLeave"></CheckStudentLeave>
 </template>
 <script>
-import axios from "../../axios-http.js";
+import axiosClient from "../../axios-http.js";
 import CheckStudentLeave from '@/components/teacher/CheckStudentLeave.vue';
 import { dataStore } from '../../store/user-store.js';
 
@@ -24,13 +24,13 @@ export default {
     },
     methods:{
         getAllStudentsRequest(){
-            axios.get('get_padding').then((res)=>{
+            axiosClient.get('/get_padding').then((res)=>{
                 this.listAllStudentsLeave = res.data
             })
         },
         updateStatus(status, id){
             let request = {status:status}
-            axios.put('request/update_status/'+id, request).then((res)=>{
+            axiosClient.put('request/update_status/'+id, request).then((res)=>{
                 console.log(res.data);
                 this.getAllStudentsRequest()
             });

@@ -1,11 +1,12 @@
 <template>
   <div class="student-request">
+    <form-alert v-if="success" ></form-alert>
     <form-request @request="addRequest"></form-request>
   </div>
 </template>
 
 <script>
-import axios from "../../axios-http";
+import axiosClient from "../../axios-http";
 import { dataStore } from '../../store/user-store.js';
 
 export default {
@@ -16,16 +17,24 @@ export default {
   },
   data(){
     return{
-      
+      success: false,
     }
   },
   methods: {
     addRequest(data){
-      axios.post("request", data).then(res=>{
+      axiosClient.post("request", data).then(res=>{
         console.log(res)
-        axios.get('sendMail/'+data.student_id+"/"+data.leave_type+"/"+data.reason, )
+        this.success = true;
+        this.sendSuccess(2000)
+        axiosClient.get('sendMail/'+data.student_id+"/"+data.leave_type+"/"+data.reason,)
       })
     },
+
+    sendSuccess(time){
+      setTimeout(() => {
+        this.success = false;
+      }, time)
+    }
   },
   computed:{
 

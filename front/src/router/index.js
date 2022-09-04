@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // import StudentDetailLeave from '../views/StudentDetailView.vue'
-import UserLogin from '../components/UserLogin.vue'
+import UserLogin from '../components/teacher/UserLogin.vue'
 import NewRequest from '../views/student/NewRequestView.vue'
 import HomeView from '../views/HomeView.vue'
 import PageNotFound from '../components/PageNotFound.vue'
@@ -9,7 +9,7 @@ import ListAllStudentView from '../views/teacher/ListAllStudentView.vue'
 import CheckStudentLeaveView from '../views/teacher/CheckStudentLeaveView.vue'
 import ResetPasswordView from '../views/teacher/ResetPasswordView.vue'
 import Teacher from '../components/teacher/TeacherHome.vue'
-
+import UserDetailView from '../views/UserDetail/UserDetailRouteView.vue'
 const routes = [
   {
     path:"/",
@@ -22,7 +22,15 @@ const routes = [
     meta:{
       requireAuth:true,
     }
-    
+  },
+
+  {
+    path: '/user_detail',
+    name:'user_detail',
+    component: UserDetailView,
+    meta:{
+      requireAuth:true,
+    }
   },
   {
     path: '/teacher',
@@ -45,6 +53,16 @@ const routes = [
     
   },
   {
+    path: '/teacher',
+    name:'teacher',
+    component: Teacher,
+    meta:{
+      requireAuth: true,
+      role:'teacher'
+    },
+    
+  },
+  {
     path: '/login',
     name:'login',
     component: UserLogin,
@@ -57,7 +75,9 @@ const routes = [
     component: NewRequest,
     meta:{
       requireAuth:true,
+      role:'student',
       user_login:'studentLogin'
+
     }
   },
   {
@@ -97,21 +117,27 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   let userLogin = localStorage.getItem('role')
   if (to.meta.requireAuth) {
-    console.log(to.path)
     if (!localStorage.getItem("token") ) {
       next("/login");
-    } else if (to.meta.user_login == userLogin) {
+    }
+    else if (to.meta.user_login == userLogin) {
       next();
-    } else if (to.path =="/reset_password" || to.path == "/home"){
+    } else if (to.path =="/reset_password" || to.path == "/home" || to.path == "/user_detail"){
       next();
     }
     else{
       next('/login')
     }
   } 
-  else {
-    next();
+  else{
+    next()
   }
+  
+  
 });
+
+
+
+
 
 export default router

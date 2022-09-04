@@ -3,8 +3,9 @@ import { defineStore } from 'pinia'
 export const dataStore = defineStore('user_login', {
   state: () => ({ 
     login: false , 
-    role: "studentLogin",
-    
+    role: localStorage.getItem('role'),
+    userId: localStorage.getItem('userId'),
+
     teacher_routes:[
       {title: "Check student leave", path: "check_student_leave"},
       {title: "List all students", path: "list_all_students"}

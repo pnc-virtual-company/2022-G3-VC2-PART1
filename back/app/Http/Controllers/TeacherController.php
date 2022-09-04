@@ -22,7 +22,7 @@ class TeacherController extends Controller
         $cher->last_name = $request->last_name;
         $cher->gender = $request->gender;
         $cher->email = $request->email;
-        $cher->phone_number = $request->phone_number;
+        $cher->phone = $request->phone;
         $cher->password = bcrypt($request->password);
         $cher->save();
         $token = $cher->createToken('mytoken')->plainTextToken;
@@ -48,7 +48,7 @@ class TeacherController extends Controller
         $cher->last_name = $request->last_name;
         $cher->gender = $request->gender;
         $cher->email = $request->email;
-        $cher->phone_number = $request->phone_number;
+        $cher->phone = $request->phone;
         $cher->password = bcrypt($request->password);
         $cher->update();
         return response()->json(['message' => 'items updated']);
@@ -84,10 +84,18 @@ class TeacherController extends Controller
         {
             $teacher->password = bcrypt($request->new_password);
             $teacher->save();
-            return response()->json(['success' => 'Password updated!'],201);
+            return response()->json(['success' => 'Password updated!',],201);
         }
         return response()->json(['success' => 'Password incorrect!'], 404);
 
+    }
+
+    public function forgotPassword(Request $request, $id)
+    {
+        $teacher = Teacher::findOrFail($id);
+        $teacher->password = bcrypt($request->new_password);
+        $teacher->update();
+        return response()->json(['success' => 'Password updated!'], 201);
     }
 
 

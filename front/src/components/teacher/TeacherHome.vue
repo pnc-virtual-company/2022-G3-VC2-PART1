@@ -25,7 +25,8 @@
   </template>
   <script>
   
-  import axios from '../../axios-http.js'
+  import axiosClient from '../../axios-http.js'
+
   export default {
   
     data(){
@@ -43,7 +44,7 @@
           
       },
       tokenRequest(){
-        axios.get('student/'+this.userId,{headers:{Authorization:`Bearer ${this.token}`}})
+        axiosClient.get('student/'+this.userId,{headers:{Authorization:`Bearer ${this.token}`}})
         .then(res=>{
           this.student=res.data;
           // console.log(this.student)

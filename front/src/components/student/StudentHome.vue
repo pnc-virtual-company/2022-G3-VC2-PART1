@@ -1,11 +1,12 @@
 <template>
-  <div class="flex justify-between mt-2">
-    <img class="w-2/4" src="../../assets/Homepage.svg" alt="" />
-    <div class="typewriter mr-6">
-      <h1 class="font-bold text-2xl">Welcome to web application SLMS</h1>
-      <h1>With this app you can do :</h1>
-      <div v-for="(benifit, index) in benifits" :key="index" class="flex w-100 shadow-lg rounded-lg  mt-5">
-        <div class="bg-green-600 py-4 px-6 rounded-l-lg flex items-center">
+<div class="flex justify-between mt-2 flex-wrap">
+    <img class=" grow-0 shrink-1 md:shrink-0  basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0" src="../../assets/Homepage.svg" alt="" />
+    <div class="typewriter  md:m-auto sm:m-auto  lg:m-auto xl:w-6/12 lg:w-6/12 md:w-10/12 mb-5 p-2  ">
+      <h1 class="font-bold text-2xl text-center sm:hidden">Welcome to web SLMS</h1>
+      <h1 class="font-bold text-2xl text-center hidden sm:block">Welcome to web application SLMS</h1>
+      <h1 class="text-center">With this app you can do :</h1>
+      <div v-for="(benifit, index) in benifits" :key="index" class="flex w-100 shadow-lg rounded-lg mt-5   ">
+        <div class="bg-green-600 py-4 px-6 rounded-l-lg flex items-center ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="text-white fill-current"
@@ -39,7 +40,7 @@
   </div>
 </template>
 <script>
-import axios from "../../axios-http.js";
+import axiosClient from "../../axios-http.js";
 export default {
   data() {
     return {
@@ -57,18 +58,24 @@ export default {
       if (localStorage.getItem("role") == 'teacherLogin') {
           this.benifits = ['can see all students','can create, delete, edit student','can approve and reject for student requests']
       }
-      axios.get('student/'+this.userId,{headers:{Authorization:'Bearer ' +this.token}})
+      axiosClient.get('student/'+this.userId)
       .then(res=>{
         this.student=res.data;
       })
     }
     
   },
-  // computed: {
-  //   userGender() {
-  //       return this.student.gender = "Male";
-  //   },
-  // },
+
+  computed: {
+    userGender() {
+      return (
+        this.student.gender == "M" ||
+        this.student.gender == "Male" ||
+        this.student.gender == "m" ||
+        this.student.gender == "male"
+      );
+    },
+  },
   mounted() {
     this.tokenRequest();
   },

@@ -1,9 +1,9 @@
 <template>
-    <ListAllStudent @delete_student="deleteStudent" :listAllStudents="listAllStudents"  :listStudentLeave="listStudentLeave"></ListAllStudent>
+    <ListAllStudent @delete_student="deleteStudent" @select-batch="getByBatch" @search-name="getByName" :listAllStudents="students" @addStudent="addNewStudent" :listStudentLeave="listStudentLeave"></ListAllStudent>
 
 </template>
 <script>
-import axios from "../../axios-http.js";
+import axiosClient from "../../axios-http.js";
 import ListAllStudent from '@/components/teacher/ListAllStudent.vue';
 import { dataStore } from '../../store/user-store.js';
 
@@ -17,35 +17,64 @@ export default {
     },
     data(){
         return{
+            studentsByBatch:[],
             listAllStudents:[],
+
             listStudentLeave:[],
         }
     },
     methods:{
         getAllStudents(){
-            axios.get('student').then((res)=>{
+            axiosClient.get('student').then((res)=>{
                 this.listAllStudents = res.data
+                this.studentsByBatch = this.listAllStudents
             })
         },
         getAllStudentLeave(){
-            axios.get('get_padding').then((res)=>{
+            axiosClient.get('get_padding').then((res)=>{
                 this.listStudentLeave = res.data
             });
         },
         deleteStudent(id){
-            axios.delete('student/'+id).then((response) => {
+            axiosClient.delete('student/'+id).then((response) => {
+                console.log(response.data)
                 this.getAllStudents()
-                console.log(response.data);
             })
         },
+        addNewStudent(newStudent){
+            axiosClient.post('student', newStudent).then(() =>{
+                this.getAllStudents();
+            });
+        },
+        getByBatch(batch){
+                if(batch == 'Show All'){
+                    this.studentsByBatch = this.listAllStudents
+                }else{
+                    this.studentsByBatch = this.listAllStudents.filter(student => student.batch == batch);
+            }
+            console.log(this.studentsByBatch)
+        },
+        getByName(name){
+            let students = this.listAllStudents
+            let nameLower = name.toLowerCase();
+            if(name == ''){
+                this.studentsByBatch = students;
+            }else{
+                this.studentsByBatch = students.filter(student => ((student.first_name.toLowerCase())+" "+ student.last_name.toLowerCase()).search(nameLower)>=0)
+            }
+        }
     },
+    computed: {
+        students(){
+            return this.studentsByBatch;
+        }
+    },
+    
     mounted(){
-        // this.userStore.changeUserRole('teacherLogin')
         this.getAllStudents();
         this.getAllStudentLeave()
-        console.log(this.userStore.login)
         this.userStore.change(true);
-  }
+    }
 }
 
 </script>
